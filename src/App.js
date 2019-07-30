@@ -1,14 +1,22 @@
 import React from 'react';
+import Countdown from 'components/Countdown';
+import { CounterContext } from 'contexts/counter';
+import Counter from 'utils/Counter';
 import './App.css';
-import Countdown from './components/Countdown';
+
+const counter = new Counter();
 
 function App() {
     return (
-        <div className="App">
-            <header className="App-header">
-                <Countdown></Countdown>
-            </header>
-        </div>
+        <CounterContext.Provider value={counter}>
+            <div className="App">
+                <header className="App-header">
+                    <CounterContext.Consumer>
+                        {(value) => <Countdown counter={value} />}
+                    </CounterContext.Consumer>
+                </header>
+            </div>
+        </CounterContext.Provider>
     );
 }
 
