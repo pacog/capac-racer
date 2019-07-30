@@ -1,18 +1,38 @@
+import { keepRequestingFrames } from 'utils/keepRequestingFrames';
+
 export default class Counter {
-    constructor() {
-        this.initTime = new Date().getTime();
+    paused = false;
+
+    lastTimeStamp = null;
+
+    elapsedTime = 0;
+
+    onEachFrame = (timestamp) => {
+        if (!this.lastTimeStamp) {
+            this.lastTimeStamp = timestamp;
+        }
+        if (!this.paused) {
+            const timeSinceLastTimestamp = timestamp - this.lastTimeStamp;
+            this.elapsedTime = this.elapsedTime + timeSinceLastTimestamp;
+        }
+        this.lastTimeStamp = timestamp;
+    };
+
+    destroyer = keepRequestingFrames(this.onEachFrame);
+
+    pause() {
+        this.paused = true;
     }
 
-    // pause() {}
-
-    // unpause() {}
+    unpause() {
+        this.paused = false;
+    }
 
     getRemainingTime() {
-        const now = new Date().getTime();
-        return now - this.initTime;
+        return this.elapsedTime;
     }
 
     destroy() {
-        this.initTime = null;
+        this.destroyer();
     }
 }

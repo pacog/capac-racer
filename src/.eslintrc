@@ -12,7 +12,8 @@
         "no-underscore-dangle": 0,
         "import/imports-first": ["error", "absolute-first"],
         "import/newline-after-import": "error",
-        "import/prefer-default-export": 0
+        "import/prefer-default-export": 0,
+        "no-use-before-define": 0
     },
     "globals": {
         "window": true,

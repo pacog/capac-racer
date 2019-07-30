@@ -18,14 +18,23 @@ function App() {
                             <Countdown counter={value} isPaused={isPaused} />
                         )}
                     </CounterContext.Consumer>
-                    <button
-                        type="button"
-                        onClick={() => {
-                            setPaused(!isPaused);
-                        }}
-                    >
-                        {isPaused ? 'Unpause' : 'pause'}
-                    </button>
+                    <CounterContext.Consumer>
+                        {(value) => (
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    if (isPaused) {
+                                        value.unpause();
+                                    } else {
+                                        value.pause();
+                                    }
+                                    setPaused(!isPaused);
+                                }}
+                            >
+                                {isPaused ? 'Unpause' : 'pause'}
+                            </button>
+                        )}
+                    </CounterContext.Consumer>
                 </header>
             </div>
         </CounterContext.Provider>

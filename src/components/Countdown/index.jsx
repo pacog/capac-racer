@@ -13,8 +13,15 @@ const Countdown = ({ counter, isPaused }) => {
         });
         return destroyer;
     }, [counter, isPaused]);
-    return <div>Time Left: {timeLeft}</div>;
+    return <div>Time Left: {formatTime(timeLeft)}</div>;
 };
+
+function formatTime(time) {
+    if (typeof time !== 'number') {
+        return '-';
+    }
+    return time.toFixed(3);
+}
 
 Countdown.propTypes = {
     counter: PropTypes.object.isRequired,

@@ -4,9 +4,9 @@ export const keepRequestingFrames = (callback) => {
     const destroyer = () => {
         isRunning = false;
     };
-    const doCallbackAndRequestMore = () => {
+    const doCallbackAndRequestMore = (timestamp) => {
         if (isRunning) {
-            callback();
+            callback(timestamp);
             window.requestAnimationFrame(doCallbackAndRequestMore);
         }
     };
