@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Countdown from 'components/Countdown';
 import { CounterContext } from 'contexts/counter';
 import Counter from 'utils/Counter';
 import './App.css';
 
-const counter = new Counter();
+const counter = new Counter({ timeLimit: 3000 });
 
 function App() {
     const [isPaused, setPaused] = useState(false);
+    useEffect(() => {
+        const destroyer = () => {
+            counter.destroy();
+        };
+        counter.onEnd(() => {
+            setPaused(false);
+            counter.restart();
+        });
+        return destroyer;
+    }, []);
 
     return (
         <CounterContext.Provider value={counter}>

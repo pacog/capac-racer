@@ -20,7 +20,7 @@ function formatTime(time) {
     if (typeof time !== 'number') {
         return '-';
     }
-    return time.toFixed(3);
+    return (time / 1000).toFixed(3);
 }
 
 Countdown.propTypes = {

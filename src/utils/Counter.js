@@ -1,6 +1,10 @@
 import { keepRequestingFrames } from 'utils/keepRequestingFrames';
 
 export default class Counter {
+    constructor({ timeLimit }) {
+        this.timeLimit = timeLimit;
+    }
+
     paused = false;
 
     lastTimeStamp = null;
@@ -14,9 +18,15 @@ export default class Counter {
         if (!this.paused) {
             const timeSinceLastTimestamp = timestamp - this.lastTimeStamp;
             this.elapsedTime = this.elapsedTime + timeSinceLastTimestamp;
+            if (this.getRemainingTime() === 0) {
+                this.pause();
+                this.onEndCallbacks.forEach((callback) => callback());
+            }
         }
         this.lastTimeStamp = timestamp;
     };
+
+    onEndCallbacks = [];
 
     destroyer = keepRequestingFrames(this.onEachFrame);
 
@@ -28,8 +38,18 @@ export default class Counter {
         this.paused = false;
     }
 
+    restart() {
+        this.elapsedTime = 0;
+        this.unpause();
+    }
+
+    onEnd(callback) {
+        this.onEndCallbacks = this.onEndCallbacks.concat([callback]);
+    }
+
     getRemainingTime() {
-        return this.elapsedTime;
+        const remaining = this.timeLimit - this.elapsedTime;
+        return Math.max(remaining, 0);
     }
 
     destroy() {
