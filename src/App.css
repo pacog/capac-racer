@@ -1,18 +1,15 @@
-.App {
-    text-align: center;
-}
-
-.App-header {
-    background-color: #282c34;
-    min-height: 100vh;
+.App-counter {
+    position: absolute;
+    top: 2vh;
+    left: 50%;
+    padding: 16px;
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: calc(10px + 2vmin);
+    font-size: 12px;
     color: white;
-}
-
-.App-link {
-    color: #61dafb;
+    transform: translateX(-50%);
+    width: 200px;
 }

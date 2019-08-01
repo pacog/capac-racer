@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Countdown from 'components/Countdown';
 import { CounterContext } from 'contexts/counter';
 import Counter from 'utils/Counter';
+import GameBoard from 'components/GameBoard';
 import './App.css';
 
 const counter = new Counter({ timeLimit: 3000 });
@@ -22,7 +23,8 @@ function App() {
     return (
         <CounterContext.Provider value={counter}>
             <div className="App">
-                <header className="App-header">
+                <GameBoard />
+                <header className="App-counter">
                     <CounterContext.Consumer>
                         {(value) => (
                             <Countdown counter={value} isPaused={isPaused} />
