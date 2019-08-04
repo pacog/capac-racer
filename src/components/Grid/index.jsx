@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import gridImg from 'assets/grid.png';
 import './style.css';
 
-const GRID_IMG_DENSITY = 3;
-const GRID_IMG_SIZE = 30;
+const GRID_IMAGE_SIZE = 30; // px
 
-const Grid = ({ zoom }) => {
-    const backgroundSize = (zoom * GRID_IMG_SIZE) / GRID_IMG_DENSITY;
+const Grid = ({ zoom, cellSize }) => {
+    const GRID_IMG_DENSITY = GRID_IMAGE_SIZE / cellSize;
+    const backgroundSize = (zoom * GRID_IMAGE_SIZE) / GRID_IMG_DENSITY;
     return (
         <div
             className="grid"
@@ -15,14 +15,13 @@ const Grid = ({ zoom }) => {
                 backgroundImage: `url(${gridImg})`,
                 backgroundSize: `${backgroundSize}px ${backgroundSize}px`,
             }}
-        >
-            Grid
-        </div>
+        />
     );
 };
 
 Grid.propTypes = {
     zoom: PropTypes.number.isRequired,
+    cellSize: PropTypes.number.isRequired,
 };
 
 Grid.defaultProps = {};

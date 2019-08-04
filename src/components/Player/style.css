@@ -1,0 +1,12 @@
+.player {
+    --player-size: 10px;
+
+    position: absolute;
+    height: var(--player-size);
+    width: var(--player-size);
+    margin-left: calc(var(--player-size) / -2);
+    margin-top: calc(var(--player-size) / -2);
+
+    background: lightskyblue;
+    border-radius: 50%;
+}
