@@ -1,5 +1,5 @@
 .movement-picker {
-    --movement-picker-size: 14px;
+    --movement-picker-size: 8px;
 
     position: absolute;
     height: var(--movement-picker-size);
@@ -7,6 +7,6 @@
     margin-left: calc(var(--movement-picker-size) / -2);
     margin-top: calc(var(--movement-picker-size) / -2);
 
-    background: rebeccapurple;
+    border: 1px solid rebeccapurple;
     border-radius: 50%;
 }

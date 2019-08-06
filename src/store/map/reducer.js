@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-const zoom = (state = 1, action) => {
+const zoom = (state = 2, action) => {
     switch (action.type) {
         default:
             return state;
