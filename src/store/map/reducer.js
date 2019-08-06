@@ -7,8 +7,16 @@ const zoom = (state = 1, action) => {
     }
 };
 
+const gridSize = (state = 10, action) => {
+    switch (action.type) {
+        default:
+            return state;
+    }
+};
+
 const map = combineReducers({
     zoom,
+    gridSize,
 });
 
 export default map;

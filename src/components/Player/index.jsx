@@ -1,24 +1,32 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { player as playerProp } from 'components/propTypes';
+import { getScreenCoordinates } from 'utils/screenUtils';
 import './style.css';
 
-const Player = ({ x, y }) => {
+const Player = ({ player }) => {
+    const mapZoom = useSelector((state) => state.map.zoom);
+    const gridSize = useSelector((state) => state.map.gridSize);
+    const playerScreenPosition = getScreenCoordinates(
+        player.position,
+        gridSize,
+        mapZoom,
+    );
     return (
         <div
             className="player"
             style={{
-                left: x,
-                top: y,
+                left: playerScreenPosition.x,
+                top: playerScreenPosition.y,
             }}
         />
     );
 };
 
 Player.propTypes = {
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired,
+    position: playerProp.isRequired,
 };
 
-Player.defaultProps = {};
+// Player.defaultProps = {};
 
 export default Player;

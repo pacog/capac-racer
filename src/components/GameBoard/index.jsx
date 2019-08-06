@@ -5,19 +5,15 @@ import { useSelector } from 'react-redux';
 
 import './style.css';
 
-const GRID_SIZE = 10;
-
 const GameBoard = () => {
-    const playerPosition = useSelector((state) => state.players.byId['1']);
+    const player = useSelector((state) => state.players.byId['1']);
     const mapZoom = useSelector((state) => state.map.zoom);
-    const playerScreenPosition = {
-        x: playerPosition.x * GRID_SIZE * mapZoom,
-        y: playerPosition.y * GRID_SIZE * mapZoom,
-    };
+    const gridSize = useSelector((state) => state.map.gridSize);
+
     return (
         <div className="game-board">
-            <Grid zoom={mapZoom} cellSize={GRID_SIZE} />
-            <Player x={playerScreenPosition.x} y={playerScreenPosition.y} />
+            <Grid zoom={mapZoom} cellSize={gridSize} />
+            <Player player={player} />
         </div>
     );
 };

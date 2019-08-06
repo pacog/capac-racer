@@ -2,8 +2,14 @@ import { combineReducers } from 'redux';
 
 const initialState = {
     '1': {
-        x: 5,
-        y: 25,
+        position: {
+            x: 5,
+            y: 25,
+        },
+        speed: {
+            x: -1,
+            y: -2,
+        },
     },
 };
 
