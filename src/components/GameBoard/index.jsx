@@ -2,6 +2,7 @@ import React from 'react';
 import Grid from 'components/Grid';
 import Player from 'components/Player';
 import { useSelector } from 'react-redux';
+import MovementPicker from 'components/MovementPicker';
 
 import './style.css';
 
@@ -14,6 +15,7 @@ const GameBoard = () => {
         <div className="game-board">
             <Grid zoom={mapZoom} cellSize={gridSize} />
             <Player player={player} />
+            <MovementPicker player={player} />
         </div>
     );
 };

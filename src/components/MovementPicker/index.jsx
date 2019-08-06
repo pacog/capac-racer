@@ -1,25 +1,31 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { player as playerProp } from 'components/propTypes';
+import { getScreenCoordinates } from 'utils/screenUtils';
+
 import './style.css';
 
 function MovementPicker({ player }) {
     const position = {
-        x: player.x + player.speedX,
-        y: player.y + player.speedY,
+        x: player.position.x + player.speed.x,
+        y: player.position.y + player.speed.y,
     };
+    const mapZoom = useSelector((state) => state.map.zoom);
+    const gridSize = useSelector((state) => state.map.gridSize);
+    const screenPosition = getScreenCoordinates(position, gridSize, mapZoom);
     return (
         <div
-            className="player"
+            className="movement-picker"
             style={{
-                left: position.x,
-                top: position.y,
+                left: screenPosition.x,
+                top: screenPosition.y,
             }}
         />
     );
 }
 
 MovementPicker.propTypes = {
-    player: PropTypes.object.isRequired,
+    player: playerProp.isRequired,
 };
 
 export default MovementPicker;
