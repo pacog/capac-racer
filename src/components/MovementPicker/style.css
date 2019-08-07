@@ -9,4 +9,9 @@
 
     border: 1px solid rebeccapurple;
     border-radius: 50%;
+    cursor: pointer;
+}
+
+.movement-picker:hover {
+    background-color: rebeccapurple;
 }

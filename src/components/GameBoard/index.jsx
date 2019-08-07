@@ -1,13 +1,16 @@
 import React from 'react';
 import Grid from 'components/Grid';
 import Player from 'components/Player';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { moveTo } from 'store/players/actions';
 import MovementPicker from 'components/MovementPicker';
 
 import './style.css';
 
 const GameBoard = () => {
-    const player = useSelector((state) => state.players.byId['1']);
+    const playerId = '1';
+    const dispatch = useDispatch();
+    const player = useSelector((state) => state.players.byId[playerId]);
     const mapZoom = useSelector((state) => state.map.zoom);
     const gridSize = useSelector((state) => state.map.gridSize);
 
@@ -15,7 +18,12 @@ const GameBoard = () => {
         <div className="game-board">
             <Grid zoom={mapZoom} cellSize={gridSize} />
             <Player player={player} />
-            <MovementPicker player={player} />
+            <MovementPicker
+                player={player}
+                onPositionSelected={(position) =>
+                    dispatch(moveTo(playerId, position))
+                }
+            />
         </div>
     );
 };

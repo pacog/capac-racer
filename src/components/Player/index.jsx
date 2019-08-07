@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { player as playerProp } from 'components/propTypes';
 import { getScreenCoordinates } from 'utils/screenUtils';
+
 import './style.css';
 
 const Player = ({ player }) => {
@@ -24,7 +25,7 @@ const Player = ({ player }) => {
 };
 
 Player.propTypes = {
-    position: playerProp.isRequired,
+    player: playerProp.isRequired,
 };
 
 // Player.defaultProps = {};
