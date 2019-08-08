@@ -8,4 +8,5 @@ export const vector2d = PropTypes.shape({
 export const player = PropTypes.shape({
     position: vector2d.isRequired,
     speed: vector2d.isRequired,
+    prevPositions: PropTypes.arrayOf(vector2d),
 });

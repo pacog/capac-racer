@@ -4,6 +4,7 @@ import Player from 'components/Player';
 import { useSelector, useDispatch } from 'react-redux';
 import { moveTo } from 'store/players/actions';
 import MovementPicker from 'components/MovementPicker';
+import PlayerTrail from 'components/PlayerTrail';
 
 import './style.css';
 
@@ -18,6 +19,7 @@ const GameBoard = () => {
         <div className="game-board">
             <Grid zoom={mapZoom} cellSize={gridSize} />
             <Player player={player} />
+            <PlayerTrail player={player} />
             <MovementPicker
                 player={player}
                 onPositionSelected={(position) =>

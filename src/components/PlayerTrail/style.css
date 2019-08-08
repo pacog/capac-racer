@@ -1,0 +1,5 @@
+.player-trail {
+    overflow: visible;
+    position: relative;
+    z-index: 3;
+}

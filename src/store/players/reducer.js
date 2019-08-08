@@ -12,13 +12,18 @@ const initialState = {
             x: -1,
             y: -2,
         },
+        prevPositions: [
+            {
+                x: 5,
+                y: 25,
+            },
+        ],
     },
 };
 
 const byId = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.MOVE_TO:
-            console.log('moveto', action.position);
             return {
                 ...state,
                 [action.playerId]: movePlayerTo(
@@ -37,7 +42,12 @@ const players = combineReducers({
 
 function movePlayerTo(player, position) {
     const newSpeed = substract(position, player.position);
-    return { ...player, position, speed: newSpeed };
+    return {
+        ...player,
+        position,
+        speed: newSpeed,
+        prevPositions: player.prevPositions.concat(position),
+    };
 }
 
 export default players;
