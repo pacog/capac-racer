@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import { PathLine } from 'react-svg-pathline';
 import { player as playerProp } from 'components/propTypes';
 import { getScreenCoordinates } from 'utils/screenUtils';
 
@@ -10,6 +11,7 @@ import './style.css';
 const DISTANCE_TO_MOVE = 1;
 
 function MovementPicker({ player, onPositionSelected }) {
+    const [tempLine, setTempLine] = useState(null);
     const position = {
         x: player.position.x + player.speed.x,
         y: player.position.y + player.speed.y,
@@ -17,6 +19,11 @@ function MovementPicker({ player, onPositionSelected }) {
     const mapZoom = useSelector((state) => state.map.zoom);
     const gridSize = useSelector((state) => state.map.gridSize);
 
+    const originalPlayerScreenPosition = getScreenCoordinates(
+        player.position,
+        gridSize,
+        mapZoom,
+    );
     const positions = getAllPossibleDestinations(position).map(
         (eachPosition) => {
             return {
@@ -38,8 +45,22 @@ function MovementPicker({ player, onPositionSelected }) {
                         top: eachPosition.screen.y,
                     }}
                     onClick={() => onPositionSelected(eachPosition.position)}
+                    onMouseEnter={() => setTempLine(eachPosition.screen)}
+                    onMouseLeave={() => setTempLine(eachPosition.null)}
                 />
             ))}
+            {tempLine && (
+                <svg className="movement-picker-temp-line">
+                    <PathLine
+                        points={[originalPlayerScreenPosition, tempLine]}
+                        stroke="lightskyblue"
+                        strokeWidth="2"
+                        strokeDasharray="2"
+                        fill="none"
+                        r={2}
+                    />
+                </svg>
+            )}
         </>
     );
 }

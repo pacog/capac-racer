@@ -15,16 +15,29 @@ const PlayerTrail = ({ player }) => {
     const points = player.prevPositions.map((position) =>
         getScreenCoordinates(position, gridSize, mapZoom),
     );
+    const pointsWithoutLast = points.slice(0, points.length - 1);
     return (
-        <svg className="player-trail">
-            <PathLine
-                points={points}
-                stroke="lightskyblue"
-                strokeWidth="2"
-                fill="none"
-                r={2}
-            />
-        </svg>
+        <>
+            <svg className="player-trail">
+                <PathLine
+                    points={points}
+                    stroke="lightskyblue"
+                    strokeWidth="2"
+                    fill="none"
+                    r={2}
+                />
+            </svg>
+            {pointsWithoutLast.map((point) => (
+                <div
+                    key={`${point.x}_${point.y}`}
+                    className="player-trail-point"
+                    style={{
+                        left: point.x,
+                        top: point.y,
+                    }}
+                />
+            ))}
+        </>
     );
 };
 

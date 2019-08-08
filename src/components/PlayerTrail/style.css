@@ -3,3 +3,17 @@
     position: relative;
     z-index: 3;
 }
+.player-trail-point {
+    --player-trail-size: 6px;
+
+    position: absolute;
+    height: var(--player-trail-size);
+    width: var(--player-trail-size);
+    margin-left: calc(var(--player-trail-size) / -2);
+    margin-top: calc(var(--player-trail-size) / -2);
+
+    background: lightskyblue;
+    border-radius: 50%;
+
+    z-index: 5;
+}

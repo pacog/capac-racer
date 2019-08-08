@@ -16,4 +16,13 @@
 
 .movement-picker:hover {
     background-color: rebeccapurple;
+    z-index: 11;
+}
+
+.movement-picker-temp-line {
+    overflow: visible;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9;
 }
