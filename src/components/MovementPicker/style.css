@@ -1,21 +1,19 @@
 .movement-picker {
-    --movement-picker-size: 8px;
-
     position: absolute;
     height: var(--movement-picker-size);
     width: var(--movement-picker-size);
     margin-left: calc(var(--movement-picker-size) / -2);
     margin-top: calc(var(--movement-picker-size) / -2);
 
-    border: 1px solid rebeccapurple;
-    border-radius: 50%;
+    border: 1px solid var(--movement-picker-color);
+    border-radius: var(--movement-picker-border-radius);
     cursor: pointer;
 
     z-index: 7;
 }
 
 .movement-picker:hover {
-    background-color: rebeccapurple;
+    background-color: var(--movement-picker-color);
     z-index: 11;
 }
 

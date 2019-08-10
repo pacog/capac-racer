@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { substract } from 'utils/vector2d';
+import { BLUE } from 'constants/player-styles';
 import { actionTypes } from './actions';
 
 const initialState = {
@@ -18,6 +19,7 @@ const initialState = {
                 y: 25,
             },
         ],
+        style: BLUE,
     },
 };
 

@@ -7,8 +7,8 @@
     margin-left: calc(var(--player-size) / -2);
     margin-top: calc(var(--player-size) / -2);
 
-    background: lightskyblue;
-    border-radius: 50%;
+    background: var(--player-color);
+    border-radius: var(--player-border-radius);
 
     z-index: 5;
 }

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { PathLine } from 'react-svg-pathline';
@@ -11,6 +11,10 @@ import './style.css';
 const DISTANCE_TO_MOVE = 1;
 
 function MovementPicker({ player, onPositionSelected }) {
+    const rootElement = useRef(null);
+    useEffect(() => {
+        setCSSVars(rootElement.current, player.style);
+    }, [player.style]);
     const [tempLine, setTempLine] = useState(null);
     const position = {
         x: player.position.x + player.speed.x,
@@ -34,7 +38,7 @@ function MovementPicker({ player, onPositionSelected }) {
     );
 
     return (
-        <>
+        <div ref={rootElement}>
             {positions.map((eachPosition) => (
                 // eslint-disable-next-line jsx-a11y/no-static-element-interactions
                 <div
@@ -53,15 +57,15 @@ function MovementPicker({ player, onPositionSelected }) {
                 <svg className="movement-picker-temp-line">
                     <PathLine
                         points={[originalPlayerScreenPosition, tempLine]}
-                        stroke="lightskyblue"
-                        strokeWidth="2"
+                        stroke={player.style.trailColor}
+                        strokeWidth={player.style.trailWidth}
                         strokeDasharray="2"
                         fill="none"
                         r={2}
                     />
                 </svg>
             )}
-        </>
+        </div>
     );
 }
 
@@ -82,5 +86,17 @@ MovementPicker.propTypes = {
     player: playerProp.isRequired,
     onPositionSelected: PropTypes.func.isRequired,
 };
+
+function setCSSVars(element, style) {
+    if (!element) {
+        return;
+    }
+    element.style.setProperty('--movement-picker-color', style.dotColor);
+    element.style.setProperty(
+        '--movement-picker-size',
+        `${style.dotSize + 2}px`,
+    );
+    element.style.setProperty('--movement-picker-border-radius', style.round);
+}
 
 export default MovementPicker;

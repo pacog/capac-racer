@@ -12,8 +12,8 @@
     margin-left: calc(var(--player-trail-size) / -2);
     margin-top: calc(var(--player-trail-size) / -2);
 
-    background: lightskyblue;
-    border-radius: 50%;
+    background: var(--player-trail-color);
+    border-radius: var(--player-trail-border-radius);
 
     z-index: 5;
 }

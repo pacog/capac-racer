@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { player as playerProp } from 'components/propTypes';
 import { getScreenCoordinates } from 'utils/screenUtils';
@@ -7,6 +7,10 @@ import { PathLine } from 'react-svg-pathline';
 import './style.css';
 
 const PlayerTrail = ({ player }) => {
+    const rootElement = useRef(null);
+    useEffect(() => {
+        setCSSVars(rootElement.current, player.style);
+    }, [player.style]);
     const mapZoom = useSelector((state) => state.map.zoom);
     const gridSize = useSelector((state) => state.map.gridSize);
     if (!player.prevPositions.length) {
@@ -17,12 +21,12 @@ const PlayerTrail = ({ player }) => {
     );
     const pointsWithoutLast = points.slice(0, points.length - 1);
     return (
-        <>
+        <div ref={rootElement}>
             <svg className="player-trail">
                 <PathLine
                     points={points}
-                    stroke="lightskyblue"
-                    strokeWidth="2"
+                    stroke={player.style.trailColor}
+                    strokeWidth={player.style.trailWidth}
                     fill="none"
                     r={2}
                 />
@@ -37,12 +41,21 @@ const PlayerTrail = ({ player }) => {
                     }}
                 />
             ))}
-        </>
+        </div>
     );
 };
 
 PlayerTrail.propTypes = {
     player: playerProp.isRequired,
 };
+
+function setCSSVars(element, style) {
+    if (!element) {
+        return;
+    }
+    element.style.setProperty('--player-trail-color', style.dotColor);
+    element.style.setProperty('--player-trail-size', `${style.dotSize}px`);
+    element.style.setProperty('--player-trail-border-radius', style.round);
+}
 
 export default PlayerTrail;
