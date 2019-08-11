@@ -1,0 +1,4 @@
+export const NOT_STARTED = Symbol('NOT_STARTED');
+export const START_SCREEN = Symbol('START_SCREEN');
+export const WAITING_FOR_PLAYER_INPUT = Symbol('WAITING_FOR_PLAYER_INPUT');
+export const ANIMATING_PLAYER_MOVEMENT = Symbol('ANIMATING_PLAYER_MOVEMENT');
