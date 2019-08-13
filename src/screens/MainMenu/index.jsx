@@ -1,14 +1,62 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { changeScreen } from 'store/main-ui/actions';
-import { GAME } from 'constants/screens';
+import { initGameWithPlayers } from 'store/game/async-actions';
+import { BLUE, GREEN } from 'constants/player-styles';
+
+const hardcodedPlayers = [
+    {
+        id: '1',
+        position: {
+            x: 5,
+            y: 25,
+        },
+        speed: {
+            x: -1,
+            y: -2,
+        },
+        prevPositions: [
+            {
+                x: 5,
+                y: 25,
+            },
+        ],
+        style: BLUE,
+    },
+    {
+        id: '2',
+        position: {
+            x: 6,
+            y: 25,
+        },
+        speed: {
+            x: -1,
+            y: -2,
+        },
+        prevPositions: [
+            {
+                x: 6,
+                y: 25,
+            },
+        ],
+        style: GREEN,
+    },
+];
+
+const hardcodedOrder = ['2', '1'];
 
 const MainMenu = () => {
     const dispatch = useDispatch();
     return (
         <>
             <h1>Capac Racer</h1>
-            <button type="button" onClick={() => dispatch(changeScreen(GAME))}>
+            <button
+                type="button"
+                onClick={() =>
+                    dispatch(
+                        initGameWithPlayers(hardcodedPlayers, hardcodedOrder),
+                    )
+                }
+            >
                 Start
             </button>
         </>

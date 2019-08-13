@@ -1,30 +1,20 @@
 import { combineReducers } from 'redux';
 import { substract } from 'utils/vector2d';
-import { BLUE } from 'constants/player-styles';
 import { actionTypes } from './actions';
 
-const initialState = {
-    '1': {
-        position: {
-            x: 5,
-            y: 25,
-        },
-        speed: {
-            x: -1,
-            y: -2,
-        },
-        prevPositions: [
-            {
-                x: 5,
-                y: 25,
-            },
-        ],
-        style: BLUE,
-    },
-};
+const players = combineReducers({
+    byId,
+});
 
-const byId = (state = initialState, action) => {
+function byId(state = {}, action) {
     switch (action.type) {
+        case actionTypes.SET_PLAYERS:
+            return action.players.reduce((accumulator, player) => {
+                return {
+                    ...accumulator,
+                    [player.id]: player,
+                };
+            }, {});
         case actionTypes.MOVE_TO:
             return {
                 ...state,
@@ -36,11 +26,7 @@ const byId = (state = initialState, action) => {
         default:
             return state;
     }
-};
-
-const players = combineReducers({
-    byId,
-});
+}
 
 function movePlayerTo(player, position) {
     const newSpeed = substract(position, player.position);
