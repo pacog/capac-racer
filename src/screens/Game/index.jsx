@@ -3,6 +3,7 @@ import Countdown from 'components/Countdown';
 import { CounterContext } from 'contexts/counter';
 import GameBoard from 'components/GameBoard';
 import Counter from 'utils/Counter';
+import PlayerList from 'components/PlayerList';
 
 const counter = new Counter({ timeLimit: 3000 });
 
@@ -22,6 +23,7 @@ const Game = () => {
         <CounterContext.Provider value={counter}>
             <div className="App">
                 <GameBoard />
+                <PlayerList />
                 <header className="App-counter">
                     <CounterContext.Consumer>
                         {(value) => (

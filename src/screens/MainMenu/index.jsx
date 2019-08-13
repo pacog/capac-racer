@@ -6,6 +6,7 @@ import { BLUE, GREEN } from 'constants/player-styles';
 const hardcodedPlayers = [
     {
         id: '1',
+        name: 'Player One',
         position: {
             x: 5,
             y: 25,
@@ -24,6 +25,7 @@ const hardcodedPlayers = [
     },
     {
         id: '2',
+        name: 'Player Dos',
         position: {
             x: 6,
             y: 25,
