@@ -1,4 +1,6 @@
 import React, { useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 import { player as playerProp } from 'components/propTypes';
 import { getScreenCoordinates } from 'utils/screenUtils';
@@ -6,7 +8,7 @@ import { PathLine } from 'react-svg-pathline';
 
 import './style.css';
 
-const PlayerTrail = ({ player }) => {
+const PlayerTrail = ({ player, isActive }) => {
     const rootElement = useRef(null);
     useEffect(() => {
         setCSSVars(rootElement.current, player.style);
@@ -21,7 +23,12 @@ const PlayerTrail = ({ player }) => {
     );
     const pointsWithoutLast = points.slice(0, points.length - 1);
     return (
-        <div ref={rootElement}>
+        <div
+            className={classNames('player-trail-container', {
+                'is-active': isActive,
+            })}
+            ref={rootElement}
+        >
             <svg className="player-trail">
                 <PathLine
                     points={points}
@@ -47,6 +54,7 @@ const PlayerTrail = ({ player }) => {
 
 PlayerTrail.propTypes = {
     player: playerProp.isRequired,
+    isActive: PropTypes.bool.isRequired,
 };
 
 function setCSSVars(element, style) {

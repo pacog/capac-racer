@@ -1,11 +1,13 @@
 import React, { useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 import { player as playerProp } from 'components/propTypes';
 import { getScreenCoordinates } from 'utils/screenUtils';
 
 import './style.css';
 
-const Player = ({ player }) => {
+const Player = ({ player, isActive }) => {
     const rootElement = useRef(null);
     useEffect(() => {
         setCSSVars(rootElement.current, player.style);
@@ -20,7 +22,9 @@ const Player = ({ player }) => {
     return (
         <div
             ref={rootElement}
-            className="player"
+            className={classNames('player', {
+                'is-active': isActive,
+            })}
             style={{
                 left: playerScreenPosition.x,
                 top: playerScreenPosition.y,
@@ -31,6 +35,7 @@ const Player = ({ player }) => {
 
 Player.propTypes = {
     player: playerProp.isRequired,
+    isActive: PropTypes.bool.isRequired,
 };
 
 function setCSSVars(element, style) {

@@ -11,4 +11,10 @@
     border-radius: var(--player-border-radius);
 
     z-index: 5;
+    opacity: 0.5;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.player.is-active {
+    opacity: 1;
 }

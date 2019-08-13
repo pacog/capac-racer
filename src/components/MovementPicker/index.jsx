@@ -12,10 +12,15 @@ const DISTANCE_TO_MOVE = 1;
 
 function MovementPicker({ player, onPositionSelected }) {
     const rootElement = useRef(null);
+    const [tempLine, setTempLine] = useState(null);
     useEffect(() => {
         setCSSVars(rootElement.current, player.style);
     }, [player.style]);
-    const [tempLine, setTempLine] = useState(null);
+    useEffect(() => {
+        setTempLine(null);
+        return () => setTempLine(null);
+    }, [player]);
+
     const position = {
         x: player.position.x + player.speed.x,
         y: player.position.y + player.speed.y,

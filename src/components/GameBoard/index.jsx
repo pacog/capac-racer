@@ -28,8 +28,14 @@ const GameBoard = () => {
             <Grid zoom={mapZoom} cellSize={gridSize} />
             {players.map((player) => (
                 <div key={player.id}>
-                    <Player player={player} />
-                    <PlayerTrail player={player} />
+                    <Player
+                        player={player}
+                        isActive={player === currentPlayer}
+                    />
+                    <PlayerTrail
+                        player={player}
+                        isActive={player === currentPlayer}
+                    />
                 </div>
             ))}
             {currentPlayer && waitingForPlayerInput && (
