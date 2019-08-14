@@ -5,12 +5,13 @@ import { useSelector } from 'react-redux';
 import { PathLine } from 'react-svg-pathline';
 import { player as playerProp } from 'components/propTypes';
 import { getScreenCoordinates } from 'utils/screenUtils';
+import { isEqual } from 'utils/vector2d';
 
 import './style.css';
 
 const DISTANCE_TO_MOVE = 1;
 
-function MovementPicker({ player, onPositionSelected }) {
+function MovementPicker({ player, onPositionSelected, otherPlayers }) {
     const rootElement = useRef(null);
     const [tempLine, setTempLine] = useState(null);
     useEffect(() => {
@@ -33,7 +34,7 @@ function MovementPicker({ player, onPositionSelected }) {
         gridSize,
         mapZoom,
     );
-    const positions = getAllPossibleDestinations(position).map(
+    const positions = getAllPossibleDestinations(position, otherPlayers).map(
         (eachPosition) => {
             return {
                 screen: getScreenCoordinates(eachPosition, gridSize, mapZoom),
@@ -74,7 +75,7 @@ function MovementPicker({ player, onPositionSelected }) {
     );
 }
 
-function getAllPossibleDestinations(originalPosition) {
+function getAllPossibleDestinations(originalPosition, otherPlayers) {
     const positions = [];
     for (let i = -DISTANCE_TO_MOVE; i <= DISTANCE_TO_MOVE; i += 1) {
         for (let j = -DISTANCE_TO_MOVE; j <= DISTANCE_TO_MOVE; j += 1) {
@@ -84,11 +85,20 @@ function getAllPossibleDestinations(originalPosition) {
             });
         }
     }
-    return positions;
+    return positions.filter(
+        (position) => !isPositionColliding(position, otherPlayers),
+    );
+}
+
+function isPositionColliding(position, otherPlayers) {
+    return !!otherPlayers
+        .map((player) => player.position)
+        .find((otherPosition) => isEqual(otherPosition, position));
 }
 
 MovementPicker.propTypes = {
     player: playerProp.isRequired,
+    otherPlayers: PropTypes.arrayOf(playerProp).isRequired,
     onPositionSelected: PropTypes.func.isRequired,
 };
 

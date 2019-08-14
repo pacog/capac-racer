@@ -41,6 +41,9 @@ const GameBoard = () => {
             {currentPlayer && waitingForPlayerInput && (
                 <MovementPicker
                     player={currentPlayer}
+                    otherPlayers={players.filter(
+                        (otherPlayer) => otherPlayer.id !== currentPlayer.id,
+                    )}
                     onPositionSelected={(position) =>
                         dispatch(handlePlayerMovement(currentPlayer, position))
                     }
