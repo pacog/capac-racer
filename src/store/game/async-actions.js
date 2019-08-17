@@ -1,18 +1,15 @@
 import { isEqual } from 'utils/vector2d';
 import { setPlayers, moveTo } from 'store/players/actions';
 import { changeScreen } from 'store/main-ui/actions';
-import { initGame, setGameState, nextTurn } from 'store/game/actions';
+import { initGame, nextTurn } from 'store/game/actions';
 import { getAllPlayers } from 'store/game/selectors';
 import { GAME } from 'constants/screens';
-import { WAITING_FOR_PLAYER_INPUT } from 'constants/game-states';
 
 export const initGameWithPlayers = (players, playerOrder) => {
     return (dispatch) => {
         dispatch(setPlayers(players));
         dispatch(initGame(playerOrder));
         dispatch(changeScreen(GAME));
-        // TODO: will be done by player input later on, so remove from here
-        dispatch(setGameState(WAITING_FOR_PLAYER_INPUT));
     };
 };
 

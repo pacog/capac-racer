@@ -48,7 +48,7 @@ function MovementPicker({ player, onPositionSelected, otherPlayers }) {
             {positions.map((eachPosition) => (
                 // eslint-disable-next-line jsx-a11y/no-static-element-interactions
                 <div
-                    key={`${eachPosition.position.x}_${eachPosition.position.y}`}
+                    key={`${player.id}_${eachPosition.position.x}_${eachPosition.position.y}`}
                     className="movement-picker"
                     style={{
                         left: eachPosition.screen.x,

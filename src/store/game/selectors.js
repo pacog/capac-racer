@@ -18,3 +18,7 @@ export const getCurrentPlayer = (state) => {
 export const getAllPlayers = (state) => {
     return state.game.players.map((playerId) => state.players.byId[playerId]);
 };
+
+export const getGameState = (state) => {
+    return state.game.gameState;
+};
