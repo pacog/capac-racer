@@ -21,7 +21,7 @@ const game = (state = defaultState, action) => {
         case actionTypes.NEXT_TURN:
             return {
                 ...state,
-                gameState: gameStates.WAITING_FOR_PLAYER_INPUT,
+                gameState: gameStates.PLAYER_TURN_START_SCREEN,
                 currentTurn: getNextTurn(state.players, state.currentTurn),
             };
         case actionTypes.SET_GAME_STATE:

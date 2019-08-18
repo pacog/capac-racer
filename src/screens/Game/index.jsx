@@ -6,7 +6,7 @@ import { CounterContext } from 'contexts/counter';
 import GameBoard from 'components/GameBoard';
 import Counter from 'utils/Counter';
 import PlayerList from 'components/PlayerList';
-import { getGameState } from 'store/game/selectors';
+import { getGameState, getCurrentPlayer } from 'store/game/selectors';
 import { setGameState } from 'store/game/actions';
 import './style.css';
 
@@ -15,6 +15,7 @@ const counter = new Counter({ timeLimit: 3000 });
 const Game = () => {
     const dispatch = useDispatch();
     const gameState = useSelector((state) => getGameState(state));
+    const currentPlayer = useSelector((state) => getCurrentPlayer(state));
     const [isPaused, setPaused] = useState(false);
     useEffect(() => {
         const destroyer = () => {
@@ -28,6 +29,10 @@ const Game = () => {
     }, []);
 
     const isStartScreenOn = gameState === gameStates.START_SCREEN;
+    const waitingForPlayerInput =
+        gameState === gameStates.WAITING_FOR_PLAYER_INPUT;
+    const showPlayerStartTurnModal =
+        gameState === gameStates.PLAYER_TURN_START_SCREEN;
 
     return (
         <CounterContext.Provider value={counter}>
@@ -41,7 +46,7 @@ const Game = () => {
                             onClick={() =>
                                 dispatch(
                                     setGameState(
-                                        gameStates.WAITING_FOR_PLAYER_INPUT,
+                                        gameStates.PLAYER_TURN_START_SCREEN,
                                     ),
                                 )
                             }
@@ -50,7 +55,7 @@ const Game = () => {
                         </button>
                     </div>
                 )}
-                {!isStartScreenOn && (
+                {waitingForPlayerInput && (
                     <header className="App-counter">
                         <CounterContext.Consumer>
                             {(value) => (
@@ -78,6 +83,23 @@ const Game = () => {
                             )}
                         </CounterContext.Consumer>
                     </header>
+                )}
+                {showPlayerStartTurnModal && (
+                    <div className="start-modal">
+                        <div>{currentPlayer.name}, it is your turn</div>
+                        <button
+                            type="button"
+                            onClick={() =>
+                                dispatch(
+                                    setGameState(
+                                        gameStates.WAITING_FOR_PLAYER_INPUT,
+                                    ),
+                                )
+                            }
+                        >
+                            Start my turn
+                        </button>
+                    </div>
                 )}
             </div>
         </CounterContext.Provider>
