@@ -1,60 +1,37 @@
-import { keepRequestingFrames } from 'utils/keepRequestingFrames';
-
-export default class Counter {
-    constructor({ timeLimit }) {
-        this.#timeLimit = timeLimit;
+export default class {
+    constructor({ timeToWait = 10000, started = false }) {
+        this._timeToWait = timeToWait;
+        this._isRunning = started;
+        this._elapsedTime = 0;
     }
 
-    #timeLimit = null;
-
-    #paused = false;
-
-    #lastTimeStamp = null;
-
-    #elapsedTime = 0;
-
-    #onEachFrame = (timestamp) => {
-        if (!this.#lastTimeStamp) {
-            this.#lastTimeStamp = timestamp;
+    notifyTimePassed(time) {
+        if (!this._isRunning) {
+            return;
         }
-        if (!this.#paused) {
-            const timeSinceLastTimestamp = timestamp - this.#lastTimeStamp;
-            this.#elapsedTime = this.#elapsedTime + timeSinceLastTimestamp;
-            if (this.getRemainingTime() === 0) {
-                this.pause();
-                this.#onEndCallbacks.forEach((callback) => callback());
-            }
+        this._elapsedTime += time;
+        if (this._elapsedTime >= this._timeToWait) {
+            this._callbackOnEnd(this._timeToWait - this._elapsedTime);
+            this._isRunning = false;
         }
-        this.#lastTimeStamp = timestamp;
-    };
+    }
 
-    #onEndCallbacks = [];
-
-    #destroyer = keepRequestingFrames(this.#onEachFrame);
+    restart({ callbackOnEnd = () => {} }) {
+        this._elapsedTime = 0;
+        this._isRunning = true;
+        this._callbackOnEnd = callbackOnEnd;
+    }
 
     pause() {
-        this.#paused = true;
+        this._isRunning = false;
     }
 
-    unpause() {
-        this.#paused = false;
+    stop() {
+        this._isRunning = false;
+        this._callbackOnEnd = null;
     }
 
-    restart() {
-        this.#elapsedTime = 0;
-        this.unpause();
-    }
-
-    onEnd(callback) {
-        this.#onEndCallbacks = this.#onEndCallbacks.concat([callback]);
-    }
-
-    getRemainingTime() {
-        const remaining = this.#timeLimit - this.#elapsedTime;
-        return Math.max(remaining, 0);
-    }
-
-    destroy() {
-        this.#destroyer();
+    getTimeLeft() {
+        return Math.max(this._timeToWait - this._elapsedTime, 0);
     }
 }

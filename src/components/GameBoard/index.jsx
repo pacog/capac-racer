@@ -10,7 +10,8 @@ import {
 } from 'store/game/selectors';
 import MovementPicker from 'components/MovementPicker';
 import PlayerTrail from 'components/PlayerTrail';
-
+import CounterDisplay from 'components/CounterDisplay';
+import waitingForPlayerCounter from 'utils/waitingForPlayerCounter';
 import './style.css';
 
 const GameBoard = () => {
@@ -39,15 +40,21 @@ const GameBoard = () => {
                 </div>
             ))}
             {currentPlayer && waitingForPlayerInput && (
-                <MovementPicker
-                    player={currentPlayer}
-                    otherPlayers={players.filter(
-                        (otherPlayer) => otherPlayer.id !== currentPlayer.id,
-                    )}
-                    onPositionSelected={(position) =>
-                        dispatch(handlePlayerMovement(currentPlayer, position))
-                    }
-                />
+                <>
+                    <CounterDisplay counterObject={waitingForPlayerCounter} />
+                    <MovementPicker
+                        player={currentPlayer}
+                        otherPlayers={players.filter(
+                            (otherPlayer) =>
+                                otherPlayer.id !== currentPlayer.id,
+                        )}
+                        onPositionSelected={(position) =>
+                            dispatch(
+                                handlePlayerMovement(currentPlayer, position),
+                            )
+                        }
+                    />
+                </>
             )}
         </div>
     );

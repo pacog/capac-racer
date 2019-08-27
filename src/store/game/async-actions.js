@@ -1,9 +1,11 @@
 import { isEqual } from 'utils/vector2d';
+import * as gameStates from 'constants/game-states';
 import { setPlayers, moveTo } from 'store/players/actions';
 import { changeScreen } from 'store/main-ui/actions';
-import { initGame, nextTurn } from 'store/game/actions';
+import { initGame, nextTurn, setGameState } from 'store/game/actions';
 import { getAllPlayers } from 'store/game/selectors';
 import { GAME } from 'constants/screens';
+import waitingForPlayerCounter from 'utils/waitingForPlayerCounter';
 
 export const initGameWithPlayers = (players, playerOrder) => {
     return (dispatch) => {
@@ -24,7 +26,18 @@ export const handlePlayerMovement = (player, newIntendedPosition) => {
         if (collidingPlayer) {
             return;
         }
+        waitingForPlayerCounter.stop();
         dispatch(moveTo(player.id, newIntendedPosition));
         dispatch(nextTurn());
+    };
+};
+
+export const startWaitingForPlayerInput = () => {
+    return (dispatch) => {
+        dispatch(setGameState(gameStates.WAITING_FOR_PLAYER_INPUT));
+        const callbackOnEnd = () => {
+            dispatch(nextTurn());
+        };
+        waitingForPlayerCounter.restart({ callbackOnEnd });
     };
 };
