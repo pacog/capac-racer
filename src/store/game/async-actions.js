@@ -7,7 +7,7 @@ import { getAllPlayers } from 'store/game/selectors';
 import { GAME } from 'constants/screens';
 import waitingForPlayerCounter from 'utils/waitingForPlayerCounter';
 
-export const initGameWithPlayers = (players, playerOrder) => {
+export const initGameWithConfig = ({ players, playerOrder }) => {
     return (dispatch) => {
         dispatch(setPlayers(players));
         dispatch(initGame(playerOrder));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { initGameWithPlayers } from 'store/game/async-actions';
+import { initGameWithConfig } from 'store/game/async-actions';
 import { BLUE, GREEN } from 'constants/player-styles';
 
 const hardcodedPlayers = [
@@ -55,7 +55,10 @@ const MainMenu = () => {
                 type="button"
                 onClick={() =>
                     dispatch(
-                        initGameWithPlayers(hardcodedPlayers, hardcodedOrder),
+                        initGameWithConfig({
+                            players: hardcodedPlayers,
+                            playerOrder: hardcodedOrder,
+                        }),
                     )
                 }
             >
