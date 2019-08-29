@@ -6,6 +6,7 @@ import { PathLine } from 'react-svg-pathline';
 import { player as playerProp } from 'components/propTypes';
 import { getScreenCoordinates } from 'utils/screenUtils';
 import { isEqual } from 'utils/vector2d';
+import { checkIfLineCollides } from 'utils/circuit';
 
 import './style.css';
 
@@ -28,6 +29,7 @@ function MovementPicker({ player, onPositionSelected, otherPlayers }) {
     };
     const mapZoom = useSelector((state) => state.map.zoom);
     const gridSize = useSelector((state) => state.map.gridSize);
+    const circuit = useSelector((state) => state.game.circuitInfo);
 
     const originalPlayerScreenPosition = getScreenCoordinates(
         player.position,
@@ -63,7 +65,11 @@ function MovementPicker({ player, onPositionSelected, otherPlayers }) {
                 <svg className="movement-picker-temp-line">
                     <PathLine
                         points={[originalPlayerScreenPosition, tempLine]}
-                        stroke={player.style.trailColor}
+                        stroke={getColorForTempLine(
+                            player,
+                            [originalPlayerScreenPosition, tempLine],
+                            circuit,
+                        )}
                         strokeWidth={player.style.trailWidth}
                         strokeDasharray="2"
                         fill="none"
@@ -73,6 +79,13 @@ function MovementPicker({ player, onPositionSelected, otherPlayers }) {
             )}
         </div>
     );
+}
+
+function getColorForTempLine(player, points, circuit) {
+    if (checkIfLineCollides(points, circuit)) {
+        return 'red';
+    }
+    return player.style.trailColor;
 }
 
 function getAllPossibleDestinations(originalPosition, otherPlayers) {
