@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { PathLine } from 'react-svg-pathline';
 import { player as playerProp } from 'components/propTypes';
-import { getScreenCoordinates } from 'utils/screenUtils';
+import { projectToScreenPosition } from 'store/map/selectors';
 import { isEqual } from 'utils/vector2d';
-import { checkIfLineCollides } from 'utils/circuit';
+import { doesLineCollide } from 'utils/circuit';
 
 import './style.css';
 
@@ -27,19 +27,15 @@ function MovementPicker({ player, onPositionSelected, otherPlayers }) {
         x: player.position.x + player.speed.x,
         y: player.position.y + player.speed.y,
     };
-    const mapZoom = useSelector((state) => state.map.zoom);
-    const gridSize = useSelector((state) => state.map.gridSize);
     const circuit = useSelector((state) => state.game.circuitInfo);
-
-    const originalPlayerScreenPosition = getScreenCoordinates(
-        player.position,
-        gridSize,
-        mapZoom,
+    const storeState = useSelector((state) => state);
+    const originalPlayerScreenPosition = useSelector((state) =>
+        projectToScreenPosition(state, player.position),
     );
     const positions = getAllPossibleDestinations(position, otherPlayers).map(
         (eachPosition) => {
             return {
-                screen: getScreenCoordinates(eachPosition, gridSize, mapZoom),
+                screen: projectToScreenPosition(storeState, eachPosition),
                 position: eachPosition,
             };
         },
@@ -82,7 +78,7 @@ function MovementPicker({ player, onPositionSelected, otherPlayers }) {
 }
 
 function getColorForTempLine(player, points, circuit) {
-    if (checkIfLineCollides(points, circuit)) {
+    if (doesLineCollide(points, circuit)) {
         return 'red';
     }
     return player.style.trailColor;

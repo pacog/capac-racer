@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 import { player as playerProp } from 'components/propTypes';
-import { getScreenCoordinates } from 'utils/screenUtils';
+import { projectToScreenPosition } from 'store/map/selectors';
 
 import './style.css';
 
@@ -12,12 +12,8 @@ const Player = ({ player, isActive }) => {
     useEffect(() => {
         setCSSVars(rootElement.current, player.style);
     }, [player.style]);
-    const mapZoom = useSelector((state) => state.map.zoom);
-    const gridSize = useSelector((state) => state.map.gridSize);
-    const playerScreenPosition = getScreenCoordinates(
-        player.position,
-        gridSize,
-        mapZoom,
+    const playerScreenPosition = useSelector((state) =>
+        projectToScreenPosition(state, player.position),
     );
     return (
         <div

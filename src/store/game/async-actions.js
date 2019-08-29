@@ -6,7 +6,8 @@ import { initGame, nextTurn, setGameState } from 'store/game/actions';
 import { getAllPlayers } from 'store/game/selectors';
 import { GAME } from 'constants/screens';
 import waitingForPlayerCounter from 'utils/waitingForPlayerCounter';
-import { createFromConfig } from 'utils/circuit';
+import { createFromConfig, doesLineCollide } from 'utils/circuit';
+import { projectToScreenPosition } from 'store/map/selectors';
 
 export const initGameWithConfig = ({ players, playerOrder, circuit }) => {
     return (dispatch) => {
@@ -31,7 +32,17 @@ export const handlePlayerMovement = (player, newIntendedPosition) => {
             return;
         }
         waitingForPlayerCounter.stop();
-        dispatch(moveTo(player.id, newIntendedPosition));
+        const state = getState();
+        const circuit = state.game.circuitInfo;
+        const movementLine = [
+            projectToScreenPosition(state, player.position),
+            projectToScreenPosition(state, newIntendedPosition),
+        ];
+        if (doesLineCollide(movementLine, circuit)) {
+            console.log('collision!');
+        } else {
+            dispatch(moveTo(player.id, newIntendedPosition));
+        }
         dispatch(nextTurn());
     };
 };

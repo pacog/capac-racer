@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 import { player as playerProp } from 'components/propTypes';
-import { getScreenCoordinates } from 'utils/screenUtils';
+import { projectToScreenPosition } from 'store/map/selectors';
 import { PathLine } from 'react-svg-pathline';
 
 import './style.css';
@@ -13,13 +13,12 @@ const PlayerTrail = ({ player, isActive }) => {
     useEffect(() => {
         setCSSVars(rootElement.current, player.style);
     }, [player.style]);
-    const mapZoom = useSelector((state) => state.map.zoom);
-    const gridSize = useSelector((state) => state.map.gridSize);
+    const storeState = useSelector((state) => state);
     if (!player.prevPositions.length) {
         return '';
     }
     const points = player.prevPositions.map((position) =>
-        getScreenCoordinates(position, gridSize, mapZoom),
+        projectToScreenPosition(storeState, position),
     );
     const pointsWithoutLast = points.slice(0, points.length - 1);
     return (

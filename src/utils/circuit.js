@@ -21,7 +21,7 @@ export const createFromConfig = (config) => {
         });
 };
 
-export const checkIfLineCollides = (line, circuit) => {
+export const doesLineCollide = (line, circuit) => {
     const pixelsToCheck = getPixelsToCheck(line).map(round);
     // eslint-disable-next-line no-restricted-syntax
     for (const pixelToCheck of pixelsToCheck) {
