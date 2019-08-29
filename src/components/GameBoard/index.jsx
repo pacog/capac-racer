@@ -20,23 +20,18 @@ const GameBoard = () => {
     const currentPlayer = useSelector((state) => getCurrentPlayer(state));
     const mapZoom = useSelector((state) => state.map.zoom);
     const gridSize = useSelector((state) => state.map.gridSize);
+    const circuitInfo = useSelector((state) => state.game.circuitInfo);
     const waitingForPlayerInput = useSelector((state) =>
         isWaitingForPlayerInput(state),
     );
-    const circuit = {
-        img: 'circuits/circuit1.png',
-        width: 1280,
-        height: 720,
-    };
-    const circuitImgUrl = process.env.PUBLIC_URL + circuit.img;
 
     return (
         <div className="game-board">
             <div
                 className="game-board-circuit-bg"
                 style={{
-                    backgroundImage: `url(${circuitImgUrl})`,
-                    backgroundSize: `${circuit.width}px ${circuit.height}px`,
+                    backgroundImage: `url(${circuitInfo.bgImg})`,
+                    backgroundSize: `${circuitInfo.width}px ${circuitInfo.height}px`,
                 }}
             />
             <Grid zoom={mapZoom} cellSize={gridSize} />

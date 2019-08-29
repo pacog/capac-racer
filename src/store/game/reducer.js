@@ -5,6 +5,7 @@ const defaultState = {
     gameState: gameStates.NOT_STARTED,
     players: [],
     currentTurn: null,
+    circuitInfo: null,
 };
 
 const game = (state = defaultState, action) => {
@@ -15,6 +16,7 @@ const game = (state = defaultState, action) => {
                 gameState: gameStates.START_SCREEN,
                 currentTurn: action.playerOrder[0],
                 players: action.playerOrder.slice(),
+                circuitInfo: { ...action.circuitInfo },
             };
         case actionTypes.START_GAME:
             return { ...state, gameState: gameStates.WAITING_FOR_PLAYER_INPUT };

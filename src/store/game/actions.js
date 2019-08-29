@@ -3,11 +3,13 @@ export const actionTypes = {
     START_GAME: 'START_GAME',
     SET_GAME_STATE: 'SET_GAME_STATE',
     NEXT_TURN: 'NEXT_TURN',
+    SET_CIRCUIT: 'SET_CIRCUIT',
 };
-export const initGame = (playerOrder) => {
+export const initGame = (playerOrder, circuitInfo) => {
     return {
         type: actionTypes.INIT_GAME,
         playerOrder,
+        circuitInfo,
     };
 };
 

@@ -45,6 +45,10 @@ const hardcodedPlayers = [
 ];
 
 const hardcodedOrder = ['2', '1'];
+const hardcodedCircuit = {
+    collisionImg: `${process.env.PUBLIC_URL}circuits/circuit1.png`,
+    bgImg: `${process.env.PUBLIC_URL}circuits/circuit1.png`,
+};
 
 const MainMenu = () => {
     const dispatch = useDispatch();
@@ -58,6 +62,7 @@ const MainMenu = () => {
                         initGameWithConfig({
                             players: hardcodedPlayers,
                             playerOrder: hardcodedOrder,
+                            circuit: hardcodedCircuit,
                         }),
                     )
                 }

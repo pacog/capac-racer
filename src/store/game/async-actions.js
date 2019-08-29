@@ -6,12 +6,16 @@ import { initGame, nextTurn, setGameState } from 'store/game/actions';
 import { getAllPlayers } from 'store/game/selectors';
 import { GAME } from 'constants/screens';
 import waitingForPlayerCounter from 'utils/waitingForPlayerCounter';
+import { createFromConfig } from 'utils/circuit';
 
-export const initGameWithConfig = ({ players, playerOrder }) => {
+export const initGameWithConfig = ({ players, playerOrder, circuit }) => {
     return (dispatch) => {
         dispatch(setPlayers(players));
-        dispatch(initGame(playerOrder));
-        dispatch(changeScreen(GAME));
+        // TODO: add a loading map state (or screen)
+        createFromConfig(circuit).then((circuitInfo) => {
+            dispatch(initGame(playerOrder, circuitInfo));
+            dispatch(changeScreen(GAME));
+        });
     };
 };
 
