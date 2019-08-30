@@ -37,16 +37,20 @@ const PlayerTrail = ({ player, isActive }) => {
                     r={2}
                 />
             </svg>
-            {pointsWithoutLast.map((point) => (
-                <div
-                    key={`${player.id}_${point.x}_${point.y}`}
-                    className="player-trail-point"
-                    style={{
-                        left: point.x,
-                        top: point.y,
-                    }}
-                />
-            ))}
+            {pointsWithoutLast
+                .map((point, index) => {
+                    return { ...point, turn: index + 1 };
+                })
+                .map((point) => (
+                    <div
+                        key={`${player.id}_${point.x}_${point.y}_${point.turn}`}
+                        className="player-trail-point"
+                        style={{
+                            left: point.x,
+                            top: point.y,
+                        }}
+                    />
+                ))}
         </div>
     );
 };

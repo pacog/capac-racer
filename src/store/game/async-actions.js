@@ -8,6 +8,7 @@ import { GAME } from 'constants/screens';
 import waitingForPlayerCounter from 'utils/waitingForPlayerCounter';
 import { createFromConfig, doesLineCollide } from 'utils/circuit';
 import { projectToScreenPosition } from 'store/map/selectors';
+import { distance } from 'utils/vector2d';
 
 export const initGameWithConfig = ({ players, playerOrder, circuit }) => {
     return (dispatch) => {
@@ -17,6 +18,15 @@ export const initGameWithConfig = ({ players, playerOrder, circuit }) => {
             dispatch(initGame(playerOrder, circuitInfo));
             dispatch(changeScreen(GAME));
         });
+    };
+};
+
+export const handlePlayerCollision = (player, newIntendedPosition) => {
+    return (dispatch) => {
+        const speed = distance(player.position, newIntendedPosition);
+        console.log(speed);
+        // TODO: add a turns grounded attribute
+        dispatch(moveTo(player.id, player.position));
     };
 };
 
@@ -39,7 +49,7 @@ export const handlePlayerMovement = (player, newIntendedPosition) => {
             projectToScreenPosition(state, newIntendedPosition),
         ];
         if (doesLineCollide(movementLine, circuit)) {
-            console.log('collision!');
+            dispatch(handlePlayerCollision(player, newIntendedPosition));
         } else {
             dispatch(moveTo(player.id, newIntendedPosition));
         }
