@@ -1,4 +1,3 @@
-import { isEqual } from 'utils/vector2d';
 import * as gameStates from 'constants/game-states';
 import { setPlayers, moveTo } from 'store/players/actions';
 import { changeScreen } from 'store/main-ui/actions';
@@ -8,7 +7,7 @@ import { GAME } from 'constants/screens';
 import waitingForPlayerCounter from 'utils/waitingForPlayerCounter';
 import { createFromConfig, doesLineCollide } from 'utils/circuit';
 import { projectToScreenPosition } from 'store/map/selectors';
-import { distance } from 'utils/vector2d';
+import { distance, isEqual } from 'utils/vector2d';
 
 export const initGameWithConfig = ({ players, playerOrder, circuit }) => {
     return (dispatch) => {
@@ -25,6 +24,7 @@ export const handlePlayerCollision = (player, newIntendedPosition) => {
     return (dispatch) => {
         const speed = distance(player.position, newIntendedPosition);
         console.log(speed);
+        dispatch(setGameState(gameStates.NOTIFY_COLLISION));
         // TODO: add a turns grounded attribute
         dispatch(moveTo(player.id, player.position));
     };
@@ -52,8 +52,8 @@ export const handlePlayerMovement = (player, newIntendedPosition) => {
             dispatch(handlePlayerCollision(player, newIntendedPosition));
         } else {
             dispatch(moveTo(player.id, newIntendedPosition));
+            dispatch(nextTurn());
         }
-        dispatch(nextTurn());
     };
 };
 

@@ -4,7 +4,7 @@ import * as gameStates from 'constants/game-states';
 import GameBoard from 'components/GameBoard';
 import PlayerList from 'components/PlayerList';
 import { getGameState, getCurrentPlayer } from 'store/game/selectors';
-import { setGameState } from 'store/game/actions';
+import { setGameState, nextTurn } from 'store/game/actions';
 import { startWaitingForPlayerInput } from 'store/game/async-actions';
 import './style.css';
 
@@ -16,11 +16,21 @@ const Game = () => {
     const isStartScreenOn = gameState === gameStates.START_SCREEN;
     const showPlayerStartTurnModal =
         gameState === gameStates.PLAYER_TURN_START_SCREEN;
+    const isNotifyCollissionScreenOn =
+        gameState === gameStates.NOTIFY_COLLISION;
 
     return (
         <div className="App">
             <GameBoard />
             <PlayerList />
+            {isNotifyCollissionScreenOn && (
+                <div className="start-modal">
+                    You crashed!
+                    <button type="button" onClick={() => dispatch(nextTurn())}>
+                        Next turn
+                    </button>
+                </div>
+            )}
             {isStartScreenOn && (
                 <div className="start-modal">
                     <button
