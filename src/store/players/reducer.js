@@ -23,6 +23,20 @@ function byId(state = {}, action) {
                     action.position,
                 ),
             };
+        case actionTypes.NOTIFY_COLLISION:
+            return {
+                ...state,
+                [action.playerId]: crashPlayer(
+                    state[action.playerId],
+                    action.speed,
+                ),
+            };
+
+        case actionTypes.REDUCE_GROUNDED:
+            return {
+                ...state,
+                [action.playerId]: reduceGrounded(state[action.playerId]),
+            };
         default:
             return state;
     }
@@ -35,6 +49,24 @@ function movePlayerTo(player, position) {
         position,
         speed: newSpeed,
         prevPositions: player.prevPositions.concat(position),
+    };
+}
+
+function crashPlayer(player, speed) {
+    const newSpeed = { x: 0, y: 0 };
+    const turnsGrounded = Math.floor(speed / 3);
+    return {
+        ...player,
+        speed: newSpeed,
+        turnsGrounded,
+    };
+}
+
+function reduceGrounded(player) {
+    const oldGrounded = player.turnsGrounded || 0;
+    return {
+        ...player,
+        turnsGrounded: Math.max(0, oldGrounded - 1),
     };
 }
 

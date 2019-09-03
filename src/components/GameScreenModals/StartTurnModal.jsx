@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentPlayer } from 'store/game/selectors';
@@ -8,12 +10,12 @@ const StartTurnModal = () => {
     const currentPlayer = useSelector((state) => getCurrentPlayer(state));
 
     return (
-        <div className="start-modal">
+        <div
+            className="game-screen-modal"
+            onClick={() => dispatch(startWaitingForPlayerInput())}
+        >
             <div>{currentPlayer.name}, it is your turn</div>
-            <button
-                type="button"
-                onClick={() => dispatch(startWaitingForPlayerInput())}
-            >
+            <button className="game-screen-modal-button" type="button">
                 Start my turn
             </button>
         </div>

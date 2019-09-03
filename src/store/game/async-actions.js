@@ -1,13 +1,38 @@
 import * as gameStates from 'constants/game-states';
-import { setPlayers, moveTo } from 'store/players/actions';
+import {
+    setPlayers,
+    moveTo,
+    notifyCollision,
+    reduceGrounded,
+} from 'store/players/actions';
 import { changeScreen } from 'store/main-ui/actions';
-import { initGame, nextTurn, setGameState } from 'store/game/actions';
-import { getAllPlayers } from 'store/game/selectors';
+import { initGame, setGameState, advancePlayerTurn } from 'store/game/actions';
+import { getAllPlayers, getCurrentPlayer } from 'store/game/selectors';
 import { GAME } from 'constants/screens';
 import waitingForPlayerCounter from 'utils/waitingForPlayerCounter';
 import { createFromConfig, doesLineCollide } from 'utils/circuit';
 import { projectToScreenPosition } from 'store/map/selectors';
 import { distance, isEqual } from 'utils/vector2d';
+
+export const nextTurn = () => {
+    return (dispatch, getState) => {
+        dispatch(advancePlayerTurn());
+        const nextPlayer = getCurrentPlayer(getState());
+        if (nextPlayer.turnsGrounded) {
+            dispatch(setGameState(gameStates.NOTIFY_GROUNDED));
+        } else {
+            dispatch(setGameState(gameStates.PLAYER_TURN_START_SCREEN));
+        }
+    };
+};
+
+export const reduceGroundedAndNextTurn = () => {
+    return (dispatch, getState) => {
+        const currentPlayer = getCurrentPlayer(getState());
+        dispatch(reduceGrounded(currentPlayer.id));
+        dispatch(nextTurn());
+    };
+};
 
 export const initGameWithConfig = ({ players, playerOrder, circuit }) => {
     return (dispatch) => {
@@ -23,10 +48,8 @@ export const initGameWithConfig = ({ players, playerOrder, circuit }) => {
 export const handlePlayerCollision = (player, newIntendedPosition) => {
     return (dispatch) => {
         const speed = distance(player.position, newIntendedPosition);
-        console.log(speed);
         dispatch(setGameState(gameStates.NOTIFY_COLLISION));
-        // TODO: add a turns grounded attribute
-        dispatch(moveTo(player.id, player.position));
+        dispatch(notifyCollision(player.id, speed));
     };
 };
 

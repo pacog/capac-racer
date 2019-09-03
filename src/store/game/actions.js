@@ -2,7 +2,7 @@ export const actionTypes = {
     INIT_GAME: 'INIT_GAME',
     START_GAME: 'START_GAME',
     SET_GAME_STATE: 'SET_GAME_STATE',
-    NEXT_TURN: 'NEXT_TURN',
+    ADVANCE_PLAYER_TURN: 'ADVANCE_PLAYER_TURN',
     SET_CIRCUIT: 'SET_CIRCUIT',
 };
 export const initGame = (playerOrder, circuitInfo) => {
@@ -26,8 +26,8 @@ export const setGameState = (newGameState) => {
     };
 };
 
-export const nextTurn = () => {
+export const advancePlayerTurn = () => {
     return {
-        type: actionTypes.NEXT_TURN,
+        type: actionTypes.ADVANCE_PLAYER_TURN,
     };
 };

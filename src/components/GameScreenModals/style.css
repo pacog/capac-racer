@@ -1,4 +1,4 @@
-.start-modal {
+.game-screen-modal {
     position: absolute;
     z-index: 21;
     top: 0;
@@ -8,5 +8,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+}
+.game-screen-modal-button {
+    background: limegreen;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 5px;
 }
