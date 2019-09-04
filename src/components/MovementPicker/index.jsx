@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { PathLine } from 'react-svg-pathline';
 import { player as playerProp } from 'components/propTypes';
 import { projectToScreenPosition } from 'store/map/selectors';
+import { getOtherPlayersPositionInScreen } from 'store/game/selectors';
 import { isEqual } from 'utils/vector2d';
 import { doesLineCollide } from 'utils/circuit';
 
@@ -40,6 +41,9 @@ function MovementPicker({ player, onPositionSelected, otherPlayers }) {
             };
         },
     );
+    const otherPlayersPosition = useSelector((state) =>
+        getOtherPlayersPositionInScreen(state, player.id),
+    );
 
     return (
         <div ref={rootElement}>
@@ -65,6 +69,7 @@ function MovementPicker({ player, onPositionSelected, otherPlayers }) {
                             player,
                             [originalPlayerScreenPosition, tempLine],
                             circuit,
+                            otherPlayersPosition,
                         )}
                         strokeWidth={player.style.trailWidth}
                         strokeDasharray="2"
@@ -77,8 +82,8 @@ function MovementPicker({ player, onPositionSelected, otherPlayers }) {
     );
 }
 
-function getColorForTempLine(player, points, circuit) {
-    if (doesLineCollide(points, circuit)) {
+function getColorForTempLine(player, points, circuit, otherPlayersPosition) {
+    if (doesLineCollide(points, circuit, otherPlayersPosition)) {
         return 'red';
     }
     return player.style.trailColor;

@@ -1,6 +1,13 @@
 import { loadImage } from 'utils/loadImage';
 import { createFromImage as createPixelGetterFromImage } from 'utils/imgPixelGetter';
-import { distance, add, scale, substract, round } from 'utils/vector2d';
+import {
+    distance,
+    add,
+    scale,
+    substract,
+    round,
+    isEqual,
+} from 'utils/vector2d';
 import { range } from 'utils/range';
 import { hasContent } from 'utils/pixel';
 
@@ -21,7 +28,7 @@ export const createFromConfig = (config) => {
         });
 };
 
-export const doesLineCollide = (line, circuit) => {
+export const doesLineCollide = (line, circuit, otherPlayersPosition) => {
     const pixelsToCheck = getPixelsToCheck(line).map(round);
     // eslint-disable-next-line no-restricted-syntax
     for (const pixelToCheck of pixelsToCheck) {
@@ -32,13 +39,20 @@ export const doesLineCollide = (line, circuit) => {
         if (hasContent(pixelInCollisionMap)) {
             return true;
         }
+        // eslint-disable-next-line no-loop-func
+        const collidesWithOtherPlayer = otherPlayersPosition.find((position) =>
+            isEqual(position, pixelToCheck),
+        );
+        if (collidesWithOtherPlayer) {
+            return true;
+        }
     }
     return false;
 };
 
 function getPixelsToCheck([start, end]) {
     const lineLength = distance(start, end);
-    const nPixelsToCheck = Math.ceil(lineLength);
+    const nPixelsToCheck = Math.ceil(lineLength * 2);
     if (nPixelsToCheck < 2) {
         return [];
     }

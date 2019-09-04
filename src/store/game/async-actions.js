@@ -7,7 +7,11 @@ import {
 } from 'store/players/actions';
 import { changeScreen } from 'store/main-ui/actions';
 import { initGame, setGameState, advancePlayerTurn } from 'store/game/actions';
-import { getAllPlayers, getCurrentPlayer } from 'store/game/selectors';
+import {
+    getAllPlayers,
+    getCurrentPlayer,
+    getOtherPlayersPositionInScreen,
+} from 'store/game/selectors';
 import { GAME } from 'constants/screens';
 import waitingForPlayerCounter from 'utils/waitingForPlayerCounter';
 import { createFromConfig, doesLineCollide } from 'utils/circuit';
@@ -71,7 +75,11 @@ export const handlePlayerMovement = (player, newIntendedPosition) => {
             projectToScreenPosition(state, player.position),
             projectToScreenPosition(state, newIntendedPosition),
         ];
-        if (doesLineCollide(movementLine, circuit)) {
+        const otherPlayersPosition = getOtherPlayersPositionInScreen(
+            state,
+            player.id,
+        );
+        if (doesLineCollide(movementLine, circuit, otherPlayersPosition)) {
             dispatch(handlePlayerCollision(player, newIntendedPosition));
         } else {
             dispatch(moveTo(player.id, newIntendedPosition));
