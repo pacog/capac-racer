@@ -46,8 +46,11 @@ const hardcodedPlayers = [
 
 const hardcodedOrder = ['2', '1'];
 const hardcodedCircuit = {
-    collisionImg: `${process.env.PUBLIC_URL}circuits/circuit1.png`,
-    bgImg: `${process.env.PUBLIC_URL}circuits/circuit1.png`,
+    collisionImg: `${process.env.PUBLIC_URL}circuits/circuit1/collision.png`,
+    bgImg: `${process.env.PUBLIC_URL}circuits/circuit1/bg.png`,
+    checkpoint1: `${process.env.PUBLIC_URL}circuits/circuit1/checkpoint1.png`,
+    checkpoint2: `${process.env.PUBLIC_URL}circuits/circuit1/checkpoint2.png`,
+    checkpoint3: `${process.env.PUBLIC_URL}circuits/circuit1/checkpoint3.png`,
 };
 
 const MainMenu = () => {
