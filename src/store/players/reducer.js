@@ -6,13 +6,26 @@ const players = combineReducers({
     byId,
 });
 
+const PLAYER_DEFAULT_INFO = {
+    position: { x: 0, y: 0 },
+    speed: { x: 0, y: 0 },
+    prevPositions: [],
+    turnsGrounded: 0,
+    checkpoint1Passed: false,
+    checkpoint2Passed: false,
+    checkpoint3Passed: false,
+};
+
 function byId(state = {}, action) {
     switch (action.type) {
         case actionTypes.SET_PLAYERS:
             return action.players.reduce((accumulator, player) => {
                 return {
                     ...accumulator,
-                    [player.id]: player,
+                    [player.id]: {
+                        ...PLAYER_DEFAULT_INFO,
+                        ...player,
+                    },
                 };
             }, {});
         case actionTypes.MOVE_TO:
@@ -63,10 +76,9 @@ function crashPlayer(player, speed) {
 }
 
 function reduceGrounded(player) {
-    const oldGrounded = player.turnsGrounded || 0;
     return {
         ...player,
-        turnsGrounded: Math.max(0, oldGrounded - 1),
+        turnsGrounded: Math.max(0, player.turnsGrounded - 1),
     };
 }
 
