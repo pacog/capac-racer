@@ -1,7 +1,14 @@
 .game-board {
-    position: absolute;
+    position: relative;
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+.game-board-content {
+    transition: transform 1s ease-in-out;
+}
+.is-dragging.game-board-content {
+    transition: none;
 }
 
 .game-board-camera {
