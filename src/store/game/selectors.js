@@ -30,3 +30,14 @@ export const getOtherPlayersPositionInScreen = (state, playerId) => {
 export const getGameState = (state) => {
     return state.game.gameState;
 };
+
+export const hasCurrentPlayerWon = (state) => {
+    const currentPlayer = getCurrentPlayer(state);
+    // eslint-disable-next-line no-restricted-syntax
+    for (const checkpointHasPassed of currentPlayer.checkpointsPassed) {
+        if (!checkpointHasPassed) {
+            return false;
+        }
+    }
+    return true;
+};

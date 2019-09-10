@@ -6,6 +6,7 @@ import StartGameModal from './StartGameModal';
 import StartTurnModal from './StartTurnModal';
 import NotifyCollisionModal from './NotifyCollisionModal';
 import NotifyGroundedModal from './NotifyGroundedModal';
+import NotifyVictoryModal from './NotifyVictoryModal';
 import './style.css';
 
 const GameScreenModals = () => {
@@ -20,6 +21,8 @@ const GameScreenModals = () => {
             return <NotifyCollisionModal />;
         case gameStates.NOTIFY_GROUNDED:
             return <NotifyGroundedModal />;
+        case gameStates.NOTIFY_VICTORY:
+            return <NotifyVictoryModal />;
         default:
             return '';
     }

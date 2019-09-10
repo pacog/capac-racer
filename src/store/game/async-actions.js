@@ -12,8 +12,9 @@ import {
     getAllPlayers,
     getCurrentPlayer,
     getOtherPlayersPositionInScreen,
+    hasCurrentPlayerWon,
 } from 'store/game/selectors';
-import { GAME } from 'constants/screens';
+import { GAME, MAIN_MENU } from 'constants/screens';
 import waitingForPlayerCounter from 'utils/waitingForPlayerCounter';
 import {
     createFromConfig,
@@ -90,9 +91,13 @@ export const handlePlayerMovement = (player, newIntendedPosition) => {
         }
 
         dispatch(detectAndStoreCheckpoints(movementLine, circuit));
-        // TODO check player has won
+        const hasPlayerWon = hasCurrentPlayerWon(getState());
         dispatch(moveTo(player.id, newIntendedPosition));
-        dispatch(nextTurn());
+        if (hasPlayerWon) {
+            dispatch(setGameState(gameStates.NOTIFY_VICTORY));
+        } else {
+            dispatch(nextTurn());
+        }
     };
 };
 
@@ -122,5 +127,11 @@ export const detectAndStoreCheckpoints = (movementLine, circuit) => {
                 visitedCheckpointsInTurn,
             ),
         );
+    };
+};
+
+export const finishGame = () => {
+    return (dispatch) => {
+        dispatch(changeScreen(MAIN_MENU));
     };
 };
