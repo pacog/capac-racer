@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import { loadImage } from 'utils/loadImage';
 import { createFromImage as createPixelGetterFromImage } from 'utils/imgPixelGetter';
 import {
@@ -10,6 +11,7 @@ import {
 } from 'utils/vector2d';
 import { range } from 'utils/range';
 import { hasContent } from 'utils/pixel';
+import { checkpointNamesToCheck } from 'constants/checkpoints';
 
 export const createFromConfig = (config) => {
     const result = {
@@ -24,21 +26,33 @@ export const createFromConfig = (config) => {
         })
         .then((collisionPixelGetter) => {
             result.collisionPixelGetter = collisionPixelGetter;
+            return Promise.all(
+                checkpointNamesToCheck.map((checkpointAttr) =>
+                    loadImage(config[checkpointAttr]),
+                ),
+            );
+        })
+        .then((loadedCheckpointImages) => {
+            return Promise.all(
+                loadedCheckpointImages.map((checkpointImage) =>
+                    createPixelGetterFromImage(checkpointImage),
+                ),
+            );
+        })
+        .then((checkpointPixelGetters) => {
+            result.checkpointPixelGetters = checkpointPixelGetters;
             return result;
         });
 };
 
 export const doesLineCollide = (line, circuit, otherPlayersPosition) => {
     const pixelsToCheck = getPixelsToCheck(line).map(round);
-    // eslint-disable-next-line no-restricted-syntax
+    if (
+        doesAnyPixelCollideInImage(pixelsToCheck, circuit.collisionPixelGetter)
+    ) {
+        return true;
+    }
     for (const pixelToCheck of pixelsToCheck) {
-        const pixelInCollisionMap = circuit.collisionPixelGetter.getPixel(
-            pixelToCheck.x,
-            pixelToCheck.y,
-        );
-        if (hasContent(pixelInCollisionMap)) {
-            return true;
-        }
         // eslint-disable-next-line no-loop-func
         const collidesWithOtherPlayer = otherPlayersPosition.find((position) =>
             isEqual(position, pixelToCheck),
@@ -49,6 +63,30 @@ export const doesLineCollide = (line, circuit, otherPlayersPosition) => {
     }
     return false;
 };
+
+export const getCheckpointsVisitedInLine = (line, circuit) => {
+    const pixelsToCheck = getPixelsToCheck(line).map(round);
+    return circuit.checkpointPixelGetters
+        .map((checkpointPixelGetter) =>
+            doesAnyPixelCollideInImage(pixelsToCheck, checkpointPixelGetter),
+        )
+        .map((doesItCollide, index) => ({ doesItCollide, index }))
+        .filter(({ doesItCollide }) => !!doesItCollide)
+        .map(({ index }) => index);
+};
+
+function doesAnyPixelCollideInImage(pixelsToCheck, imagePixelGetter) {
+    for (const pixelToCheck of pixelsToCheck) {
+        const pixelInCollisionMap = imagePixelGetter.getPixel(
+            pixelToCheck.x,
+            pixelToCheck.y,
+        );
+        if (hasContent(pixelInCollisionMap)) {
+            return true;
+        }
+    }
+    return false;
+}
 
 function getPixelsToCheck([start, end]) {
     const lineLength = distance(start, end);

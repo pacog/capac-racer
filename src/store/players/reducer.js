@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { substract } from 'utils/vector2d';
+import { checkpointNamesToCheck } from 'constants/checkpoints';
 import { actionTypes } from './actions';
 
 const players = combineReducers({
@@ -11,9 +12,7 @@ const PLAYER_DEFAULT_INFO = {
     speed: { x: 0, y: 0 },
     prevPositions: [],
     turnsGrounded: 0,
-    checkpoint1Passed: false,
-    checkpoint2Passed: false,
-    checkpoint3Passed: false,
+    checkpointsPassed: checkpointNamesToCheck.map(() => false),
 };
 
 function byId(state = {}, action) {
@@ -50,6 +49,14 @@ function byId(state = {}, action) {
                 ...state,
                 [action.playerId]: reduceGrounded(state[action.playerId]),
             };
+        case actionTypes.NOTIFY_VISITED_CHECKPOINTS:
+            return {
+                ...state,
+                [action.playerId]: addCheckpoints(
+                    state[action.playerId],
+                    action.newCheckpointIndexes,
+                ),
+            };
         default:
             return state;
     }
@@ -79,6 +86,17 @@ function reduceGrounded(player) {
     return {
         ...player,
         turnsGrounded: Math.max(0, player.turnsGrounded - 1),
+    };
+}
+
+function addCheckpoints(player, newIndexes) {
+    const newCheckpoints = player.checkpointsPassed.slice();
+    newIndexes.forEach((newIndex) => {
+        newCheckpoints[newIndex] = true;
+    });
+    return {
+        ...player,
+        checkpointsPassed: newCheckpoints,
     };
 }
 

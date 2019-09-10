@@ -4,6 +4,7 @@ import {
     moveTo,
     notifyCollision,
     reduceGrounded,
+    notifyVisitedCheckpoints,
 } from 'store/players/actions';
 import { changeScreen } from 'store/main-ui/actions';
 import { initGame, setGameState, advancePlayerTurn } from 'store/game/actions';
@@ -14,7 +15,11 @@ import {
 } from 'store/game/selectors';
 import { GAME } from 'constants/screens';
 import waitingForPlayerCounter from 'utils/waitingForPlayerCounter';
-import { createFromConfig, doesLineCollide } from 'utils/circuit';
+import {
+    createFromConfig,
+    doesLineCollide,
+    getCheckpointsVisitedInLine,
+} from 'utils/circuit';
 import { projectToScreenPosition } from 'store/map/selectors';
 import { distance, isEqual } from 'utils/vector2d';
 
@@ -81,10 +86,13 @@ export const handlePlayerMovement = (player, newIntendedPosition) => {
         );
         if (doesLineCollide(movementLine, circuit, otherPlayersPosition)) {
             dispatch(handlePlayerCollision(player, newIntendedPosition));
-        } else {
-            dispatch(moveTo(player.id, newIntendedPosition));
-            dispatch(nextTurn());
+            return;
         }
+
+        dispatch(detectAndStoreCheckpoints(movementLine, circuit));
+        // TODO check player has won
+        dispatch(moveTo(player.id, newIntendedPosition));
+        dispatch(nextTurn());
     };
 };
 
@@ -95,5 +103,24 @@ export const startWaitingForPlayerInput = () => {
             dispatch(nextTurn());
         };
         waitingForPlayerCounter.restart({ callbackOnEnd });
+    };
+};
+
+export const detectAndStoreCheckpoints = (movementLine, circuit) => {
+    return (dispatch, getState) => {
+        const visitedCheckpointsInTurn = getCheckpointsVisitedInLine(
+            movementLine,
+            circuit,
+        );
+        if (!visitedCheckpointsInTurn.length) {
+            return;
+        }
+        const currentPlayer = getCurrentPlayer(getState());
+        dispatch(
+            notifyVisitedCheckpoints(
+                currentPlayer.id,
+                visitedCheckpointsInTurn,
+            ),
+        );
     };
 };
