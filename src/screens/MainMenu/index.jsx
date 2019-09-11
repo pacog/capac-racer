@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { initGameWithConfig } from 'store/game/async-actions';
 import { BLUE, GREEN } from 'constants/player-styles';
+import './style.css';
 
 const hardcodedPlayers = [
     {
@@ -56,23 +57,50 @@ const hardcodedCircuit = {
 const MainMenu = () => {
     const dispatch = useDispatch();
     return (
-        <>
-            <h1>Capac Racer</h1>
-            <button
-                type="button"
-                onClick={() =>
-                    dispatch(
-                        initGameWithConfig({
-                            players: hardcodedPlayers,
-                            playerOrder: hardcodedOrder,
-                            circuit: hardcodedCircuit,
-                        }),
-                    )
-                }
-            >
-                Start
-            </button>
-        </>
+        <div className="main-menu">
+            <h1 className="main-menu-title">Capac Racer</h1>
+            <div className="main-menu-buttons">
+                <button
+                    className="main-menu-button"
+                    type="button"
+                    disabled
+                    onClick={() => console.log('continue')}
+                >
+                    Continue game
+                </button>
+                <button
+                    className="main-menu-button"
+                    type="button"
+                    onClick={() =>
+                        dispatch(
+                            initGameWithConfig({
+                                players: hardcodedPlayers,
+                                playerOrder: hardcodedOrder,
+                                circuit: hardcodedCircuit,
+                            }),
+                        )
+                    }
+                >
+                    Start new game
+                </button>
+                <button
+                    className="main-menu-button"
+                    type="button"
+                    disabled
+                    onClick={() => console.log('tutorial')}
+                >
+                    Tutorial
+                </button>
+                <button
+                    className="main-menu-button"
+                    type="button"
+                    disabled
+                    onClick={() => console.log('credits')}
+                >
+                    Credits
+                </button>
+            </div>
+        </div>
     );
 };
 
