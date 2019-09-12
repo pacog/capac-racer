@@ -19,10 +19,29 @@ const selectedCircuit = (state = null, action) => {
             return state;
     }
 };
+const selectedPlayers = (state = null, action) => {
+    switch (action.type) {
+        case actionTypes.SET_SELECTED_PLAYERS:
+            return action.players;
+        default:
+            return state;
+    }
+};
+
+const selectedPlayerOrder = (state = null, action) => {
+    switch (action.type) {
+        case actionTypes.SET_SELECTED_PLAYERS:
+            return action.playerOrder;
+        default:
+            return state;
+    }
+};
 
 const mainUI = combineReducers({
     currentScreen,
     selectedCircuit,
+    selectedPlayerOrder,
+    selectedPlayers,
 });
 
 export default mainUI;

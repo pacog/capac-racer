@@ -1,4 +1,5 @@
 import * as gameStates from 'constants/game-states';
+import { circuits } from 'constants/circuits';
 import {
     setPlayers,
     moveTo,
@@ -52,6 +53,19 @@ export const initGameWithConfig = ({ players, playerOrder, circuit }) => {
             dispatch(initGame(playerOrder, circuitInfo));
             dispatch(changeScreen(GAME));
         });
+    };
+};
+
+export const initGameWithSavedConfig = () => {
+    return (dispatch, getState) => {
+        const state = getState();
+        dispatch(
+            initGameWithConfig({
+                players: state.mainUI.selectedPlayers,
+                playerOrder: state.mainUI.selectedPlayerOrder,
+                circuit: circuits[state.mainUI.selectedCircuit],
+            }),
+        );
     };
 };
 
