@@ -11,8 +11,18 @@ const currentScreen = (state = MAIN_MENU, action) => {
     }
 };
 
+const selectedCircuit = (state = null, action) => {
+    switch (action.type) {
+        case actionTypes.SET_SELECTED_CIRCUIT:
+            return action.circuitId;
+        default:
+            return state;
+    }
+};
+
 const mainUI = combineReducers({
     currentScreen,
+    selectedCircuit,
 });
 
 export default mainUI;
