@@ -11,19 +11,21 @@ function CircuitSelection() {
     const dispatch = useDispatch();
     return (
         <div className="circuit-selection-screen full-screen">
-            {circuitsArray.map((circuit) => (
-                <button
-                    key={circuit.id}
-                    className="main-menu-button"
-                    type="button"
-                    onClick={() => {
-                        dispatch(setSelectedCircuit(circuit.id));
-                        dispatch(changeScreen(PLAYERS_SELECTION));
-                    }}
-                >
-                    {circuit.name}
-                </button>
-            ))}
+            <div className="main-menu-section">
+                {circuitsArray.map((circuit) => (
+                    <button
+                        key={circuit.id}
+                        className="main-menu-button"
+                        type="button"
+                        onClick={() => {
+                            dispatch(setSelectedCircuit(circuit.id));
+                            dispatch(changeScreen(PLAYERS_SELECTION));
+                        }}
+                    >
+                        {circuit.name}
+                    </button>
+                ))}
+            </div>
 
             <button
                 className="main-menu-button"

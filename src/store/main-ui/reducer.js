@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { MAIN_MENU } from 'constants/screens';
+import { BLUE } from 'constants/player-styles';
 import { actionTypes } from './actions';
 
 const currentScreen = (state = MAIN_MENU, action) => {
@@ -19,7 +20,16 @@ const selectedCircuit = (state = null, action) => {
             return state;
     }
 };
-const selectedPlayers = (state = null, action) => {
+
+const initialPlayers = [
+    {
+        id: 'DEFAULT_PLAYER',
+        name: 'Player One',
+        style: BLUE,
+    },
+];
+
+const selectedPlayers = (state = initialPlayers, action) => {
     switch (action.type) {
         case actionTypes.SET_SELECTED_PLAYERS:
             return action.players;
@@ -28,7 +38,8 @@ const selectedPlayers = (state = null, action) => {
     }
 };
 
-const selectedPlayerOrder = (state = null, action) => {
+const defaultOrder = ['DEFAULT_PLAYER'];
+const selectedPlayerOrder = (state = defaultOrder, action) => {
     switch (action.type) {
         case actionTypes.SET_SELECTED_PLAYERS:
             return action.playerOrder;

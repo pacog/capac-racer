@@ -41,3 +41,11 @@ export const hasCurrentPlayerWon = (state) => {
     }
     return true;
 };
+
+export const getOrderedPlayers = (state) => {
+    const playerOrder = state.mainUI.selectedPlayerOrder;
+    const players = state.mainUI.selectedPlayers;
+    return playerOrder.map((playerId) =>
+        players.find((player) => player.id === playerId),
+    );
+};

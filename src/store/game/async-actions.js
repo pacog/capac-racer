@@ -47,7 +47,12 @@ export const reduceGroundedAndNextTurn = () => {
 
 export const initGameWithConfig = ({ players, playerOrder, circuit }) => {
     return (dispatch) => {
-        dispatch(setPlayers(players));
+        const playersWithMapPosition = initMapPositionForPlayers({
+            players,
+            playerOrder,
+            circuit,
+        });
+        dispatch(setPlayers(playersWithMapPosition));
         // TODO: add a loading map state (or screen)
         createFromConfig(circuit).then((circuitInfo) => {
             dispatch(initGame(playerOrder, circuitInfo));
@@ -149,3 +154,19 @@ export const finishGame = () => {
         dispatch(changeScreen(MAIN_MENU));
     };
 };
+
+function initMapPositionForPlayers({ players, playerOrder, circuit }) {
+    const orderedPlayers = playerOrder.map((playerId) =>
+        players.find((player) => player.id === playerId),
+    );
+
+    return orderedPlayers.map((player, index) => {
+        const initialPosition = circuit.startingPositions[index];
+        return {
+            ...player,
+            position: { ...initialPosition },
+            prevPositions: [{ ...initialPosition }],
+            speed: { ...circuit.initialSpeed },
+        };
+    });
+}
