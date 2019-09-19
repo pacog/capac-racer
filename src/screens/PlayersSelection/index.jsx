@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeScreen } from 'store/main-ui/actions';
+import { changeScreen, removePlayer } from 'store/main-ui/actions';
 import { addRandomPlayer } from 'store/main-ui/async-actions';
 import { initGameWithSavedConfig } from 'store/game/async-actions';
 import { circuits } from 'constants/circuits';
@@ -23,7 +23,7 @@ function PlayersSelection() {
                     <PlayerSelector
                         key={player.id}
                         player={player}
-                        onRemove={() => console.log('onRemove')}
+                        onRemove={() => dispatch(removePlayer(player.id))}
                         canBeRemoved={players.length > 1}
                     />
                 ))}
