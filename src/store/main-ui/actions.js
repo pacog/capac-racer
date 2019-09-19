@@ -4,6 +4,8 @@ export const actionTypes = {
     SET_SELECTED_PLAYERS: 'SET_SELECTED_PLAYERS',
     REMOVE_PLAYER: 'REMOVE_PLAYER',
     UPDATE_PLAYER: 'UPDATE_PLAYER',
+    TOGGLE_RANDOMIZE_PLAYER_ORDER_ON_START:
+        'TOGGLE_RANDOMIZE_PLAYER_ORDER_ON_START',
 };
 export const changeScreen = (screenId) => {
     return {
@@ -38,5 +40,11 @@ export const updatePlayer = (playerId, attrsToUpdate) => {
         type: actionTypes.UPDATE_PLAYER,
         playerId,
         attrsToUpdate,
+    };
+};
+
+export const toggleRandomizePlayerOrderOnStart = () => {
+    return {
+        type: actionTypes.TOGGLE_RANDOMIZE_PLAYER_ORDER_ON_START,
     };
 };

@@ -62,11 +62,21 @@ const selectedPlayerOrder = (state = defaultOrder, action) => {
     }
 };
 
+const randomizePlayerOrderOnStart = (state = true, action) => {
+    switch (action.type) {
+        case actionTypes.TOGGLE_RANDOMIZE_PLAYER_ORDER_ON_START:
+            return !state;
+        default:
+            return state;
+    }
+};
+
 const mainUI = combineReducers({
     currentScreen,
     selectedCircuit,
     selectedPlayerOrder,
     selectedPlayers,
+    randomizePlayerOrderOnStart,
 });
 
 export default mainUI;

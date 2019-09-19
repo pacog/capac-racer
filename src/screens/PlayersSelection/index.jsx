@@ -1,9 +1,12 @@
+/* eslint-disable jsx-a11y/label-has-for */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     changeScreen,
     removePlayer,
     updatePlayer,
+    toggleRandomizePlayerOrderOnStart,
 } from 'store/main-ui/actions';
 import { addRandomPlayer } from 'store/main-ui/async-actions';
 import { initGameWithSavedConfig } from 'store/game/async-actions';
@@ -16,6 +19,10 @@ import './style.css';
 function PlayersSelection() {
     const dispatch = useDispatch();
     const circuitId = useSelector((state) => state.mainUI.selectedCircuit);
+    const randomizePlayerOrderOnStart = useSelector(
+        (state) => state.mainUI.randomizePlayerOrderOnStart,
+    );
+
     const players = useSelector(getOrderedPlayers);
 
     const circuit = circuits[circuitId];
@@ -44,6 +51,20 @@ function PlayersSelection() {
                     </button>
                 )}
             </div>
+            {players.length > 1 && (
+                <div>
+                    <label>
+                        <input
+                            type="checkbox"
+                            checked={randomizePlayerOrderOnStart}
+                            onChange={() =>
+                                dispatch(toggleRandomizePlayerOrderOnStart())
+                            }
+                        />
+                    </label>
+                    Randomize player order when race starts
+                </div>
+            )}
             <button
                 className="main-menu-button"
                 type="button"

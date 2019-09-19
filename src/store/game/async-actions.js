@@ -1,3 +1,4 @@
+import shuffle from 'lodash.shuffle';
 import * as gameStates from 'constants/game-states';
 import { circuits } from 'constants/circuits';
 import {
@@ -64,10 +65,14 @@ export const initGameWithConfig = ({ players, playerOrder, circuit }) => {
 export const initGameWithSavedConfig = () => {
     return (dispatch, getState) => {
         const state = getState();
+        const { randomizePlayerOrderOnStart } = state.mainUI;
+        const playerOrder = randomizePlayerOrderOnStart
+            ? shuffle(state.mainUI.selectedPlayerOrder)
+            : state.mainUI.selectedPlayerOrder;
         dispatch(
             initGameWithConfig({
                 players: state.mainUI.selectedPlayers,
-                playerOrder: state.mainUI.selectedPlayerOrder,
+                playerOrder,
                 circuit: circuits[state.mainUI.selectedCircuit],
             }),
         );
