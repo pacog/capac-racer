@@ -16,10 +16,15 @@ export const vector2d = PropTypes.shape({
     y: PropTypes.number,
 });
 
-export const player = PropTypes.shape({
+export const selectablePlayer = PropTypes.shape({
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    style: playerStyle,
+});
+
+export const player = PropTypes.shape({
+    ...selectablePlayer,
     position: vector2d.isRequired,
     speed: vector2d.isRequired,
     prevPositions: PropTypes.arrayOf(vector2d),
-    style: playerStyle,
 });

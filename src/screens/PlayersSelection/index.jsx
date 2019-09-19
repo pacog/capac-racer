@@ -1,10 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeScreen, setSelectedPlayers } from 'store/main-ui/actions';
+import { changeScreen } from 'store/main-ui/actions';
+import { addRandomPlayer } from 'store/main-ui/async-actions';
 import { initGameWithSavedConfig } from 'store/game/async-actions';
 import { circuits } from 'constants/circuits';
 import { CIRCUIT_SELECTION } from 'constants/screens';
 import { getOrderedPlayers } from 'store/game/selectors';
+import PlayerSelector from 'components/PlayerSelector';
 import './style.css';
 
 function PlayersSelection() {
@@ -17,10 +19,23 @@ function PlayersSelection() {
     return (
         <div className="player-selection-screen full-screen">
             <div className="main-menu-section">
-                Max player: {circuit.maxPlayers}
                 {players.map((player) => (
-                    <div key={player.id}>{player.name}</div>
+                    <PlayerSelector
+                        key={player.id}
+                        player={player}
+                        onRemove={() => console.log('onRemove')}
+                        canBeRemoved={players.length > 1}
+                    />
                 ))}
+                {players.length < circuit.maxPlayers && (
+                    <button
+                        type="button"
+                        className="main-menu-button"
+                        onClick={() => dispatch(addRandomPlayer())}
+                    >
+                        Add Player
+                    </button>
+                )}
             </div>
             <button
                 className="main-menu-button"
