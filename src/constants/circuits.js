@@ -10,25 +10,25 @@ export const circuits = {
         maxPlayers: 4,
         startingPositions: [
             {
+                x: 4,
+                y: 23,
+            },
+            {
                 x: 5,
-                y: 25,
+                y: 23,
             },
             {
                 x: 6,
-                y: 25,
+                y: 23,
             },
             {
                 x: 7,
-                y: 25,
-            },
-            {
-                x: 8,
-                y: 25,
+                y: 23,
             },
         ],
         initialSpeed: {
-            x: 1,
-            y: 0,
+            x: 0,
+            y: -1,
         },
     },
     circuit2: {

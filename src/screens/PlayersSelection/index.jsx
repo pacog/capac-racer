@@ -41,9 +41,6 @@ function PlayersSelection() {
                 className="main-menu-button"
                 type="button"
                 onClick={() => {
-                    // dispatch(
-                    //     setSelectedPlayers(hardcodedPlayers, hardcodedOrder),
-                    // );
                     dispatch(initGameWithSavedConfig());
                 }}
             >

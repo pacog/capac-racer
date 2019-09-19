@@ -23,7 +23,9 @@ export const selectablePlayer = PropTypes.shape({
 });
 
 export const player = PropTypes.shape({
-    ...selectablePlayer,
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    style: playerStyle,
     position: vector2d.isRequired,
     speed: vector2d.isRequired,
     prevPositions: PropTypes.arrayOf(vector2d),
