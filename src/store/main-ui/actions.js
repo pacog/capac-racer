@@ -3,6 +3,7 @@ export const actionTypes = {
     SET_SELECTED_CIRCUIT: 'SET_SELECTED_CIRCUIT',
     SET_SELECTED_PLAYERS: 'SET_SELECTED_PLAYERS',
     REMOVE_PLAYER: 'REMOVE_PLAYER',
+    UPDATE_PLAYER: 'UPDATE_PLAYER',
 };
 export const changeScreen = (screenId) => {
     return {
@@ -29,5 +30,13 @@ export const removePlayer = (playerId) => {
     return {
         type: actionTypes.REMOVE_PLAYER,
         playerId,
+    };
+};
+
+export const updatePlayer = (playerId, attrsToUpdate) => {
+    return {
+        type: actionTypes.UPDATE_PLAYER,
+        playerId,
+        attrsToUpdate,
     };
 };

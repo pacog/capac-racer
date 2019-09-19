@@ -35,6 +35,16 @@ const selectedPlayers = (state = initialPlayers, action) => {
             return action.players;
         case actionTypes.REMOVE_PLAYER:
             return state.filter((player) => player.id !== action.playerId);
+        case actionTypes.UPDATE_PLAYER:
+            return state.map((player) => {
+                if (player.id !== action.playerId) {
+                    return player;
+                }
+                return {
+                    ...player,
+                    ...action.attrsToUpdate,
+                };
+            });
         default:
             return state;
     }
