@@ -1,0 +1,34 @@
+.circuit-selector {
+    height: 100px;
+    width: 100px;
+    position: relative;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.circuit-selector:hover {
+    box-shadow: 0 0 0 5px goldenrod;
+}
+
+.circuit-selector-img {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+}
+
+.circuit-selector-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+}
+.circuit-selector-title {
+    font-size: 12px;
+}
+.circuit-selector-players {
+    font-size: 10px;
+}

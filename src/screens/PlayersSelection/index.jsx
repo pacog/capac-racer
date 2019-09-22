@@ -29,6 +29,7 @@ function PlayersSelection() {
 
     return (
         <div className="player-selection-screen full-screen">
+            <h1 className="main-menu-title">Choose players</h1>
             <div className="main-menu-section">
                 {players.map((player) => (
                     <PlayerSelector
