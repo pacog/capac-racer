@@ -205,3 +205,15 @@ export const tryToToggleInGameMenu = () => {
         }
     };
 };
+
+export const tryToShowInGameMenu = () => {
+    return (dispatch, getState) => {
+        const { gameState } = getState().game;
+        switch (gameState) {
+            case gameStates.WAITING_FOR_PLAYER_INPUT:
+                dispatch(pause());
+                break;
+            default:
+        }
+    };
+};

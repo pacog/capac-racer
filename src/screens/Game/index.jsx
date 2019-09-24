@@ -4,7 +4,11 @@ import GameBoard from 'components/GameBoard';
 import PlayerList from 'components/PlayerList';
 import GameScreenModals from 'components/GameScreenModals';
 import KeyPressListener from 'components/KeyPressListener';
-import { tryToToggleInGameMenu } from 'store/game/async-actions';
+import WindowBlurListener from 'components/WindowBlurListener';
+import {
+    tryToToggleInGameMenu,
+    tryToShowInGameMenu,
+} from 'store/game/async-actions';
 
 import './style.css';
 
@@ -17,6 +21,9 @@ const Game = () => {
                     Escape: () => dispatch(tryToToggleInGameMenu()),
                     Space: () => dispatch(tryToToggleInGameMenu()),
                 }}
+            />
+            <WindowBlurListener
+                onBlur={() => dispatch(tryToShowInGameMenu())}
             />
             <GameBoard />
             <PlayerList />
