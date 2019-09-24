@@ -10,8 +10,6 @@ import {
 } from 'store/game/selectors';
 import MovementPicker from 'components/MovementPicker';
 import PlayerTrail from 'components/PlayerTrail';
-import CounterDisplay from 'components/CounterDisplay';
-import waitingForPlayerCounter from 'utils/waitingForPlayerCounter';
 import './style.css';
 
 const GameBoardContents = () => {
@@ -49,7 +47,6 @@ const GameBoardContents = () => {
             ))}
             {currentPlayer && waitingForPlayerInput && (
                 <>
-                    <CounterDisplay counterObject={waitingForPlayerCounter} />
                     <MovementPicker
                         player={currentPlayer}
                         otherPlayers={players.filter(
