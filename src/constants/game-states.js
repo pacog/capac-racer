@@ -6,3 +6,4 @@ export const ANIMATING_PLAYER_MOVEMENT = Symbol('ANIMATING_PLAYER_MOVEMENT');
 export const NOTIFY_COLLISION = Symbol('NOTIFY_COLLISION');
 export const NOTIFY_GROUNDED = Symbol('NOTIFY_GROUNDED');
 export const NOTIFY_VICTORY = Symbol('NOTIFY_VICTORY');
+export const SHOW_MENU = Symbol('SHOW_MENU');

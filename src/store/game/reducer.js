@@ -3,6 +3,7 @@ import { actionTypes } from './actions';
 
 const defaultState = {
     gameState: gameStates.NOT_STARTED,
+    lastGameState: null, // We store one game state previous to the current so we can go back after pausing
     players: [],
     currentTurn: null,
     circuitInfo: null,
@@ -26,7 +27,11 @@ const game = (state = defaultState, action) => {
                 currentTurn: getNextTurn(state.players, state.currentTurn),
             };
         case actionTypes.SET_GAME_STATE:
-            return { ...state, gameState: action.newGameState };
+            return {
+                ...state,
+                gameState: action.newGameState,
+                lastGameState: state.gameState,
+            };
         default:
             return state;
     }

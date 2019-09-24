@@ -26,6 +26,10 @@ export default class {
         this._isRunning = false;
     }
 
+    unpause() {
+        this._isRunning = true;
+    }
+
     stop() {
         this._isRunning = false;
         this._callbackOnEnd = null;

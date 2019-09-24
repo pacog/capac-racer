@@ -175,3 +175,18 @@ function initMapPositionForPlayers({ players, playerOrder, circuit }) {
         };
     });
 }
+
+export const pause = () => {
+    return (dispatch) => {
+        dispatch(setGameState(gameStates.SHOW_MENU));
+        waitingForPlayerCounter.pause();
+    };
+};
+
+export const unpause = () => {
+    return (dispatch, getState) => {
+        const lastState = getState().game.lastGameState;
+        dispatch(setGameState(lastState));
+        waitingForPlayerCounter.unpause();
+    };
+};
