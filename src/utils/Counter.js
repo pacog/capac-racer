@@ -35,6 +35,12 @@ export default class {
         this._callbackOnEnd = null;
     }
 
+    reset() {
+        this._elapsedTime = 0;
+        this._isRunning = false;
+        this._callbackOnEnd = null;
+    }
+
     getTimeLeft() {
         return Math.max(this._timeToWait - this._elapsedTime, 0);
     }

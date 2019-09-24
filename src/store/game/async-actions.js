@@ -157,6 +157,7 @@ export const detectAndStoreCheckpoints = (movementLine, circuit) => {
 export const finishGame = () => {
     return (dispatch) => {
         dispatch(changeScreen(MAIN_MENU));
+        waitingForPlayerCounter.reset();
     };
 };
 

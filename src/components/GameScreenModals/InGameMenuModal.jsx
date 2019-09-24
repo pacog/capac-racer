@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { unpause } from 'store/game/async-actions';
+import { unpause, finishGame } from 'store/game/async-actions';
 
 const InGameMenuModal = () => {
     const dispatch = useDispatch();
@@ -12,6 +12,17 @@ const InGameMenuModal = () => {
             <div>Paused</div>
             <button className="game-screen-modal-button" type="button">
                 Continue!
+            </button>
+
+            <button
+                className="game-screen-modal-button mt-l"
+                type="button"
+                onClick={(event) => {
+                    event.stopPropagation();
+                    dispatch(finishGame());
+                }}
+            >
+                Exit game
             </button>
         </div>
     );
