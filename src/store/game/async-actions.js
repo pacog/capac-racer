@@ -185,8 +185,23 @@ export const pause = () => {
 
 export const unpause = () => {
     return (dispatch, getState) => {
-        const lastState = getState().game.lastGameState;
+        const lastState = getState().game.prevGameState;
         dispatch(setGameState(lastState));
         waitingForPlayerCounter.unpause();
+    };
+};
+
+export const tryToToggleInGameMenu = () => {
+    return (dispatch, getState) => {
+        const { gameState } = getState().game;
+        switch (gameState) {
+            case gameStates.SHOW_MENU:
+                dispatch(unpause());
+                break;
+            case gameStates.WAITING_FOR_PLAYER_INPUT:
+                dispatch(pause());
+                break;
+            default:
+        }
     };
 };
