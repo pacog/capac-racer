@@ -7,8 +7,10 @@ import {
     getCurrentPlayer,
     getAllPlayers,
     isWaitingForPlayerInput,
+    isAnimatingRandomSelection,
 } from 'store/game/selectors';
 import MovementPicker from 'components/MovementPicker';
+import RandomSelectionAnimation from 'components/RandomSelectionAnimation';
 import PlayerTrail from 'components/PlayerTrail';
 import './style.css';
 
@@ -19,9 +21,8 @@ const GameBoardContents = () => {
     const mapZoom = useSelector((state) => state.map.zoom);
     const gridSize = useSelector((state) => state.map.gridSize);
     const circuitInfo = useSelector((state) => state.game.circuitInfo);
-    const waitingForPlayerInput = useSelector((state) =>
-        isWaitingForPlayerInput(state),
-    );
+    const waitingForPlayerInput = useSelector(isWaitingForPlayerInput);
+    const animatingRandomSelection = useSelector(isAnimatingRandomSelection);
 
     return (
         <>
@@ -49,16 +50,17 @@ const GameBoardContents = () => {
                 <>
                     <MovementPicker
                         player={currentPlayer}
-                        otherPlayers={players.filter(
-                            (otherPlayer) =>
-                                otherPlayer.id !== currentPlayer.id,
-                        )}
                         onPositionSelected={(position) =>
                             dispatch(
                                 handlePlayerMovement(currentPlayer, position),
                             )
                         }
                     />
+                </>
+            )}
+            {currentPlayer && animatingRandomSelection && (
+                <>
+                    <RandomSelectionAnimation player={currentPlayer} />
                 </>
             )}
         </>

@@ -1,5 +1,6 @@
 import * as gameStates from 'constants/game-states';
 import { projectToScreenPosition } from 'store/map/selectors';
+import { getPossibleDestinations } from 'store/players/selectors';
 
 export const isGameStarted = (state) => {
     return state.game.gameState !== gameStates.NOT_STARTED;
@@ -7,6 +8,10 @@ export const isGameStarted = (state) => {
 
 export const isWaitingForPlayerInput = (state) => {
     return state.game.gameState === gameStates.WAITING_FOR_PLAYER_INPUT;
+};
+
+export const isAnimatingRandomSelection = (state) => {
+    return state.game.gameState === gameStates.ANIMATING_RANDOM_PLAYER_MOVEMENT;
 };
 
 export const getCurrentPlayer = (state) => {
@@ -48,4 +53,17 @@ export const getOrderedPlayers = (state) => {
     return playerOrder.map((playerId) =>
         players.find((player) => player.id === playerId),
     );
+};
+
+export const getPossibleDestinationsForPlayerInScreen = (state, player) => {
+    const otherPlayers = getAllPlayers(state).filter(
+        (otherPlayer) => otherPlayer.id !== player.id,
+    );
+
+    return getPossibleDestinations(player, otherPlayers).map((eachPosition) => {
+        return {
+            screen: projectToScreenPosition(state, eachPosition),
+            position: eachPosition,
+        };
+    });
 };

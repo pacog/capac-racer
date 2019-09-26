@@ -1,4 +1,4 @@
-.movement-picker {
+.random-selection-animation {
     position: absolute;
     height: var(--player-size);
     width: var(--player-size);
@@ -7,20 +7,33 @@
 
     border: 1px solid var(--player-color);
     border-radius: var(--player-border-radius);
-    cursor: pointer;
 
     z-index: 7;
 }
 
-.movement-picker:hover {
+.random-selection-animation.is-highlighted {
     background-color: var(--player-color);
     z-index: 11;
 }
 
-.movement-picker-temp-line {
+.random-selection-animation-temp-line {
     overflow: visible;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 9;
+}
+
+.random-selection-animation-warning {
+    position: absolute;
+    transform: translateX(-50%);
+    margin-top: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 8px;
+    width: 140px;
+    color: white;
+    border-radius: 4px;
+    z-index: 15;
+    text-align: center;
+    font-size: 12px;
 }

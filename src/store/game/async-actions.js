@@ -17,6 +17,7 @@ import {
     hasCurrentPlayerWon,
 } from 'store/game/selectors';
 import { GAME, MAIN_MENU } from 'constants/screens';
+import { TIME_SHOWING_RANDOM_SELECTOR } from 'constants/ux';
 import waitingForPlayerCounter from 'utils/waitingForPlayerCounter';
 import {
     createFromConfig,
@@ -144,8 +145,7 @@ export const startWaitingForPlayerInput = () => {
 function showRandomSelectorAndMovePlayer() {
     return (dispatch, getState) => {
         dispatch(setGameState(gameStates.ANIMATING_RANDOM_PLAYER_MOVEMENT));
-        // TODO extract creation of counter to external module
-        timeout(5000).then(() => {
+        timeout(TIME_SHOWING_RANDOM_SELECTOR).then(() => {
             const player = getCurrentPlayer(getState());
             const otherPlayers = getAllPlayers(getState()).filter(
                 (otherPlayer) => otherPlayer.id !== player.id,

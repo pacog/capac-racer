@@ -1,7 +1,6 @@
+import { TIME_FOR_USER_TO_PICK_POSITION } from 'constants/ux';
 import Counter from './Counter';
 
-const TIME_TO_WAIT_FOR_PLAYER = 15999; // TODO take from options
-
-const counter = new Counter({ timeToWait: TIME_TO_WAIT_FOR_PLAYER });
+const counter = new Counter({ timeToWait: TIME_FOR_USER_TO_PICK_POSITION });
 
 export default counter;
