@@ -25,13 +25,9 @@ import {
 } from 'utils/circuit';
 import { projectToScreenPosition } from 'store/map/selectors';
 import { distance, isEqual } from 'utils/vector2d';
-import Counter from 'utils/Counter';
-import {
-    addToUpdate as addToGameLoopUpdate,
-    removeFromUpdate as removeFromGameLoopUpdate,
-} from 'utils/gameLoop';
 import { getPossibleDestinations } from 'store/players/selectors';
 import { pickRandomFromArray } from 'utils/random';
+import { timeout } from 'utils/gameLoopTimeout';
 
 export const nextTurn = () => {
     return (dispatch, getState) => {
@@ -149,24 +145,14 @@ function showRandomSelectorAndMovePlayer() {
     return (dispatch, getState) => {
         dispatch(setGameState(gameStates.ANIMATING_RANDOM_PLAYER_MOVEMENT));
         // TODO extract creation of counter to external module
-        const counter = new Counter({ timeToWait: 5000 });
-        const notifyPassOfTime = (time) => {
-            counter.notifyTimePassed(time);
-        };
-        addToGameLoopUpdate(notifyPassOfTime);
-        counter.restart({
-            callbackOnEnd: () => {
-                removeFromGameLoopUpdate(notifyPassOfTime);
-                counter.stop();
-
-                const player = getCurrentPlayer(getState());
-                const otherPlayers = getAllPlayers(getState()).filter(
-                    (otherPlayer) => otherPlayer.id !== player.id,
-                );
-                const positions = getPossibleDestinations(player, otherPlayers);
-                const nextPosition = pickRandomFromArray(positions);
-                dispatch(handlePlayerMovement(player, nextPosition));
-            },
+        timeout(5000).then(() => {
+            const player = getCurrentPlayer(getState());
+            const otherPlayers = getAllPlayers(getState()).filter(
+                (otherPlayer) => otherPlayer.id !== player.id,
+            );
+            const positions = getPossibleDestinations(player, otherPlayers);
+            const nextPosition = pickRandomFromArray(positions);
+            dispatch(handlePlayerMovement(player, nextPosition));
         });
     };
 }
