@@ -25,6 +25,13 @@ import {
 } from 'utils/circuit';
 import { projectToScreenPosition } from 'store/map/selectors';
 import { distance, isEqual } from 'utils/vector2d';
+import Counter from 'utils/Counter';
+import {
+    addToUpdate as addToGameLoopUpdate,
+    removeFromUpdate as removeFromGameLoopUpdate,
+} from 'utils/gameLoop';
+import { getPossibleDestinations } from 'store/players/selectors';
+import { pickRandomFromArray } from 'utils/random';
 
 export const nextTurn = () => {
     return (dispatch, getState) => {
@@ -89,6 +96,7 @@ export const handlePlayerCollision = (player, newIntendedPosition) => {
 
 export const handlePlayerMovement = (player, newIntendedPosition) => {
     return (dispatch, getState) => {
+        // TODO: remove? START
         const allPlayers = getAllPlayers(getState());
         const collidingPlayer = allPlayers
             .filter((otherPlayer) => otherPlayer.id !== player.id)
@@ -98,6 +106,8 @@ export const handlePlayerMovement = (player, newIntendedPosition) => {
         if (collidingPlayer) {
             return;
         }
+        // TODO: remove END
+
         waitingForPlayerCounter.stop();
         const state = getState();
         const circuit = state.game.circuitInfo;
@@ -129,11 +139,37 @@ export const startWaitingForPlayerInput = () => {
     return (dispatch) => {
         dispatch(setGameState(gameStates.WAITING_FOR_PLAYER_INPUT));
         const callbackOnEnd = () => {
-            dispatch(nextTurn());
+            dispatch(showRandomSelectorAndMovePlayer());
         };
         waitingForPlayerCounter.restart({ callbackOnEnd });
     };
 };
+
+function showRandomSelectorAndMovePlayer() {
+    return (dispatch, getState) => {
+        dispatch(setGameState(gameStates.ANIMATING_RANDOM_PLAYER_MOVEMENT));
+        // TODO extract creation of counter to external module
+        const counter = new Counter({ timeToWait: 5000 });
+        const notifyPassOfTime = (time) => {
+            counter.notifyTimePassed(time);
+        };
+        addToGameLoopUpdate(notifyPassOfTime);
+        counter.restart({
+            callbackOnEnd: () => {
+                removeFromGameLoopUpdate(notifyPassOfTime);
+                counter.stop();
+
+                const player = getCurrentPlayer(getState());
+                const otherPlayers = getAllPlayers(getState()).filter(
+                    (otherPlayer) => otherPlayer.id !== player.id,
+                );
+                const positions = getPossibleDestinations(player, otherPlayers);
+                const nextPosition = pickRandomFromArray(positions);
+                dispatch(handlePlayerMovement(player, nextPosition));
+            },
+        });
+    };
+}
 
 export const detectAndStoreCheckpoints = (movementLine, circuit) => {
     return (dispatch, getState) => {

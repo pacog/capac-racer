@@ -6,12 +6,10 @@ import { PathLine } from 'react-svg-pathline';
 import { player as playerProp } from 'components/propTypes';
 import { projectToScreenPosition } from 'store/map/selectors';
 import { getOtherPlayersPositionInScreen } from 'store/game/selectors';
-import { isEqual } from 'utils/vector2d';
+import { getPossibleDestinations } from 'store/players/selectors';
 import { doesLineCollide } from 'utils/circuit';
 
 import './style.css';
-
-const DISTANCE_TO_MOVE = 1;
 
 function MovementPicker({ player, onPositionSelected, otherPlayers }) {
     const rootElement = useRef(null);
@@ -24,16 +22,12 @@ function MovementPicker({ player, onPositionSelected, otherPlayers }) {
         return () => setTempLine(null);
     }, [player]);
 
-    const position = {
-        x: player.position.x + player.speed.x,
-        y: player.position.y + player.speed.y,
-    };
     const circuit = useSelector((state) => state.game.circuitInfo);
     const storeState = useSelector((state) => state);
     const originalPlayerScreenPosition = useSelector((state) =>
         projectToScreenPosition(state, player.position),
     );
-    const positions = getAllPossibleDestinations(position, otherPlayers).map(
+    const positions = getPossibleDestinations(player, otherPlayers).map(
         (eachPosition) => {
             return {
                 screen: projectToScreenPosition(storeState, eachPosition),
@@ -87,27 +81,6 @@ function getColorForTempLine(player, points, circuit, otherPlayersPosition) {
         return 'red';
     }
     return player.style.trailColor;
-}
-
-function getAllPossibleDestinations(originalPosition, otherPlayers) {
-    const positions = [];
-    for (let i = -DISTANCE_TO_MOVE; i <= DISTANCE_TO_MOVE; i += 1) {
-        for (let j = -DISTANCE_TO_MOVE; j <= DISTANCE_TO_MOVE; j += 1) {
-            positions.push({
-                x: originalPosition.x + i,
-                y: originalPosition.y + j,
-            });
-        }
-    }
-    return positions.filter(
-        (position) => !isPositionColliding(position, otherPlayers),
-    );
-}
-
-function isPositionColliding(position, otherPlayers) {
-    return !!otherPlayers
-        .map((player) => player.position)
-        .find((otherPosition) => isEqual(otherPosition, position));
 }
 
 MovementPicker.propTypes = {
