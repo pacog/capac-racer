@@ -1,5 +1,9 @@
 .main-menu {
-    background: black;
+    background: linear-gradient(
+        to bottom,
+        var(--dark-blue),
+        var(--darkest-blue)
+    );
 }
 
 .main-menu-title {
@@ -7,33 +11,19 @@
     margin-bottom: 24px;
     color: white;
 }
-
-.main-menu-buttons {
+.main-menu-content {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
 }
 
-.main-menu-button {
-    min-width: 200px;
-    padding: 12px 20px;
-    color: #c4c4c4;
-    background: transparent;
-    border: 1px solid #c4c4c4;
-    border-radius: 4px;
-    margin: 0;
-    margin-top: 12px;
-    cursor: pointer;
-}
-.main-menu-button[disabled] {
-    opacity: 0.5;
-    cursor: default;
-}
-
-.main-menu-button:not([disabled]):hover {
-    color: white;
-    border-color: white;
+.main-menu-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin-left: 10px;
 }
 
 .main-menu-section {

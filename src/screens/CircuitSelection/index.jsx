@@ -27,7 +27,7 @@ function CircuitSelection() {
             </div>
 
             <button
-                className="main-menu-button"
+                className="button"
                 type="button"
                 onClick={() => {
                     dispatch(changeScreen(MAIN_MENU));

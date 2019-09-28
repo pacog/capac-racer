@@ -45,7 +45,7 @@ function PlayersSelection() {
                 {players.length < circuit.maxPlayers && (
                     <button
                         type="button"
-                        className="main-menu-button"
+                        className="button"
                         onClick={() => dispatch(addRandomPlayer())}
                     >
                         Add Player
@@ -67,7 +67,7 @@ function PlayersSelection() {
                 </div>
             )}
             <button
-                className="main-menu-button"
+                className="button"
                 type="button"
                 onClick={() => {
                     dispatch(initGameWithSavedConfig());
@@ -76,7 +76,7 @@ function PlayersSelection() {
                 Start game!
             </button>
             <button
-                className="main-menu-button"
+                className="button"
                 type="button"
                 onClick={() => {
                     dispatch(changeScreen(CIRCUIT_SELECTION));

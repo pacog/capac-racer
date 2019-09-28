@@ -5,9 +5,9 @@ html {
 
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-        'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-        'Helvetica Neue', sans-serif;
+    font-family: 'doppio_oneregular', -apple-system, BlinkMacSystemFont,
+        'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+        'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     position: relative;
@@ -28,4 +28,31 @@ html {
 *:before,
 *:after {
     box-sizing: inherit;
+}
+
+@font-face {
+    font-family: 'destroyregular';
+    src: url('./fonts/destroy_-webfont.woff2') format('woff2'),
+        url('./fonts/destroy_-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'doppio_oneregular';
+    src: url('./fonts/doppioone-regular-webfont.woff2') format('woff2'),
+        url('./fonts/doppioone-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Variables */
+html {
+    --dark-blue: #011626;
+    --darker-blue: #010d17;
+    --darkest-blue: #00060a;
+    --white: #fdfffc;
+    --blue: #2ec4b6;
+    --red: #e71d36;
+    --orange: #ff9f1c;
 }

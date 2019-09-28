@@ -1,0 +1,13 @@
+.logo {
+    font-family: 'destroyregular';
+}
+.logo-up {
+    font-size: 93px;
+    color: var(--white);
+    line-height: 82px;
+}
+.logo-down {
+    font-size: 94px;
+    color: var(--red);
+    line-height: 58px;
+}
