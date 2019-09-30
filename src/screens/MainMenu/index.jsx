@@ -9,7 +9,7 @@ import './style.css';
 const MainMenu = () => {
     const dispatch = useDispatch();
     return (
-        <div className="main-menu full-screen">
+        <div className="menu-screen full-screen">
             <div className="main-menu-content">
                 <Logo />
 

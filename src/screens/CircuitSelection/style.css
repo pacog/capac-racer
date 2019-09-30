@@ -1,4 +1,21 @@
-.circuit-selection-screen {
-    background: black;
-    color: white;
+.circuit-selection-content {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    padding: 0 40px;
+    width: 100%;
+}
+
+.circuit-selection-list {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 100%;
+    width: 100%;
+    overflow: auto;
+}
+
+.circuit-selection-list .circuit-selector {
+    flex-shrink: 0;
 }

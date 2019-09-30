@@ -25,3 +25,36 @@
 .button:not([disabled]):hover {
     color: var(--orange);
 }
+
+.menu-screen {
+    background: linear-gradient(
+        to bottom,
+        var(--dark-blue),
+        var(--darkest-blue)
+    );
+}
+
+.menu-header {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+    padding: 48px;
+    color: var(--white);
+}
+.menu-header-title {
+    flex: 1;
+    font-size: 48px;
+    margin: 0;
+    margin-left: 42px;
+    text-align: left;
+    line-height: 40px;
+}
+.menu-content {
+    flex: 1;
+}
+.menu-footer {
+    width: 100%;
+    padding: 24px;
+}

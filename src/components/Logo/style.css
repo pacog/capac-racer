@@ -4,10 +4,21 @@
 .logo-up {
     font-size: 93px;
     color: var(--white);
+    text-shadow: 0 0 5px var(--darkest-blue);
     line-height: 82px;
 }
 .logo-down {
     font-size: 94px;
     color: var(--red);
+    text-shadow: 0 0 5px var(--darkest-blue);
     line-height: 58px;
+}
+
+.logo-small .logo-up {
+    font-size: 47px;
+    line-height: 41px;
+}
+.logo-small .logo-down {
+    font-size: 48px;
+    line-height: 27px;
 }
