@@ -1,4 +1,24 @@
-.player-selection-screen {
-    background: black;
-    color: white;
+.player-selection-content {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player-selection-add-player-button {
+    width: 100%;
+}
+.player-selection-checkbox {
+    display: block;
+    cursor: pointer;
+    margin-top: 20px;
+    color: var(--white);
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+.player-selection-checkbox input {
+    margin-right: 10px;
 }

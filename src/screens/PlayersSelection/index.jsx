@@ -14,6 +14,7 @@ import { circuits } from 'constants/circuits';
 import { CIRCUIT_SELECTION } from 'constants/screens';
 import { getOrderedPlayers } from 'store/game/selectors';
 import PlayerSelector from 'components/PlayerSelector';
+import Logo from 'components/Logo';
 import './style.css';
 
 function PlayersSelection() {
@@ -28,9 +29,12 @@ function PlayersSelection() {
     const circuit = circuits[circuitId];
 
     return (
-        <div className="player-selection-screen full-screen">
-            <h1 className="main-menu-title">Choose players</h1>
-            <div>
+        <div className="menu-screen full-screen">
+            <div className="menu-header">
+                <Logo variant="small" />
+                <h1 className="menu-header-title">Choose players</h1>
+            </div>
+            <div className="menu-content player-selection-content">
                 {players.map((player) => (
                     <PlayerSelector
                         key={player.id}
@@ -45,16 +49,17 @@ function PlayersSelection() {
                 {players.length < circuit.maxPlayers && (
                     <button
                         type="button"
-                        className="button"
+                        className="button player-selection-add-player-button"
                         onClick={() => dispatch(addRandomPlayer())}
                     >
                         Add Player
                     </button>
                 )}
             </div>
+
             {players.length > 1 && (
                 <div>
-                    <label>
+                    <label className="player-selection-checkbox">
                         <input
                             type="checkbox"
                             checked={randomizePlayerOrderOnStart}
@@ -62,28 +67,32 @@ function PlayersSelection() {
                                 dispatch(toggleRandomizePlayerOrderOnStart())
                             }
                         />
+                        Randomize player order when race starts
                     </label>
-                    Randomize player order when race starts
                 </div>
             )}
-            <button
-                className="button"
-                type="button"
-                onClick={() => {
-                    dispatch(initGameWithSavedConfig());
-                }}
-            >
-                Start game!
-            </button>
-            <button
-                className="button"
-                type="button"
-                onClick={() => {
-                    dispatch(changeScreen(CIRCUIT_SELECTION));
-                }}
-            >
-                Back
-            </button>
+
+            <footer className="menu-footer">
+                <button
+                    className="button menu-footer-back-button"
+                    type="button"
+                    onClick={() => {
+                        dispatch(changeScreen(CIRCUIT_SELECTION));
+                    }}
+                >
+                    Back
+                </button>
+                <div className="menu-footer-filler" />
+                <button
+                    className="button"
+                    type="button"
+                    onClick={() => {
+                        dispatch(initGameWithSavedConfig());
+                    }}
+                >
+                    Start game!
+                </button>
+            </footer>
         </div>
     );
 }

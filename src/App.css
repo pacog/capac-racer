@@ -17,6 +17,10 @@
     font-size: 26px;
 }
 
+.button-small {
+    font-size: 18px;
+}
+
 .button[disabled] {
     opacity: 0.5;
     cursor: default;
@@ -57,4 +61,9 @@
 .menu-footer {
     width: 100%;
     padding: 24px;
+    display: flex;
+    align-items: center;
+}
+.menu-footer-filler {
+    flex: 1;
 }

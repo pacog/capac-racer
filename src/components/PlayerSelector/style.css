@@ -1,0 +1,31 @@
+.player-selector {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.player-selector-input {
+    background: var(--white);
+    color: var(--dark-blue);
+    font-family: doppio_oneregular;
+    font-size: 20px;
+    line-height: 30px;
+    padding: 0 10px;
+    border-radius: 4px;
+    outline: 0;
+    border: 0;
+}
+
+.player-selector-style-container {
+    margin-left: 10px;
+    height: 30px;
+    width: 30px;
+    border-radius: 4px;
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.player-selector-style {
+    height: 12px;
+    width: 12px;
+}

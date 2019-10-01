@@ -1,25 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { selectablePlayer } from 'components/propTypes';
+
 import './style.css';
 
 function PlayerSelector({ player, onRemove, canBeRemoved, onNameChange }) {
     return (
-        <>
-            <div>
-                <input
-                    type="text"
-                    value={player.name}
-                    onChange={(event) => onNameChange(event.target.value)}
+        <div className="player-selector">
+            <input
+                className="player-selector-input"
+                type="text"
+                value={player.name}
+                onChange={(event) => onNameChange(event.target.value)}
+            />
+            <div className="player-selector-style-container">
+                <div
+                    className="player-selector-style"
+                    style={{
+                        backgroundColor: player.style.dotColor,
+                        borderRadius: player.style.round,
+                    }}
                 />
-                ({player.style.name})
             </div>
             {canBeRemoved && (
-                <button type="button" onClick={onRemove}>
+                <button
+                    type="button"
+                    className="button button-small"
+                    onClick={onRemove}
+                >
                     Delete
                 </button>
             )}
-        </>
+        </div>
     );
 }
 
