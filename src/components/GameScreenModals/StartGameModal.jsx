@@ -14,9 +14,15 @@ const StartGameModal = () => {
                 dispatch(setGameState(gameStates.PLAYER_TURN_START_SCREEN))
             }
         >
-            <button className="game-screen-modal-button" type="button">
-                Start game!
-            </button>
+            <div className="game-screen-modal-content">
+                Everybody ready?
+                <button
+                    className="button game-screen-modal-button"
+                    type="button"
+                >
+                    Start game!
+                </button>
+            </div>
         </div>
     );
 };

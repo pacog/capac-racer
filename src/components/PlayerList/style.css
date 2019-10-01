@@ -1,28 +1,40 @@
 .player-list {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 12px;
+    left: 12px;
     padding: 10px;
-    background: rgba(0, 0, 0, 0.4);
-    color: white;
+    background: var(--darkest-blue);
+    color: var(--white);
     list-style: none;
     z-index: 15;
+    min-width: 120px;
+    border-radius: 4px;
 }
 .player-list-item {
-    font-size: 12px;
+    font-size: 14px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    opacity: 0.5;
+    opacity: 0.4;
     transition: opacity 0.3s ease-in-out;
+    margin: 4px 0;
 }
 .player-list-item.is-active {
     opacity: 1;
+}
+.player-list-item-decorator-container {
+    background: var(--white);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
 }
 .player-list-item-decorator {
     width: var(--player-size);
     height: var(--player-size);
     border-radius: var(--player-border-radius);
     background-color: var(--player-color);
-    margin-right: 5px;
 }

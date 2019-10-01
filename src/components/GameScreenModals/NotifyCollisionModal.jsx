@@ -10,11 +10,16 @@ const NotifyCollisionModal = () => {
     return (
         // eslint-disable-next-line jsx-a11y/click-events-have-key-events
         <div className="game-screen-modal" onClick={() => dispatch(nextTurn())}>
-            <div>You crashed!</div>
-            <div>Turns grounded: {currentPlayer.turnsGrounded}</div>
-            <button className="game-screen-modal-button" type="button">
-                Next turn
-            </button>
+            <div className="game-screen-modal-content">
+                <div>You crashed!</div>
+                <div>Turns grounded: {currentPlayer.turnsGrounded}</div>
+                <button
+                    className="button game-screen-modal-button"
+                    type="button"
+                >
+                    Next turn
+                </button>
+            </div>
         </div>
     );
 };

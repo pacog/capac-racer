@@ -20,7 +20,12 @@ function CounterDisplay({ counterObject }) {
     }, []); // Make sure the effect runs only once
 
     return (
-        <div className="counter-display">{(timeLeft / 1000).toFixed(3)}</div>
+        <div className="counter-display">
+            <div className="counter-display-text">Time left:</div>
+            <div className="counter-display-number">
+                {(timeLeft / 1000).toFixed(3)}
+            </div>
+        </div>
     );
 }
 

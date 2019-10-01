@@ -28,12 +28,24 @@
     position: absolute;
     transform: translateX(-50%);
     margin-top: 20px;
-    background: rgba(0, 0, 0, 0.5);
     padding: 8px;
     width: 140px;
-    color: white;
+    color: var(--white);
     border-radius: 4px;
     z-index: 15;
     text-align: center;
     font-size: 12px;
+    overflow: hidden;
+}
+.random-selection-animation-warning:before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--darkest-blue);
+    opacity: 0.8;
+    z-index: -1;
 }

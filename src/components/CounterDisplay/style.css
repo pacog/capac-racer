@@ -1,9 +1,24 @@
 .counter-display {
     position: fixed;
-    top: 10px;
+    top: 12px;
     left: 50%;
     transform: translateX(-50%);
     padding: 10px;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
+    background: var(--darkest-blue);
+    color: var(--white);
+    text-align: center;
+    width: 120px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.counter-display-text {
+    color: var(--grey-1);
+    font-size: 12px;
+}
+.counter-display-number {
+    width: 40px;
+    text-align: left;
 }

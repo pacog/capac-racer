@@ -15,7 +15,9 @@ const PlayerListItem = ({ player, isActive }) => {
                 'is-active': isActive,
             })}
         >
-            <div className="player-list-item-decorator" />
+            <div className="player-list-item-decorator-container">
+                <div className="player-list-item-decorator" />
+            </div>
             <div>{player.name}</div>
         </li>
     );

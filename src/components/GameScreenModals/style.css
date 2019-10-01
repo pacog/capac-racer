@@ -9,13 +9,50 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.8);
     color: white;
 }
-.game-screen-modal-button {
-    background: limegreen;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin: 5px;
+.game-screen-modal:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to bottom,
+        var(--dark-blue),
+        var(--darkest-blue)
+    );
+    opacity: 0.85;
+    z-index: -1;
+}
+
+.game-screen-modal-content {
+    background: var(--darkest-blue);
+    padding: 12px;
+    border-radius: 12px;
+    min-width: 300px;
+    max-width: 600px;
+    text-align: center;
+}
+
+.button.game-screen-modal-button {
+    background: var(--red-2);
+    border-radius: 6px;
+    font-size: 18px;
+    padding: 8px 16px;
+    margin-top: 12px;
+    width: 100%;
+}
+
+.button.game-screen-modal-button:not([disabled]):hover {
+    background: var(--red-3);
+    color: var(--white);
+}
+
+.button.game-screen-modal-button.game-screen-modal-button-secondary {
+    background: var(--dark-blue);
+}
+.button.game-screen-modal-button.game-screen-modal-button-secondary:not([disabled]):hover {
+    background: var(--darker-blue);
 }

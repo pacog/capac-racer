@@ -14,10 +14,15 @@ const StartTurnModal = () => {
             className="game-screen-modal"
             onClick={() => dispatch(startWaitingForPlayerInput())}
         >
-            <div>{currentPlayer.name}, it is your turn</div>
-            <button className="game-screen-modal-button" type="button">
-                Start my turn
-            </button>
+            <div className="game-screen-modal-content">
+                <div>{currentPlayer.name}, it is your turn</div>
+                <button
+                    className="button game-screen-modal-button"
+                    type="button"
+                >
+                    Start my turn
+                </button>
+            </div>
         </div>
     );
 };

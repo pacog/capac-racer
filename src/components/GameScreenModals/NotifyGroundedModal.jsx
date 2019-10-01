@@ -13,13 +13,18 @@ const NotifyGroundedModal = () => {
             className="game-screen-modal"
             onClick={() => dispatch(reduceGroundedAndNextTurn())}
         >
-            <div>
-                {currentPlayer.name}, you are grounded because you crashed!
+            <div className="game-screen-modal-content">
+                <div>
+                    {currentPlayer.name}, you are grounded because you crashed!
+                </div>
+                <div>Turns left: {currentPlayer.turnsGrounded}</div>
+                <button
+                    className="button game-screen-modal-button"
+                    type="button"
+                >
+                    Next turn
+                </button>
             </div>
-            <div>Turns left: {currentPlayer.turnsGrounded}</div>
-            <button className="game-screen-modal-button" type="button">
-                Next turn
-            </button>
         </div>
     );
 };

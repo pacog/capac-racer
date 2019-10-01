@@ -9,21 +9,26 @@ const InGameMenuModal = () => {
     return (
         // eslint-disable-next-line jsx-a11y/click-events-have-key-events
         <div className="game-screen-modal" onClick={() => dispatch(unpause())}>
-            <div>Paused</div>
-            <button className="game-screen-modal-button" type="button">
-                Continue!
-            </button>
+            <div className="game-screen-modal-content">
+                <div>Paused</div>
+                <button
+                    className="button game-screen-modal-button"
+                    type="button"
+                >
+                    Continue!
+                </button>
 
-            <button
-                className="game-screen-modal-button mt-l"
-                type="button"
-                onClick={(event) => {
-                    event.stopPropagation();
-                    dispatch(finishGame());
-                }}
-            >
-                Exit game
-            </button>
+                <button
+                    className="button game-screen-modal-button game-screen-modal-button-secondary "
+                    type="button"
+                    onClick={(event) => {
+                        event.stopPropagation();
+                        dispatch(finishGame());
+                    }}
+                >
+                    Exit game
+                </button>
+            </div>
         </div>
     );
 };

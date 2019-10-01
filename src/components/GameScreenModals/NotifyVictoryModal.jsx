@@ -13,10 +13,15 @@ const NotifyVictoryModal = () => {
             className="game-screen-modal"
             onClick={() => dispatch(finishGame())}
         >
-            <div>{currentPlayer.name} won!</div>
-            <button className="game-screen-modal-button" type="button">
-                Yay!
-            </button>
+            <div className="game-screen-modal-content">
+                <div>{currentPlayer.name} won!</div>
+                <button
+                    className="button game-screen-modal-button"
+                    type="button"
+                >
+                    Yay!
+                </button>
+            </div>
         </div>
     );
 };

@@ -17,20 +17,22 @@ const GameBoard = () => {
     const currentPlayer = useSelector((state) => getCurrentPlayer(state));
     const waitingForPlayerInput = useSelector(isWaitingForPlayerInput);
     return (
-        <div className="game-board">
+        <div className="game-board-container">
             <GameBoardCameraHandler currentPlayer={currentPlayer}>
                 <GameBoardContents />
             </GameBoardCameraHandler>
             {waitingForPlayerInput && (
                 <CounterDisplay counterObject={waitingForPlayerCounter} />
             )}
-            <button
-                type="button"
-                className="in-game-button pause-button"
-                onClick={() => dispatch(pause())}
-            >
-                Pause
-            </button>
+            <div className="pause-button-container">
+                <button
+                    type="button"
+                    className="button button-small"
+                    onClick={() => dispatch(pause())}
+                >
+                    Pause
+                </button>
+            </div>
         </div>
     );
 };

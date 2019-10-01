@@ -17,10 +17,6 @@
     font-size: 26px;
 }
 
-.button-small {
-    font-size: 18px;
-}
-
 .button[disabled] {
     opacity: 0.5;
     cursor: default;
@@ -28,6 +24,26 @@
 
 .button:not([disabled]):hover {
     color: var(--orange);
+}
+
+.button-bg {
+    background: var(--red-2);
+    border-radius: 6px;
+    font-size: 18px;
+    padding: 8px 16px;
+}
+.button-bg.button:not([disabled]):hover {
+    background: var(--red-3);
+    color: var(--white);
+}
+
+.button-full-width {
+    display: block;
+    width: 100%;
+}
+
+.button-small {
+    font-size: 18px;
 }
 
 .menu-screen {
@@ -66,4 +82,8 @@
 }
 .menu-footer-filler {
     flex: 1;
+}
+
+.mt-m {
+    margin-top: 16px;
 }
