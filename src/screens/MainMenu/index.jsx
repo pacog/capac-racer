@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
 import { changeScreen } from 'store/main-ui/actions';
 import { CIRCUIT_SELECTION } from 'constants/screens';
@@ -6,10 +7,10 @@ import Logo from 'components/Logo';
 
 import './style.css';
 
-const MainMenu = () => {
+const MainMenu = ({ className }) => {
     const dispatch = useDispatch();
     return (
-        <div className="menu-screen full-screen">
+        <div className={classNames('full-screen', className)}>
             <div className="main-menu-content">
                 <Logo />
 

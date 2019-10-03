@@ -1,6 +1,9 @@
 .logo {
     font-family: 'destroyregular';
 }
+.logo-big {
+    width: 256px;
+}
 .logo-up {
     font-size: 93px;
     color: var(--white);

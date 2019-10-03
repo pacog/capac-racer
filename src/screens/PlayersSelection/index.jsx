@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-for */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
+import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     changeScreen,
@@ -17,7 +18,7 @@ import PlayerSelector from 'components/PlayerSelector';
 import Logo from 'components/Logo';
 import './style.css';
 
-function PlayersSelection() {
+function PlayersSelection({ className }) {
     const dispatch = useDispatch();
     const circuitId = useSelector((state) => state.mainUI.selectedCircuit);
     const randomizePlayerOrderOnStart = useSelector(
@@ -29,7 +30,7 @@ function PlayersSelection() {
     const circuit = circuits[circuitId];
 
     return (
-        <div className="menu-screen full-screen">
+        <div className={classNames('full-screen', className)}>
             <div className="menu-header">
                 <Logo variant="small" />
                 <h1 className="menu-header-title">Choose players</h1>

@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
 import { changeScreen, setSelectedCircuit } from 'store/main-ui/actions';
 import { MAIN_MENU, PLAYERS_SELECTION } from 'constants/screens';
@@ -9,10 +10,10 @@ import './style.css';
 
 const circuitsArray = Object.values(circuits);
 
-function CircuitSelection() {
+function CircuitSelection({ className }) {
     const dispatch = useDispatch();
     return (
-        <div className="menu-screen full-screen">
+        <div className={classNames('full-screen', className)}>
             <div className="menu-header">
                 <Logo variant="small" />
                 <h1 className="menu-header-title">Select circuit</h1>
