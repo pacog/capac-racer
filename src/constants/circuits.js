@@ -55,4 +55,28 @@ export const circuits = {
             y: 0,
         },
     },
+    circuit3: {
+        id: 'circuit3',
+        name: 'Silverstone',
+        collisionImg: `${process.env.PUBLIC_URL}circuits/circuit3/collision.png`,
+        bgImg: `${process.env.PUBLIC_URL}circuits/circuit3/bg.png`,
+        checkpoint1: `${process.env.PUBLIC_URL}circuits/circuit3/checkpoint_1.png`,
+        checkpoint2: `${process.env.PUBLIC_URL}circuits/circuit3/checkpoint_2.png`,
+        checkpoint3: `${process.env.PUBLIC_URL}circuits/circuit3/checkpoint_3.png`,
+        maxPlayers: 2,
+        startingPositions: [
+            {
+                x: 23,
+                y: 6,
+            },
+            {
+                x: 24,
+                y: 5,
+            },
+        ],
+        initialSpeed: {
+            x: 1,
+            y: 1,
+        },
+    },
 };
