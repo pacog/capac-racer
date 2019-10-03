@@ -8,7 +8,7 @@ import CircuitSelection from 'screens/CircuitSelection';
 import PlayersSelection from 'screens/PlayersSelection';
 
 const TIME_TO_SHOW_FIRST_SCREEN = 500; // ms
-const STATE_CHANGE_TRANSITION_TIME = 3000; // ms
+const STATE_CHANGE_TRANSITION_TIME = 300; // ms
 
 function Router() {
     const [gameReady, setGameReady] = useState(false);

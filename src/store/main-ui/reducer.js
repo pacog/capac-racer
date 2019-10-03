@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import { MAIN_MENU } from 'constants/screens';
-import { BLUE } from 'constants/player-styles';
+import { STYLES } from 'constants/player-styles';
+import { getRandomName } from 'utils/getRandomName';
+import { pickRandomFromArray } from 'utils/random';
 import { actionTypes } from './actions';
 
 const currentScreen = (state = MAIN_MENU, action) => {
@@ -24,8 +26,8 @@ const selectedCircuit = (state = null, action) => {
 const initialPlayers = [
     {
         id: 'DEFAULT_PLAYER',
-        name: 'Player One',
-        style: BLUE,
+        name: getRandomName(),
+        style: pickRandomFromArray(Object.values(STYLES)),
     },
 ];
 

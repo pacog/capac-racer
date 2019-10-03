@@ -32,9 +32,3 @@
     height: 24px;
     margin-right: 8px;
 }
-.player-list-item-decorator {
-    width: var(--player-size);
-    height: var(--player-size);
-    border-radius: var(--player-border-radius);
-    background-color: var(--player-color);
-}

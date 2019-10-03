@@ -31,11 +31,11 @@ function PlayersSelection({ className }) {
 
     return (
         <div className={classNames('full-screen', className)}>
-            <div className="menu-header">
+            <div className="menu-header transition-from-right">
                 <Logo variant="small" />
                 <h1 className="menu-header-title">Choose players</h1>
             </div>
-            <div className="menu-content player-selection-content">
+            <div className="menu-content player-selection-content transition-from-right">
                 {players.map((player) => (
                     <PlayerSelector
                         key={player.id}
@@ -59,7 +59,7 @@ function PlayersSelection({ className }) {
             </div>
 
             {players.length > 1 && (
-                <div>
+                <div className="transition-from-right">
                     <label className="player-selection-checkbox">
                         <input
                             type="checkbox"
@@ -73,7 +73,7 @@ function PlayersSelection({ className }) {
                 </div>
             )}
 
-            <footer className="menu-footer">
+            <footer className="menu-footer transition-from-right">
                 <button
                     className="button menu-footer-back-button"
                     type="button"

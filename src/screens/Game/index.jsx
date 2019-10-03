@@ -15,7 +15,7 @@ import './style.css';
 const Game = () => {
     const dispatch = useDispatch();
     return (
-        <div className="App">
+        <div className="transition-opacity">
             <KeyPressListener
                 keys={{
                     Escape: () => dispatch(tryToToggleInGameMenu()),

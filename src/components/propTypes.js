@@ -9,6 +9,7 @@ export const playerStyle = PropTypes.shape({
     trailColor: PropTypes.string,
     trailDotsSize: PropTypes.number,
     trailWidth: PropTypes.number,
+    icon: PropTypes.string,
 });
 
 export const vector2d = PropTypes.shape({

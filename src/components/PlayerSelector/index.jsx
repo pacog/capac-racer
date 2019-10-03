@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { selectablePlayer } from 'components/propTypes';
-
+import PlayerIcon from 'components/PlayerIcon';
 import './style.css';
 
 function PlayerSelector({ player, onRemove, canBeRemoved, onNameChange }) {
@@ -14,13 +14,7 @@ function PlayerSelector({ player, onRemove, canBeRemoved, onNameChange }) {
                 onChange={(event) => onNameChange(event.target.value)}
             />
             <div className="player-selector-style-container">
-                <div
-                    className="player-selector-style"
-                    style={{
-                        backgroundColor: player.style.dotColor,
-                        borderRadius: player.style.round,
-                    }}
-                />
+                <PlayerIcon playerStyle={player.style} />
             </div>
             {canBeRemoved && (
                 <button

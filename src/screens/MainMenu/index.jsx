@@ -12,9 +12,11 @@ const MainMenu = ({ className }) => {
     return (
         <div className={classNames('full-screen', className)}>
             <div className="main-menu-content">
-                <Logo />
+                <div className="transition-from-left">
+                    <Logo />
+                </div>
 
-                <div className="main-menu-buttons">
+                <div className="main-menu-buttons transition-from-right">
                     <button
                         className="button"
                         type="button"

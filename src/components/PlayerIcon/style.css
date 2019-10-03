@@ -1,0 +1,7 @@
+.player-icon {
+    height: 20px;
+    width: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}

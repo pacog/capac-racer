@@ -13,12 +13,12 @@ const circuitsArray = Object.values(circuits);
 function CircuitSelection({ className }) {
     const dispatch = useDispatch();
     return (
-        <div className={classNames('full-screen', className)}>
-            <div className="menu-header">
+        <div className={classNames('full-screen circuit-selection', className)}>
+            <div className="menu-header transition-from-top">
                 <Logo variant="small" />
                 <h1 className="menu-header-title">Select circuit</h1>
             </div>
-            <div className="menu-content circuit-selection-content">
+            <div className="menu-content circuit-selection-content transition-from-bottom">
                 <div className="circuit-selection-list">
                     {circuitsArray.map((circuit) => (
                         <CircuitSelector
@@ -33,7 +33,7 @@ function CircuitSelection({ className }) {
                 </div>
             </div>
 
-            <footer className="menu-footer">
+            <footer className="menu-footer transition-from-bottom">
                 <button
                     className="button menu-footer-back-button"
                     type="button"
