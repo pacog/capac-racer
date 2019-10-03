@@ -188,4 +188,8 @@ html {
     --red-2: #c2172e;
     --red-3: #a80f24;
     --orange: #ff9f1c;
+
+    --route-transition-time: 3s;
+    --route-transition-ease-in: ease-in;
+    --route-transition-ease-out: ease-out;
 }
