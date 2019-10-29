@@ -54,15 +54,17 @@ const GameBoardCameraHandler = ({ children, currentPlayer }) => {
 
         setCameraPosition(add(cameraPosition, newCameraMovement));
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentPlayer]);
+    }, [currentPlayer, boardSize]);
 
     return (
-        <ReactResizeDetector
-            handleHeight
-            handleWidth
-            onResize={(width, height) => setBoardSize({ width, height })}
-        >
-            <div className="game-board">
+        <div className="game-board">
+            <ReactResizeDetector
+                handleHeight
+                handleWidth
+                onResize={(width, height) => {
+                    setBoardSize({ width, height });
+                }}
+            >
                 <div
                     className={classNames('game-board-content', {
                         'is-dragging': isDragging,
@@ -99,8 +101,8 @@ const GameBoardCameraHandler = ({ children, currentPlayer }) => {
                 >
                     {children}
                 </div>
-            </div>
-        </ReactResizeDetector>
+            </ReactResizeDetector>
+        </div>
     );
 };
 
