@@ -79,4 +79,28 @@ export const circuits = {
             y: 1,
         },
     },
+    circuit4: {
+        id: 'circuit4',
+        name: 'The worm',
+        collisionImg: `${process.env.PUBLIC_URL}circuits/circuit4/collision.png`,
+        bgImg: `${process.env.PUBLIC_URL}circuits/circuit4/bg.png`,
+        checkpoint1: `${process.env.PUBLIC_URL}circuits/circuit4/checkpoint_1.png`,
+        checkpoint2: `${process.env.PUBLIC_URL}circuits/circuit4/checkpoint_2.png`,
+        checkpoint3: `${process.env.PUBLIC_URL}circuits/circuit4/checkpoint_3.png`,
+        maxPlayers: 2,
+        startingPositions: [
+            {
+                x: 25,
+                y: 32,
+            },
+            {
+                x: 25,
+                y: 33,
+            },
+        ],
+        initialSpeed: {
+            x: 1,
+            y: 0,
+        },
+    },
 };
