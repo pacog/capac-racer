@@ -1,0 +1,26 @@
+.high-scores-circuit-tabs {
+    display: flex;
+    margin-top: 20px;
+}
+
+.high-scores-circuit-tab {
+    color: var(--white);
+    margin: 0 12px;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 2px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.high-scores-circuit-tab:hover {
+    border-bottom-color: var(--red-3);
+}
+
+.high-scores-circuit-tab.is-active {
+    border-bottom-color: var(--red);
+    cursor: default;
+}
+
+.high-scores-circuit {
+    margin-top: 40px;
+}

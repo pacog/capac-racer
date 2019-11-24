@@ -70,17 +70,17 @@ export const DANCER = {
     icon: `${process.env.PUBLIC_URL}player-icons/dancer.png`,
 };
 
-export const PANDA = {
-    id: 'panda',
-    name: 'panda',
-    dotColor: '#212121',
-    dotSize: 12, // px
-    round: '50%',
-    trailColor: '#212121',
-    trailDotsSize: 6, // px
-    trailWidth: 2, // px
-    icon: `${process.env.PUBLIC_URL}player-icons/panda.png`,
-};
+// export const PANDA = {
+//     id: 'panda',
+//     name: 'panda',
+//     dotColor: '#212121',
+//     dotSize: 12, // px
+//     round: '50%',
+//     trailColor: '#212121',
+//     trailDotsSize: 6, // px
+//     trailWidth: 2, // px
+//     icon: `${process.env.PUBLIC_URL}player-icons/panda.png`,
+// };
 
 export const STYLES = {
     [CAR.id]: CAR,
@@ -89,5 +89,5 @@ export const STYLES = {
     [SKULL.id]: SKULL,
     [CLOWN.id]: CLOWN,
     [DANCER.id]: DANCER,
-    [PANDA.id]: PANDA,
+    // [PANDA.id]: PANDA,
 };

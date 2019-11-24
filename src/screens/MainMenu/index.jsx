@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
 import { changeScreen } from 'store/main-ui/actions';
-import { CIRCUIT_SELECTION } from 'constants/screens';
+import { CIRCUIT_SELECTION, HIGH_SCORES } from 'constants/screens';
 import Logo from 'components/Logo';
 
 import './style.css';
@@ -37,10 +37,9 @@ const MainMenu = ({ className }) => {
                     <button
                         className="button"
                         type="button"
-                        disabled
-                        onClick={() => console.log('tutorial')}
+                        onClick={() => dispatch(changeScreen(HIGH_SCORES))}
                     >
-                        Tutorial
+                        High scores
                     </button>
                     <button
                         className="button"

@@ -6,6 +6,7 @@ import MainMenu from 'screens/MainMenu';
 import Game from 'screens/Game';
 import CircuitSelection from 'screens/CircuitSelection';
 import PlayersSelection from 'screens/PlayersSelection';
+import HighScores from 'screens/HighScores';
 
 const TIME_TO_SHOW_FIRST_SCREEN = 500; // ms
 const STATE_CHANGE_TRANSITION_TIME = 300; // ms
@@ -34,6 +35,10 @@ function Router() {
         {
             screenName: screens.PLAYERS_SELECTION,
             Component: PlayersSelection,
+        },
+        {
+            screenName: screens.HIGH_SCORES,
+            Component: HighScores,
         },
         {
             screenName: screens.GAME,
