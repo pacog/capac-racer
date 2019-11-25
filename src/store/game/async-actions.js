@@ -25,7 +25,7 @@ import {
     getCheckpointsVisitedInLine,
 } from 'utils/circuit';
 import { projectToScreenPosition } from 'store/map/selectors';
-import { distance, isEqual } from 'utils/vector2d';
+import { distance } from 'utils/vector2d';
 import { getPossibleDestinations } from 'store/players/selectors';
 import { pickRandomFromArray } from 'utils/random';
 import { timeout } from 'utils/gameLoopTimeout';
@@ -97,16 +97,6 @@ export const handlePlayerCollision = (
 
 export const handlePlayerMovement = (player, newIntendedPosition) => {
     return (dispatch, getState) => {
-        // TODO: remove? START
-        const allPlayers = getAllPlayers(getState());
-        const collidingPlayer = allPlayers
-            .filter((otherPlayer) => otherPlayer.id !== player.id)
-            .find((otherPlayer) =>
-                isEqual(otherPlayer.position, newIntendedPosition),
-            );
-        if (collidingPlayer) {
-            return;
-        }
         const timePassed = waitingForPlayerCounter.getTimePassed();
         waitingForPlayerCounter.stop();
         const state = getState();
