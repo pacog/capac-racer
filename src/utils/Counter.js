@@ -44,4 +44,8 @@ export default class {
     getTimeLeft() {
         return Math.max(this._timeToWait - this._elapsedTime, 0);
     }
+
+    getTimePassed() {
+        return this._elapsedTime;
+    }
 }

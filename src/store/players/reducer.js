@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { substract } from 'utils/vector2d';
+import { substract, magnitude } from 'utils/vector2d';
 import { checkpointNamesToCheck } from 'constants/checkpoints';
 import { actionTypes } from './actions';
 
@@ -13,6 +13,10 @@ const PLAYER_DEFAULT_INFO = {
     prevPositions: [],
     turnsGrounded: 0,
     checkpointsPassed: checkpointNamesToCheck.map(() => false),
+    turnsSpent: 0,
+    realTimeUsed: 0,
+    maxSpeed: 0,
+    crashes: 0,
 };
 
 function byId(state = {}, action) {
@@ -33,6 +37,7 @@ function byId(state = {}, action) {
                 [action.playerId]: movePlayerTo(
                     state[action.playerId],
                     action.position,
+                    action.timePassed,
                 ),
             };
         case actionTypes.NOTIFY_COLLISION:
@@ -41,6 +46,7 @@ function byId(state = {}, action) {
                 [action.playerId]: crashPlayer(
                     state[action.playerId],
                     action.speed,
+                    action.timePassed,
                 ),
             };
 
@@ -62,23 +68,31 @@ function byId(state = {}, action) {
     }
 }
 
-function movePlayerTo(player, position) {
+function movePlayerTo(player, position, timePassed) {
     const newSpeed = substract(position, player.position);
+    const speedMagnitude = magnitude(newSpeed);
+
     return {
         ...player,
         position,
         speed: newSpeed,
         prevPositions: player.prevPositions.concat(position),
+        turnsSpent: player.turnsSpent + 1,
+        maxSpeed: Math.max(speedMagnitude, player.maxSpeed),
+        realTimeUsed: player.realTimeUsed + timePassed,
     };
 }
 
-function crashPlayer(player, speed) {
+function crashPlayer(player, speed, timePassed) {
     const newSpeed = { x: 0, y: 0 };
     const turnsGrounded = Math.floor(speed / 3);
     return {
         ...player,
         speed: newSpeed,
         turnsGrounded,
+        crashes: player.crashes + 1,
+        turnsSpent: player.turnsSpent + 1,
+        realTimeUsed: player.realTimeUsed + timePassed,
     };
 }
 
@@ -86,6 +100,7 @@ function reduceGrounded(player) {
     return {
         ...player,
         turnsGrounded: Math.max(0, player.turnsGrounded - 1),
+        turnsSpent: player.turnsSpent + 1,
     };
 }
 

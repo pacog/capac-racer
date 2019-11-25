@@ -6,19 +6,21 @@ export const actionTypes = {
     NOTIFY_VISITED_CHECKPOINTS: 'NOTIFY_VISITED_CHECKPOINTS',
 };
 
-export const moveTo = (playerId, position) => {
+export const moveTo = (playerId, position, timePassed) => {
     return {
         type: actionTypes.MOVE_TO,
         playerId,
         position,
+        timePassed,
     };
 };
 
-export const notifyCollision = (playerId, speed) => {
+export const notifyCollision = (playerId, speed, timePassed) => {
     return {
         type: actionTypes.NOTIFY_COLLISION,
         playerId,
         speed,
+        timePassed,
     };
 };
 

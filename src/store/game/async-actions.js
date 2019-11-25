@@ -83,11 +83,15 @@ export const initGameWithSavedConfig = () => {
     };
 };
 
-export const handlePlayerCollision = (player, newIntendedPosition) => {
+export const handlePlayerCollision = (
+    player,
+    newIntendedPosition,
+    timePassed,
+) => {
     return (dispatch) => {
         const speed = distance(player.position, newIntendedPosition);
         dispatch(setGameState(gameStates.NOTIFY_COLLISION));
-        dispatch(notifyCollision(player.id, speed));
+        dispatch(notifyCollision(player.id, speed, timePassed));
     };
 };
 
@@ -103,8 +107,7 @@ export const handlePlayerMovement = (player, newIntendedPosition) => {
         if (collidingPlayer) {
             return;
         }
-        // TODO: remove END
-
+        const timePassed = waitingForPlayerCounter.getTimePassed();
         waitingForPlayerCounter.stop();
         const state = getState();
         const circuit = state.game.circuitInfo;
@@ -117,13 +120,15 @@ export const handlePlayerMovement = (player, newIntendedPosition) => {
             player.id,
         );
         if (doesLineCollide(movementLine, circuit, otherPlayersPosition)) {
-            dispatch(handlePlayerCollision(player, newIntendedPosition));
+            dispatch(
+                handlePlayerCollision(player, newIntendedPosition, timePassed),
+            );
             return;
         }
 
         dispatch(detectAndStoreCheckpoints(movementLine, circuit));
         const hasPlayerWon = hasCurrentPlayerWon(getState());
-        dispatch(moveTo(player.id, newIntendedPosition));
+        dispatch(moveTo(player.id, newIntendedPosition, timePassed));
         if (hasPlayerWon) {
             dispatch(setGameState(gameStates.NOTIFY_VICTORY));
         } else {

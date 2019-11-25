@@ -5,7 +5,7 @@ const defaultState = {
     gameState: gameStates.NOT_STARTED,
     prevGameState: null, // We store one game state previous to the current so we can go back after pausing
     players: [],
-    currentTurn: null,
+    currentTurnPlayerId: null,
     circuitInfo: null,
 };
 
@@ -15,7 +15,7 @@ const game = (state = defaultState, action) => {
             return {
                 ...state,
                 gameState: gameStates.START_SCREEN,
-                currentTurn: action.playerOrder[0],
+                currentTurnPlayerId: action.playerOrder[0],
                 players: action.playerOrder.slice(),
                 circuitInfo: { ...action.circuitInfo },
             };
@@ -24,7 +24,10 @@ const game = (state = defaultState, action) => {
         case actionTypes.ADVANCE_PLAYER_TURN:
             return {
                 ...state,
-                currentTurn: getNextTurn(state.players, state.currentTurn),
+                currentTurnPlayerId: getNextTurn(
+                    state.players,
+                    state.currentTurnPlayerId,
+                ),
             };
         case actionTypes.SET_GAME_STATE:
             return {
@@ -40,7 +43,7 @@ const game = (state = defaultState, action) => {
 export default game;
 
 function getNextTurn(players, currentPlayer) {
-    const currentTurn = players.indexOf(currentPlayer);
-    const nextTurn = (currentTurn + 1) % players.length;
+    const currentTurnPlayerId = players.indexOf(currentPlayer);
+    const nextTurn = (currentTurnPlayerId + 1) % players.length;
     return players[nextTurn];
 }

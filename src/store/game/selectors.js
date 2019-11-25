@@ -18,7 +18,7 @@ export const getCurrentPlayer = (state) => {
     if (!isGameStarted(state)) {
         return null;
     }
-    return state.players.byId[state.game.currentTurn];
+    return state.players.byId[state.game.currentTurnPlayerId];
 };
 
 export const getAllPlayers = (state) => {
