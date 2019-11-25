@@ -95,6 +95,25 @@ export const handlePlayerCollision = (
     };
 };
 
+export const handleCorrectMovement = (
+    player,
+    newIntendedPosition,
+    timePassed,
+    movementLine,
+    circuit,
+) => {
+    return (dispatch, getState) => {
+        dispatch(detectAndStoreCheckpoints(movementLine, circuit));
+        const hasPlayerWon = hasCurrentPlayerWon(getState());
+        dispatch(moveTo(player.id, newIntendedPosition, timePassed));
+        if (hasPlayerWon) {
+            dispatch(setGameState(gameStates.NOTIFY_VICTORY));
+        } else {
+            dispatch(nextTurn());
+        }
+    };
+};
+
 export const handlePlayerMovement = (player, newIntendedPosition) => {
     return (dispatch, getState) => {
         const timePassed = waitingForPlayerCounter.getTimePassed();
@@ -116,14 +135,15 @@ export const handlePlayerMovement = (player, newIntendedPosition) => {
             return;
         }
 
-        dispatch(detectAndStoreCheckpoints(movementLine, circuit));
-        const hasPlayerWon = hasCurrentPlayerWon(getState());
-        dispatch(moveTo(player.id, newIntendedPosition, timePassed));
-        if (hasPlayerWon) {
-            dispatch(setGameState(gameStates.NOTIFY_VICTORY));
-        } else {
-            dispatch(nextTurn());
-        }
+        dispatch(
+            handleCorrectMovement(
+                player,
+                newIntendedPosition,
+                timePassed,
+                movementLine,
+                circuit,
+            ),
+        );
     };
 };
 
