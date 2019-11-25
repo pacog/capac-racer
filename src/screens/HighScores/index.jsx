@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
 import { changeScreen } from 'store/main-ui/actions';
@@ -8,32 +8,21 @@ import { MAIN_MENU } from 'constants/screens';
 import { circuits } from 'constants/circuits';
 import Logo from 'components/Logo';
 import ScoreBoard from 'components/ScoreBoard';
+import { getByCircuitId } from 'utils/highScoresStorage';
 import './style.css';
 
 const circuitsArray = Object.values(circuits);
-const fakeCircuitScores = [
-    {
-        id: 'asdfasdf23',
-        name: 'Aitor Senna',
-        turns: 17,
-        time: 176,
-    },
-    {
-        id: 'vsdfvsdfv23',
-        name: 'Calamardo',
-        turns: 19,
-        time: 190,
-    },
-    {
-        id: '23fcsadvasd',
-        name: 'Groucho',
-        turns: 21,
-        time: 116,
-    },
-];
+
 function HighScores() {
-    const dispatch = useDispatch();
+    const [scoresForCurrentCircuit, setScoresForCurrentCircuit] = useState([]);
     const [activeCircuit, setActiveCircuit] = useState(circuitsArray[0]);
+    useEffect(() => {
+        if (activeCircuit.id) {
+            setScoresForCurrentCircuit(getByCircuitId(activeCircuit.id));
+        }
+    }, [activeCircuit]);
+
+    const dispatch = useDispatch();
 
     return (
         <div className="full-screen high-scores">
@@ -58,7 +47,7 @@ function HighScores() {
                 </div>
 
                 <div className="high-scores-circuit">
-                    <ScoreBoard scores={fakeCircuitScores} />
+                    <ScoreBoard scores={scoresForCurrentCircuit} />
                 </div>
             </div>
 

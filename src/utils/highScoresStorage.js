@@ -5,7 +5,7 @@ const MAX_SCORES_PER_CIRCUIT = 3;
 
 export const getAll = () => {
     try {
-        const all = localStorage.getItem(LOCAL_STORAGE_ID);
+        const all = JSON.parse(localStorage.getItem(LOCAL_STORAGE_ID));
         return all || {};
     } catch (e) {
         return {};
@@ -52,7 +52,7 @@ export const addScore = (score, circuit) => {
     } else {
         newScores.push(score);
     }
-    newScores = newScores.slice(MAX_SCORES_PER_CIRCUIT);
+    newScores = newScores.slice(0, MAX_SCORES_PER_CIRCUIT);
     updateCircuitScores(circuit, newScores);
     return scoreToAdd;
 };
@@ -76,7 +76,7 @@ function updateCircuitScores(circuit, newScores) {
         [circuit.id]: newScores,
     };
     try {
-        localStorage.setItem(LOCAL_STORAGE_ID, newAll);
+        localStorage.setItem(LOCAL_STORAGE_ID, JSON.stringify(newAll, 2));
     } catch (e) {
         // eslint-disable-next-line no-console
         console.warn('error saving high score', e);

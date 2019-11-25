@@ -24,3 +24,8 @@
 .high-scores-circuit {
     margin-top: 40px;
 }
+
+.score-board-empty {
+    color: var(--white);
+    text-align: center;
+}

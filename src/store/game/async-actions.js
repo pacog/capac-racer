@@ -109,6 +109,8 @@ export const handleCorrectMovement = (
         dispatch(moveTo(player.id, newIntendedPosition, timePassed));
         if (hasPlayerWon) {
             const score = {
+                name: player.name,
+                date: new Date(),
                 turns: player.turnsSpent,
                 realTimeUsed: player.realTimeUsed,
                 maxSpeed: player.maxSpeed,
