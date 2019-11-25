@@ -9,7 +9,12 @@ import {
     notifyVisitedCheckpoints,
 } from 'store/players/actions';
 import { changeScreen } from 'store/main-ui/actions';
-import { initGame, setGameState, advancePlayerTurn } from 'store/game/actions';
+import {
+    initGame,
+    setGameState,
+    advancePlayerTurn,
+    setLatestHighScore,
+} from 'store/game/actions';
 import {
     getAllPlayers,
     getCurrentPlayer,
@@ -118,9 +123,8 @@ export const handleCorrectMovement = (
             };
             if (shouldScoreByAdded(score, circuit)) {
                 const newScore = addScore(score, circuit);
-                console.log(newScore);
-                // TODO: show screen with high score instead of victory
-                dispatch(setGameState(gameStates.NOTIFY_VICTORY));
+                dispatch(setLatestHighScore(newScore));
+                dispatch(setGameState(gameStates.NOTIFY_HIGH_SCORE));
             } else {
                 dispatch(setGameState(gameStates.NOTIFY_VICTORY));
             }

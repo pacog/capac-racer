@@ -1,18 +1,22 @@
 import React from 'react';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import { Score } from 'components/propTypes';
 import './style.css';
 
-function ScoreBoard({ scores }) {
+function ScoreBoard({ scores, highlightedScore }) {
     return (
         <div className="score-board">
             {!!scores.length &&
                 scores.map((score, index) => (
                     <div
-                        className="score-board-item"
+                        className={classNames('score-board-item', {
+                            'is-highlighted': highlightedScore.id === score.id,
+                        })}
                         key={`score-board-item-${score.id}`}
                     >
                         {index + 1}. {score.name} - {score.turns} turns -{' '}
-                        {score.realTimeUsed.toFixed(2)} seconds
+                        {(score.realTimeUsed / 1000).toFixed(2)} seconds
                     </div>
                 ))}
 
@@ -24,14 +28,12 @@ function ScoreBoard({ scores }) {
 }
 
 ScoreBoard.propTypes = {
-    scores: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.string,
-            name: PropTypes.string,
-            turns: PropTypes.number,
-            time: PropTypes.number,
-        }),
-    ).isRequired,
+    scores: PropTypes.arrayOf(Score).isRequired,
+    highlightedScore: Score,
+};
+
+ScoreBoard.defaultProps = {
+    highlightedScore: null,
 };
 
 export default ScoreBoard;

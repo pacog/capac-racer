@@ -4,6 +4,7 @@ export const actionTypes = {
     SET_GAME_STATE: 'SET_GAME_STATE',
     ADVANCE_PLAYER_TURN: 'ADVANCE_PLAYER_TURN',
     SET_CIRCUIT: 'SET_CIRCUIT',
+    SET_LATEST_HIGH_SCORE: 'SET_LATEST_HIGH_SCORE',
 };
 export const initGame = (playerOrder, circuitInfo) => {
     return {
@@ -29,5 +30,12 @@ export const setGameState = (newGameState) => {
 export const advancePlayerTurn = () => {
     return {
         type: actionTypes.ADVANCE_PLAYER_TURN,
+    };
+};
+
+export const setLatestHighScore = (highScore) => {
+    return {
+        type: actionTypes.SET_LATEST_HIGH_SCORE,
+        highScore,
     };
 };

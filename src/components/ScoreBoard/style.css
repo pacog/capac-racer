@@ -2,3 +2,7 @@
     color: var(--white);
     margin-top: 8px;
 }
+
+.score-board-item.is-highlighted {
+    background: var(--red-3);
+}

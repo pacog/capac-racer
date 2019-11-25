@@ -7,6 +7,7 @@ const defaultState = {
     players: [],
     currentTurnPlayerId: null,
     circuitInfo: null,
+    latestHighScore: null, // If somebody achived a high score, it will be stored here until the next game starts
 };
 
 const game = (state = defaultState, action) => {
@@ -18,6 +19,7 @@ const game = (state = defaultState, action) => {
                 currentTurnPlayerId: action.playerOrder[0],
                 players: action.playerOrder.slice(),
                 circuitInfo: { ...action.circuitInfo },
+                latestHighScore: null,
             };
         case actionTypes.START_GAME:
             return { ...state, gameState: gameStates.WAITING_FOR_PLAYER_INPUT };
@@ -35,6 +37,12 @@ const game = (state = defaultState, action) => {
                 gameState: action.newGameState,
                 prevGameState: state.gameState,
             };
+        case actionTypes.SET_LATEST_HIGH_SCORE:
+            return {
+                ...state,
+                latestHighScore: action.highScore,
+            };
+
         default:
             return state;
     }

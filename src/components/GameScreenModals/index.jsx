@@ -8,6 +8,7 @@ import NotifyCollisionModal from './NotifyCollisionModal';
 import NotifyGroundedModal from './NotifyGroundedModal';
 import NotifyVictoryModal from './NotifyVictoryModal';
 import InGameMenuModal from './InGameMenuModal';
+import NotifyHighScoreModal from './NotifyHighScoreModal';
 import './style.css';
 
 const GameScreenModals = () => {
@@ -24,6 +25,8 @@ const GameScreenModals = () => {
             return <NotifyGroundedModal />;
         case gameStates.NOTIFY_VICTORY:
             return <NotifyVictoryModal />;
+        case gameStates.NOTIFY_HIGH_SCORE:
+            return <NotifyHighScoreModal />;
         case gameStates.SHOW_MENU:
             return <InGameMenuModal />;
         default:

@@ -22,7 +22,7 @@ export const shouldScoreByAdded = (score, circuit) => {
     if (circuitScores.length < MAX_SCORES_PER_CIRCUIT) {
         return true;
     }
-    const lastScore = circuitScores[circuitScores.length < 1];
+    const lastScore = circuitScores[circuitScores.length - 1];
     if (isBetterScore(score, lastScore)) {
         return true;
     }
@@ -50,7 +50,7 @@ export const addScore = (score, circuit) => {
     if (typeof insertBefore === 'number') {
         newScores.splice(insertBefore, 0, scoreToAdd);
     } else {
-        newScores.push(score);
+        newScores.push(scoreToAdd);
     }
     newScores = newScores.slice(0, MAX_SCORES_PER_CIRCUIT);
     updateCircuitScores(circuit, newScores);

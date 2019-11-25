@@ -31,3 +31,10 @@ export const player = PropTypes.shape({
     speed: vector2d.isRequired,
     prevPositions: PropTypes.arrayOf(vector2d),
 });
+
+export const Score = PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    turns: PropTypes.number,
+    time: PropTypes.number,
+});
