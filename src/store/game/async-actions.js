@@ -29,6 +29,7 @@ import { distance } from 'utils/vector2d';
 import { getPossibleDestinations } from 'store/players/selectors';
 import { pickRandomFromArray } from 'utils/random';
 import { timeout } from 'utils/gameLoopTimeout';
+import { shouldScoreByAdded, addScore } from 'utils/highScoresStorage';
 
 export const nextTurn = () => {
     return (dispatch, getState) => {
@@ -107,7 +108,20 @@ export const handleCorrectMovement = (
         const hasPlayerWon = hasCurrentPlayerWon(getState());
         dispatch(moveTo(player.id, newIntendedPosition, timePassed));
         if (hasPlayerWon) {
-            dispatch(setGameState(gameStates.NOTIFY_VICTORY));
+            const score = {
+                turns: player.turnsSpent,
+                realTimeUsed: player.realTimeUsed,
+                maxSpeed: player.maxSpeed,
+                crashes: player.crashes,
+            };
+            if (shouldScoreByAdded(score, circuit)) {
+                const newScore = addScore(score, circuit);
+                console.log(newScore);
+                // TODO: show screen with high score instead of victory
+                dispatch(setGameState(gameStates.NOTIFY_VICTORY));
+            } else {
+                dispatch(setGameState(gameStates.NOTIFY_VICTORY));
+            }
         } else {
             dispatch(nextTurn());
         }

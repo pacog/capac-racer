@@ -42,12 +42,12 @@ export const circuits = {
         maxPlayers: 2,
         startingPositions: [
             {
-                x: 5,
-                y: 10,
+                x: 7,
+                y: 15,
             },
             {
-                x: 6,
-                y: 10,
+                x: 7,
+                y: 16,
             },
         ],
         initialSpeed: {
