@@ -12,7 +12,7 @@ function PlayerSelector({
     canBeRemoved,
     onNameChange,
     onTypeChange,
-    // onLevelAIChange,
+    onLevelAIChange,
 }) {
     return (
         <div className="player-selector">
@@ -55,9 +55,46 @@ function PlayerSelector({
                 >
                     AI
                 </button>
+
+                {player.type === AI && (
+                    <div className="player-selector-ai-level">
+                        <input
+                            value={player.levelAI}
+                            type="range"
+                            min="0"
+                            max="4"
+                            step="1"
+                            onChange={(event) =>
+                                onLevelAIChange(
+                                    parseInt(event.target.value, 10),
+                                )
+                            }
+                        />
+                        <div className="player-selector-ai-level-text">
+                            {getRobotNameByLevel(player.levelAI)}
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );
+}
+
+function getRobotNameByLevel(level) {
+    switch (level) {
+        case 0:
+            return 'Bender';
+        case 1:
+            return 'Wall-E';
+        case 2:
+            return 'Deep Blue';
+        case 3:
+            return 'HAL-9000';
+        case 4:
+            return 'Skynet';
+        default:
+            return 'Rodolfo';
+    }
 }
 
 PlayerSelector.propTypes = {

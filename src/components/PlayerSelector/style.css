@@ -54,3 +54,18 @@
     background: var(--red-3);
     cursor: default;
 }
+
+.player-selector-ai-level {
+    position: relative;
+}
+.player-selector-ai-level-text {
+    padding: 4px;
+    position: absolute;
+    background: var(--dark-blue);
+    border-radius: 2px;
+    color: var(--white);
+    font-size: 10px;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+}
