@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-for */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useEffect } from 'react';
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -8,6 +8,7 @@ import {
     removePlayer,
     updatePlayer,
     toggleRandomizePlayerOrderOnStart,
+    limitPlayersTo,
 } from 'store/main-ui/actions';
 import { addRandomPlayer } from 'store/main-ui/async-actions';
 import { initGameWithSavedConfig } from 'store/game/async-actions';
@@ -20,14 +21,19 @@ import './style.css';
 
 function PlayersSelection({ className }) {
     const dispatch = useDispatch();
+    const players = useSelector(getOrderedPlayers);
     const circuitId = useSelector((state) => state.mainUI.selectedCircuit);
+    const circuit = circuits[circuitId];
+
+    useEffect(() => {
+        if (players.length && players.length > circuit.maxPlayers) {
+            dispatch(limitPlayersTo(circuit.maxPlayers));
+        }
+    }, [players, circuit, dispatch]);
+
     const randomizePlayerOrderOnStart = useSelector(
         (state) => state.mainUI.randomizePlayerOrderOnStart,
     );
-
-    const players = useSelector(getOrderedPlayers);
-
-    const circuit = circuits[circuitId];
 
     return (
         <div className={classNames('full-screen', className)}>

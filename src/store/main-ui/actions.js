@@ -6,6 +6,7 @@ export const actionTypes = {
     UPDATE_PLAYER: 'UPDATE_PLAYER',
     TOGGLE_RANDOMIZE_PLAYER_ORDER_ON_START:
         'TOGGLE_RANDOMIZE_PLAYER_ORDER_ON_START',
+    LIMIT_PLAYERS_TO: 'LIMIT_PLAYERS_TO',
 };
 export const changeScreen = (screenId) => {
     return {
@@ -46,5 +47,12 @@ export const updatePlayer = (playerId, attrsToUpdate) => {
 export const toggleRandomizePlayerOrderOnStart = () => {
     return {
         type: actionTypes.TOGGLE_RANDOMIZE_PLAYER_ORDER_ON_START,
+    };
+};
+
+export const limitPlayersTo = (numberOfPlayers) => {
+    return {
+        type: actionTypes.LIMIT_PLAYERS_TO,
+        numberOfPlayers,
     };
 };
