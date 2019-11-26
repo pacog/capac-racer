@@ -1,6 +1,14 @@
 .player-selector {
-    display: flex;
     margin-bottom: 10px;
+}
+
+.player-selector-top,
+.player-selector-bottom {
+    display: flex;
+}
+
+.player-selector-bottom {
+    margin-top: 8px;
 }
 
 .player-selector-input {
@@ -24,4 +32,25 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.player-selector-toggle {
+    border: 0;
+    padding: 8px 12px;
+    background: var(--darkest-blue);
+    color: var(--white);
+    border-radius: 4px;
+    outline: 0;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+.player-selector-toggle:hover:not(.is-selected) {
+    background: var(--dark-blue);
+}
+
+.player-selector-toggle.is-selected {
+    background: var(--red-3);
+    cursor: default;
 }

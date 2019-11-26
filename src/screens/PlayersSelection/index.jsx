@@ -51,6 +51,16 @@ function PlayersSelection({ className }) {
                         onNameChange={(newName) =>
                             dispatch(updatePlayer(player.id, { name: newName }))
                         }
+                        onTypeChange={(newType) =>
+                            dispatch(updatePlayer(player.id, { type: newType }))
+                        }
+                        onLevelAIChange={(newLevelAI) =>
+                            dispatch(
+                                updatePlayer(player.id, {
+                                    levelAI: newLevelAI,
+                                }),
+                            )
+                        }
                     />
                 ))}
                 {players.length < circuit.maxPlayers && (

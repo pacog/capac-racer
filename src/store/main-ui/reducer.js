@@ -3,6 +3,7 @@ import { MAIN_MENU } from 'constants/screens';
 import { STYLES } from 'constants/player-styles';
 import { getRandomName } from 'utils/getRandomName';
 import { pickRandomFromArray } from 'utils/random';
+import { HUMAN } from 'constants/player-types';
 import { actionTypes } from './actions';
 
 const currentScreen = (state = MAIN_MENU, action) => {
@@ -28,6 +29,8 @@ const initialPlayers = [
         id: 'DEFAULT_PLAYER',
         name: getRandomName(),
         style: pickRandomFromArray(Object.values(STYLES)),
+        type: HUMAN,
+        levelAI: 0,
     },
 ];
 
