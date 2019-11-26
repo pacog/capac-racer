@@ -2,6 +2,7 @@ import { v4 as uuid } from 'uuid';
 import { getRandomName } from 'utils/getRandomName';
 import { pickRandomFromArray, keepPickingUntilNotInArray } from 'utils/random';
 import { STYLES } from 'constants/player-styles';
+import { HUMAN } from 'constants/player-types';
 import { setSelectedPlayers } from './actions';
 
 export const addRandomPlayer = () => {
@@ -22,6 +23,8 @@ export const addRandomPlayer = () => {
             id: uuid(),
             name: newName,
             style: newStyle,
+            type: HUMAN,
+            levelAI: 0,
         };
 
         dispatch(

@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { substract, magnitude } from 'utils/vector2d';
 import { checkpointNamesToCheck } from 'constants/checkpoints';
+import { HUMAN } from 'constants/player-types';
 import { actionTypes } from './actions';
 
 const players = combineReducers({
@@ -17,6 +18,8 @@ const PLAYER_DEFAULT_INFO = {
     realTimeUsed: 0,
     maxSpeed: 0,
     crashes: 0,
+    type: HUMAN,
+    levelAI: 0,
 };
 
 function byId(state = {}, action) {
