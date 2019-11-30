@@ -11,6 +11,7 @@
     flex-direction: column;
     color: white;
 }
+
 .game-screen-modal:before {
     content: '';
     position: absolute;
@@ -27,6 +28,15 @@
     z-index: -1;
 }
 
+.game-screen-modal-non-invasive {
+    justify-content: flex-end;
+    padding-bottom: 40px;
+}
+
+.game-screen-modal-non-invasive:before {
+    opacity: 0;
+}
+
 .game-screen-modal-content {
     background: var(--darkest-blue);
     padding: 12px;
@@ -34,6 +44,12 @@
     min-width: 300px;
     max-width: 600px;
     text-align: center;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.game-screen-modal-content.is-hidden {
+    opacity: 0;
 }
 
 .button.game-screen-modal-button {

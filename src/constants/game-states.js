@@ -11,3 +11,4 @@ export const NOTIFY_GROUNDED = Symbol('NOTIFY_GROUNDED');
 export const NOTIFY_VICTORY = Symbol('NOTIFY_VICTORY');
 export const NOTIFY_HIGH_SCORE = Symbol('NOTIFY_HIGH_SCORE');
 export const SHOW_MENU = Symbol('SHOW_MENU');
+export const AI_THINKING_SCREEN = Symbol('AI_THINKING_SCREEN');

@@ -35,6 +35,7 @@ import { getPossibleDestinations } from 'store/players/selectors';
 import { pickRandomFromArray } from 'utils/random';
 import { timeout } from 'utils/gameLoopTimeout';
 import { shouldScoreByAdded, addScore } from 'utils/highScoresStorage';
+import { AI } from 'constants/player-types';
 
 export const nextTurn = () => {
     return (dispatch, getState) => {
@@ -42,9 +43,15 @@ export const nextTurn = () => {
         const nextPlayer = getCurrentPlayer(getState());
         if (nextPlayer.turnsGrounded) {
             dispatch(setGameState(gameStates.NOTIFY_GROUNDED));
-        } else {
-            dispatch(setGameState(gameStates.PLAYER_TURN_START_SCREEN));
+            return;
         }
+
+        if (nextPlayer.type === AI) {
+            dispatch(handleAITurn(nextPlayer));
+            return;
+        }
+
+        dispatch(setGameState(gameStates.PLAYER_TURN_START_SCREEN));
     };
 };
 
@@ -174,6 +181,12 @@ export const startWaitingForPlayerInput = () => {
             dispatch(showRandomSelectorAndMovePlayer());
         };
         waitingForPlayerCounter.restart({ callbackOnEnd });
+    };
+};
+
+export const handleAITurn = (player) => {
+    return (dispatch) => {
+        dispatch(setGameState(gameStates.AI_THINKING_SCREEN));
     };
 };
 

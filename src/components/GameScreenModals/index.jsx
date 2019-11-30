@@ -9,6 +9,7 @@ import NotifyGroundedModal from './NotifyGroundedModal';
 import NotifyVictoryModal from './NotifyVictoryModal';
 import InGameMenuModal from './InGameMenuModal';
 import NotifyHighScoreModal from './NotifyHighScoreModal';
+import AIThinkingModal from './AIThinkingModal';
 import './style.css';
 
 const GameScreenModals = () => {
@@ -29,6 +30,8 @@ const GameScreenModals = () => {
             return <NotifyHighScoreModal />;
         case gameStates.SHOW_MENU:
             return <InGameMenuModal />;
+        case gameStates.AI_THINKING_SCREEN:
+            return <AIThinkingModal />;
         default:
             return '';
     }
