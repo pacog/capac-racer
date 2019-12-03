@@ -21,8 +21,6 @@ const game = (state = defaultState, action) => {
                 circuitInfo: { ...action.circuitInfo },
                 latestHighScore: null,
             };
-        case actionTypes.START_GAME:
-            return { ...state, gameState: gameStates.WAITING_FOR_PLAYER_INPUT };
         case actionTypes.ADVANCE_PLAYER_TURN:
             return {
                 ...state,

@@ -36,10 +36,10 @@ import { pickRandomFromArray } from 'utils/random';
 import { timeout } from 'utils/gameLoopTimeout';
 import { shouldScoreByAdded, addScore } from 'utils/highScoresStorage';
 import { AI } from 'constants/player-types';
+import { chooseNextMovement } from 'utils/ai';
 
-export const nextTurn = () => {
+export const startTurn = () => {
     return (dispatch, getState) => {
-        dispatch(advancePlayerTurn());
         const nextPlayer = getCurrentPlayer(getState());
         if (nextPlayer.turnsGrounded) {
             dispatch(setGameState(gameStates.NOTIFY_GROUNDED));
@@ -52,6 +52,13 @@ export const nextTurn = () => {
         }
 
         dispatch(setGameState(gameStates.PLAYER_TURN_START_SCREEN));
+    };
+};
+
+export const nextTurn = () => {
+    return (dispatch) => {
+        dispatch(advancePlayerTurn());
+        dispatch(startTurn());
     };
 };
 
@@ -103,8 +110,12 @@ export const handlePlayerCollision = (
 ) => {
     return (dispatch) => {
         const speed = distance(player.position, newIntendedPosition);
-        dispatch(setGameState(gameStates.NOTIFY_COLLISION));
         dispatch(notifyCollision(player.id, speed, timePassed));
+        if (player.type === AI) {
+            dispatch(setGameState(gameStates.NOTIFY_AI_COLLISION));
+            return;
+        }
+        dispatch(setGameState(gameStates.NOTIFY_COLLISION));
     };
 };
 
@@ -185,8 +196,17 @@ export const startWaitingForPlayerInput = () => {
 };
 
 export const handleAITurn = (player) => {
-    return (dispatch) => {
+    return (dispatch, getState) => {
         dispatch(setGameState(gameStates.AI_THINKING_SCREEN));
+        const state = getState();
+        const circuit = state.game.circuitInfo;
+        const otherPlayers = getAllPlayers(getState()).filter(
+            (otherPlayer) => otherPlayer.id !== player.id,
+        );
+        const nextMovement = chooseNextMovement(player, otherPlayers, circuit);
+        setTimeout(() => {
+            dispatch(handlePlayerMovement(player, nextMovement));
+        }, 3000); // TODO get different timeouts depending on player
     };
 };
 

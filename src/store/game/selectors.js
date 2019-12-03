@@ -14,6 +14,10 @@ export const isAnimatingRandomSelection = (state) => {
     return state.game.gameState === gameStates.ANIMATING_RANDOM_PLAYER_MOVEMENT;
 };
 
+export const isAnimatingAISelection = (state) => {
+    return state.game.gameState === gameStates.AI_THINKING_SCREEN;
+};
+
 export const getCurrentPlayer = (state) => {
     if (!isGameStarted(state)) {
         return null;

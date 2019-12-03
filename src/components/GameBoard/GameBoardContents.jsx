@@ -8,6 +8,7 @@ import {
     getAllPlayers,
     isWaitingForPlayerInput,
     isAnimatingRandomSelection,
+    isAnimatingAISelection,
 } from 'store/game/selectors';
 import MovementPicker from 'components/MovementPicker';
 import RandomSelectionAnimation from 'components/RandomSelectionAnimation';
@@ -23,6 +24,7 @@ const GameBoardContents = () => {
     const circuitInfo = useSelector((state) => state.game.circuitInfo);
     const waitingForPlayerInput = useSelector(isWaitingForPlayerInput);
     const animatingRandomSelection = useSelector(isAnimatingRandomSelection);
+    const animatingAISelection = useSelector(isAnimatingAISelection);
 
     return (
         <>
@@ -60,7 +62,18 @@ const GameBoardContents = () => {
             )}
             {currentPlayer && animatingRandomSelection && (
                 <>
-                    <RandomSelectionAnimation player={currentPlayer} />
+                    <RandomSelectionAnimation player={currentPlayer}>
+                        Too late!
+                        <br /> Choosing a random move for you...
+                    </RandomSelectionAnimation>
+                </>
+            )}
+            {currentPlayer && animatingAISelection && (
+                <>
+                    <RandomSelectionAnimation
+                        player={currentPlayer}
+                        switchRandomEvery={350}
+                    />
                 </>
             )}
         </>

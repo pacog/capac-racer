@@ -5,6 +5,7 @@ import { getGameState } from 'store/game/selectors';
 import StartGameModal from './StartGameModal';
 import StartTurnModal from './StartTurnModal';
 import NotifyCollisionModal from './NotifyCollisionModal';
+import NotifyAICollisionModal from './NotifyAICollisionModal';
 import NotifyGroundedModal from './NotifyGroundedModal';
 import NotifyVictoryModal from './NotifyVictoryModal';
 import InGameMenuModal from './InGameMenuModal';
@@ -22,6 +23,8 @@ const GameScreenModals = () => {
             return <StartTurnModal />;
         case gameStates.NOTIFY_COLLISION:
             return <NotifyCollisionModal />;
+        case gameStates.NOTIFY_AI_COLLISION:
+            return <NotifyAICollisionModal />;
         case gameStates.NOTIFY_GROUNDED:
             return <NotifyGroundedModal />;
         case gameStates.NOTIFY_VICTORY:

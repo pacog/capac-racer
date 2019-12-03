@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 import { PathLine } from 'react-svg-pathline';
@@ -14,7 +15,7 @@ import { pickRandomFromArray } from 'utils/random';
 import { SWITCH_RANDOM_SELECTION_EVERY } from 'constants/ux.js';
 import './style.css';
 
-function RandomSelectionAnimation({ player }) {
+function RandomSelectionAnimation({ player, children, switchRandomEvery }) {
     const rootElement = useRef(null);
     const [tempLine, setTempLine] = useState(null);
     const [highlightedPosition, setHighlightedPosition] = useState(null);
@@ -38,27 +39,28 @@ function RandomSelectionAnimation({ player }) {
             const randomPosition = pickRandomFromArray(possiblePositions);
             setHighlightedPosition(randomPosition);
             setTempLine(randomPosition.screen);
-        }, SWITCH_RANDOM_SELECTION_EVERY);
+        }, switchRandomEvery);
         return () => {
             clearInterval(interval);
         };
-    }, [player, possiblePositions]);
+    }, [player, possiblePositions, switchRandomEvery]);
     const otherPlayersPosition = useSelector((state) =>
         getOtherPlayersPositionInScreen(state, player.id),
     );
 
     return (
         <div ref={rootElement}>
-            <div
-                className="random-selection-animation-warning"
-                style={{
-                    top: originalPlayerScreenPosition.y,
-                    left: originalPlayerScreenPosition.x,
-                }}
-            >
-                Too late!
-                <br /> Choosing a random move for you...
-            </div>
+            {children && (
+                <div
+                    className="random-selection-animation-warning"
+                    style={{
+                        top: originalPlayerScreenPosition.y,
+                        left: originalPlayerScreenPosition.x,
+                    }}
+                >
+                    {children}
+                </div>
+            )}
             {possiblePositions.map((eachPosition) => {
                 const key = getKey(player, eachPosition);
                 return (
@@ -104,6 +106,13 @@ function getKey(player, position) {
 
 RandomSelectionAnimation.propTypes = {
     player: playerProp.isRequired,
+    children: PropTypes.node,
+    switchRandomEvery: PropTypes.number,
+};
+
+RandomSelectionAnimation.defaultProps = {
+    children: null,
+    switchRandomEvery: SWITCH_RANDOM_SELECTION_EVERY,
 };
 
 export default RandomSelectionAnimation;
