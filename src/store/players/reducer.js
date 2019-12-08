@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import { checkpointNamesToCheck } from 'constants/checkpoints';
 import { HUMAN } from 'constants/player-types';
 import {
     movePlayerTo,
@@ -18,7 +17,7 @@ const PLAYER_DEFAULT_INFO = {
     speed: { x: 0, y: 0 },
     prevPositions: [],
     turnsGrounded: 0,
-    checkpointsPassed: checkpointNamesToCheck.map(() => false),
+    checkpointsPassed: [false],
     turnsSpent: 0,
     realTimeUsed: 0,
     maxSpeed: 0,

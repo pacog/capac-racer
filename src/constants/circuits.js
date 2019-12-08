@@ -4,9 +4,18 @@ export const circuits = {
         name: 'Circuito 1',
         collisionImg: `${process.env.PUBLIC_URL}circuits/circuit1/collision.png`,
         bgImg: `${process.env.PUBLIC_URL}circuits/circuit1/bg.png`,
-        checkpoint1: `${process.env.PUBLIC_URL}circuits/circuit1/checkpoint_1.png`,
-        checkpoint2: `${process.env.PUBLIC_URL}circuits/circuit1/checkpoint_2.png`,
-        checkpoint3: `${process.env.PUBLIC_URL}circuits/circuit1/checkpoint_3.png`,
+        checkpoints: [
+            `${process.env.PUBLIC_URL}circuits/circuit1/cp1.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit1/cp2.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit1/cp3.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit1/cp4.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit1/cp5.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit1/cp6.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit1/cp7.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit1/cp8.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit1/cp9.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit1/cp10.png`,
+        ],
         maxPlayers: 4,
         startingPositions: [
             {
@@ -36,9 +45,12 @@ export const circuits = {
         name: 'Corto',
         collisionImg: `${process.env.PUBLIC_URL}circuits/circuit2/collision.png`,
         bgImg: `${process.env.PUBLIC_URL}circuits/circuit2/bg.png`,
-        checkpoint1: `${process.env.PUBLIC_URL}circuits/circuit2/checkpoint_1.png`,
-        checkpoint2: `${process.env.PUBLIC_URL}circuits/circuit2/checkpoint_2.png`,
-        checkpoint3: `${process.env.PUBLIC_URL}circuits/circuit2/checkpoint_3.png`,
+        checkpoints: [
+            `${process.env.PUBLIC_URL}circuits/circuit2/checkpoint_1.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit2/checkpoint_2.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit2/checkpoint_3.png`,
+        ],
+
         maxPlayers: 2,
         startingPositions: [
             {
@@ -60,9 +72,12 @@ export const circuits = {
         name: 'Silverstone',
         collisionImg: `${process.env.PUBLIC_URL}circuits/circuit3/collision.png`,
         bgImg: `${process.env.PUBLIC_URL}circuits/circuit3/bg.png`,
-        checkpoint1: `${process.env.PUBLIC_URL}circuits/circuit3/checkpoint_1.png`,
-        checkpoint2: `${process.env.PUBLIC_URL}circuits/circuit3/checkpoint_2.png`,
-        checkpoint3: `${process.env.PUBLIC_URL}circuits/circuit3/checkpoint_3.png`,
+        checkpoints: [
+            `${process.env.PUBLIC_URL}circuits/circuit3/checkpoint_1.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit3/checkpoint_2.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit3/checkpoint_3.png`,
+        ],
+
         maxPlayers: 2,
         startingPositions: [
             {
@@ -84,9 +99,12 @@ export const circuits = {
         name: 'The worm',
         collisionImg: `${process.env.PUBLIC_URL}circuits/circuit4/collision.png`,
         bgImg: `${process.env.PUBLIC_URL}circuits/circuit4/bg.png`,
-        checkpoint1: `${process.env.PUBLIC_URL}circuits/circuit4/checkpoint_1.png`,
-        checkpoint2: `${process.env.PUBLIC_URL}circuits/circuit4/checkpoint_2.png`,
-        checkpoint3: `${process.env.PUBLIC_URL}circuits/circuit4/checkpoint_3.png`,
+        checkpoints: [
+            `${process.env.PUBLIC_URL}circuits/circuit4/checkpoint_1.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit4/checkpoint_2.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit4/checkpoint_3.png`,
+        ],
+
         maxPlayers: 2,
         startingPositions: [
             {

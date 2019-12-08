@@ -220,9 +220,11 @@ export const handleAITurn = (player) => {
             mapZoom,
             mapGridSize,
         );
-        setTimeout(() => {
+
+        // TODO get different timeouts depending on player
+        timeout(500).then(() => {
             dispatch(handlePlayerMovement(player, nextMovement));
-        }, 500); // TODO get different timeouts depending on player
+        });
     };
 };
 
@@ -279,6 +281,7 @@ function initMapPositionForPlayers({ players, playerOrder, circuit }) {
             position: { ...initialPosition },
             prevPositions: [{ ...initialPosition }],
             speed: { ...circuit.initialSpeed },
+            checkpointsPassed: circuit.checkpoints.map(() => false),
         };
     });
 }

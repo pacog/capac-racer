@@ -11,7 +11,6 @@ import {
 } from 'utils/vector2d';
 import { range } from 'utils/range';
 import { hasContent } from 'utils/pixel';
-import { checkpointNamesToCheck } from 'constants/checkpoints';
 import { getScreenCoordinates } from 'utils/screenUtils';
 
 export const createFromConfig = (config) => {
@@ -27,9 +26,10 @@ export const createFromConfig = (config) => {
         })
         .then((collisionPixelGetter) => {
             result.collisionPixelGetter = collisionPixelGetter;
+
             return Promise.all(
-                checkpointNamesToCheck.map((checkpointAttr) =>
-                    loadImage(config[checkpointAttr]),
+                config.checkpoints.map((checkpointImg) =>
+                    loadImage(checkpointImg),
                 ),
             );
         })
