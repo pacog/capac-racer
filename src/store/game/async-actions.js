@@ -18,16 +18,16 @@ import {
 import {
     getAllPlayers,
     getCurrentPlayer,
-    getOtherPlayersPositionInScreen,
     hasCurrentPlayerWon,
+    getOtherPlayers,
 } from 'store/game/selectors';
 import { GAME, MAIN_MENU } from 'constants/screens';
 import { TIME_SHOWING_RANDOM_SELECTOR } from 'constants/ux';
 import waitingForPlayerCounter from 'utils/waitingForPlayerCounter';
 import {
     createFromConfig,
-    doesLineCollide,
     getCheckpointsVisitedInLine,
+    checkIfPlayerCanMove,
 } from 'utils/circuit';
 import { projectToScreenPosition } from 'store/map/selectors';
 import { distance } from 'utils/vector2d';
@@ -158,20 +158,28 @@ export const handlePlayerMovement = (player, newIntendedPosition) => {
         waitingForPlayerCounter.stop();
         const state = getState();
         const circuit = state.game.circuitInfo;
-        const movementLine = [
-            projectToScreenPosition(state, player.position),
-            projectToScreenPosition(state, newIntendedPosition),
-        ];
-        const otherPlayersPosition = getOtherPlayersPositionInScreen(
-            state,
-            player.id,
-        );
-        if (doesLineCollide(movementLine, circuit, otherPlayersPosition)) {
+        const mapZoom = state.map.zoom;
+        const mapGridSize = state.map.gridSize;
+        const canMoveThere = checkIfPlayerCanMove({
+            from: player.position,
+            to: newIntendedPosition,
+            zoom: mapZoom,
+            gridSize: mapGridSize,
+            circuit,
+            otherPlayers: getOtherPlayers(state, player.id),
+        });
+
+        if (!canMoveThere) {
             dispatch(
                 handlePlayerCollision(player, newIntendedPosition, timePassed),
             );
             return;
         }
+
+        const movementLine = [
+            projectToScreenPosition(state, player.position),
+            projectToScreenPosition(state, newIntendedPosition),
+        ];
 
         dispatch(
             handleCorrectMovement(
@@ -203,10 +211,18 @@ export const handleAITurn = (player) => {
         const otherPlayers = getAllPlayers(getState()).filter(
             (otherPlayer) => otherPlayer.id !== player.id,
         );
-        const nextMovement = chooseNextMovement(player, otherPlayers, circuit);
+        const mapZoom = state.map.zoom;
+        const mapGridSize = state.map.gridSize;
+        const nextMovement = chooseNextMovement(
+            player,
+            otherPlayers,
+            circuit,
+            mapZoom,
+            mapGridSize,
+        );
         setTimeout(() => {
             dispatch(handlePlayerMovement(player, nextMovement));
-        }, 3000); // TODO get different timeouts depending on player
+        }, 500); // TODO get different timeouts depending on player
     };
 };
 

@@ -1,18 +1,25 @@
 export const createFromImage = (img) => {
     const canvas = document.createElement('canvas');
-    canvas.width = img.width;
-    canvas.height = img.height;
-    canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height);
+    const { width, height } = img;
+
+    canvas.width = width;
+    canvas.height = height;
+    canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+
+    const rawData = canvas.getContext('2d').getImageData(0, 0, width, height)
+        .data;
 
     return {
+        width,
+        height,
         getPixel: (x, y) => {
-            const rawData = canvas.getContext('2d').getImageData(x, y, 1, 1)
-                .data;
+            const basePosition = 4 * (x + y * width);
+
             return {
-                r: rawData[0],
-                g: rawData[1],
-                b: rawData[2],
-                a: rawData[3],
+                r: rawData[basePosition + 0],
+                g: rawData[basePosition + 1],
+                b: rawData[basePosition + 2],
+                a: rawData[basePosition + 3],
             };
         },
     };

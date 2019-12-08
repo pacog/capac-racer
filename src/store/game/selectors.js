@@ -29,9 +29,12 @@ export const getAllPlayers = (state) => {
     return state.game.players.map((playerId) => state.players.byId[playerId]);
 };
 
+export const getOtherPlayers = (state, playerId) => {
+    return getAllPlayers(state).filter((player) => player.id !== playerId);
+};
+
 export const getOtherPlayersPositionInScreen = (state, playerId) => {
-    return getAllPlayers(state)
-        .filter((player) => player.id !== playerId)
+    return getOtherPlayers(state, playerId)
         .map((player) => player.position)
         .map((position) => projectToScreenPosition(state, position));
 };
