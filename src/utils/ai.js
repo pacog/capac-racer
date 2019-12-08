@@ -29,7 +29,7 @@ export const chooseNextMovement = (
     let finishedSolutions = [];
     let bestFinishedSolution = null;
 
-    const maxIterations = 100;
+    const maxIterations = 500;
     let currentIteration = 1;
     while (openSolutions.length && currentIteration <= maxIterations) {
         currentIteration += 1;
@@ -52,9 +52,9 @@ export const chooseNextMovement = (
             }
         }
         finishedSolutions = finishedSolutions.concat(newFinishedSolutions);
-
         const newOpenSolutions = newSolutions
             .filter((solution) => !solution.isFinished())
+            .filter((solution) => solution.getScore() >= 0)
             .filter(
                 // removing solutions with more turns than already found ones
                 (solution) =>
@@ -63,6 +63,7 @@ export const chooseNextMovement = (
             );
 
         openSolutions = openSolutions.concat(newOpenSolutions);
+
         const maxAvgSpeed = openSolutions.reduce(
             (acc, solution) => Math.max(acc, solution.avgSpeed),
             0,
@@ -215,7 +216,9 @@ class PartialCircuitSolution {
         const nextCheckpoint = 1 - this._getPercentageToNextCheckpoint();
         this.checkpointsCovered = checkpoints + nextCheckpoint;
         this.checkpointsCoveredPerTurn =
-            (this.checkpointsCovered + 1) / (this.getTurns() + 1);
+            this.checkpointsCovered / this.getTurns();
+
+        this.score = 1; // temp until all scores are calculated
     }
 
     getScore() {
