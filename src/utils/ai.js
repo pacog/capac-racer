@@ -29,7 +29,7 @@ export const chooseNextMovement = (
     let finishedSolutions = [];
     let bestFinishedSolution = null;
 
-    const maxIterations = 500;
+    const maxIterations = 1000;
     let currentIteration = 1;
     while (openSolutions.length && currentIteration <= maxIterations) {
         currentIteration += 1;
