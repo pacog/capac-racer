@@ -38,8 +38,11 @@ export const reduceGrounded = (player) => {
 
 export const addCheckpoints = (player, newIndexes) => {
     const newCheckpoints = player.checkpointsPassed.slice();
-    newIndexes.forEach((newIndex) => {
-        newCheckpoints[newIndex] = true;
+    newIndexes.sort().forEach((newIndex) => {
+        // Only do checkpoints in correct order.
+        if (newIndex === 0 || newCheckpoints[newIndex - 1]) {
+            newCheckpoints[newIndex] = true;
+        }
     });
     return {
         ...player,
