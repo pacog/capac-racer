@@ -31,7 +31,7 @@ const levels = [
     },
     {
         // level 3
-        randomSolutionChance: 15 / 100,
+        randomSolutionChance: 0,
         maxIterations: 1500,
         maxThinkingDepth: 99999,
         timeThinking: {
