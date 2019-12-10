@@ -32,11 +32,12 @@ import {
 import { projectToScreenPosition } from 'store/map/selectors';
 import { distance } from 'utils/vector2d';
 import { getPossibleDestinations } from 'store/players/selectors';
-import { pickRandomFromArray } from 'utils/random';
+import { pickRandomFromArray, getRandomInRange } from 'utils/random';
 import { timeout } from 'utils/gameLoopTimeout';
 import { shouldScoreByAdded, addScore } from 'utils/highScoresStorage';
 import { AI } from 'constants/player-types';
 import { chooseNextMovement } from 'utils/ai';
+import aiLevels from 'constants/ai-levels';
 
 export const startTurn = () => {
     return (dispatch, getState) => {
@@ -221,15 +222,21 @@ export const handleAITurn = (player) => {
             mapGridSize,
         );
 
-        // TODO get different timeouts depending on player
-        const minTimeToWaitForPlayer = 500;
-        Promise.all([timeout(minTimeToWaitForPlayer), nextMovementPromise])
-        .then((results) => {
+        const minTimeToWaitForPlayer = getMinTimeToWaitForPlayer(player);
+        Promise.all([
+            timeout(minTimeToWaitForPlayer),
+            nextMovementPromise,
+        ]).then((results) => {
             const nextMovement = results[1];
             dispatch(handlePlayerMovement(player, nextMovement));
         });
     };
 };
+
+function getMinTimeToWaitForPlayer(player) {
+    const { timeThinking } = aiLevels[player.levelAI];
+    return getRandomInRange(timeThinking.min, timeThinking.max);
+}
 
 function showRandomSelectorAndMovePlayer() {
     return (dispatch, getState) => {

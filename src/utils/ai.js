@@ -2,6 +2,7 @@
 import { getPossibleDestinations } from 'store/players/selectors';
 import { pickRandomFromArray } from 'utils/random';
 import { checkIfPlayerCanMove } from 'utils/circuit';
+import aiLevels from 'constants/ai-levels';
 import PartialCircuitSolution from './PartialCircuitSolution';
 import { waitForNextAnimationFrame } from './request-animation-frame';
 
@@ -60,8 +61,8 @@ async function* createSolutionsGenerator({
     let finishedSolutions = [];
     let bestFinishedSolution = null;
 
-    const maxIterations = getMaxIterationsForPlayer(player);
-    const maxDepthForSolutions = getMaxDepthForPlayer(player);
+    const { maxIterations } = aiLevels[player.levelAI];
+    const { maxThinkingDepth } = aiLevels[player.levelAI];
 
     let currentIteration = 1;
     const yieldEvery = 50;
@@ -74,7 +75,7 @@ async function* createSolutionsGenerator({
         );
         const newSolutions = solutionToExpand.expand(
             otherPlayers,
-            maxDepthForSolutions,
+            maxThinkingDepth,
         );
         const newFinishedSolutions = newSolutions.filter((solution) =>
             solution.isFinished(),
@@ -144,48 +145,8 @@ async function* createSolutionsGenerator({
     };
 }
 
-function getMaxIterationsForPlayer(player) {
-    switch (player.levelAI) {
-        case 0:
-            return 50;
-        case 1:
-            return 200;
-        case 2:
-            return 1000;
-        default:
-            return 5000;
-    }
-}
-
-function getMaxDepthForPlayer(player) {
-    switch (player.levelAI) {
-        case 0:
-            return 5;
-        case 1:
-            return 10;
-        case 2:
-            return 30;
-        default:
-            return 99999;
-    }
-}
-
 function shouldGetRandomSolution(player) {
-    let chance;
-    switch (player.levelAI) {
-        case 0:
-            chance = 10 / 100;
-            break;
-        case 1:
-            chance = 5 / 100;
-            break;
-        case 2:
-            chance = 2 / 100;
-            break;
-        default:
-            chance = 0;
-    }
-
+    const chance = aiLevels[player.levelAI].randomSolutionChance;
     return Math.random() < chance;
 }
 
@@ -211,10 +172,16 @@ function returnRandomNonCrashingMove({
             otherPlayers: [],
         });
 
-    const possiblePositions = getPossibleDestinations(
+    let possiblePositions = getPossibleDestinations(
         player,
         otherPlayers,
     ).filter((position) => canMoveThere(position));
+
+    if (!possiblePositions.length) {
+        // If we don't have other option other than crashing
+        possiblePositions = getPossibleDestinations(player, otherPlayers);
+    }
+
     return pickRandomFromArray(possiblePositions);
 }
 

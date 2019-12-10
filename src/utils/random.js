@@ -21,3 +21,7 @@ export const keepPickingUntilNotInArray = (
         `keepPickingUntilNotInArray: tried ${maxTries} times, no luck`,
     );
 };
+
+export const getRandomInRange = (min, max) => {
+    return min + Math.random() * (max - min);
+};
