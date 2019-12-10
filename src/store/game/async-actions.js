@@ -213,7 +213,7 @@ export const handleAITurn = (player) => {
         );
         const mapZoom = state.map.zoom;
         const mapGridSize = state.map.gridSize;
-        const nextMovement = chooseNextMovement(
+        const nextMovementPromise = chooseNextMovement(
             player,
             otherPlayers,
             circuit,
@@ -222,7 +222,10 @@ export const handleAITurn = (player) => {
         );
 
         // TODO get different timeouts depending on player
-        timeout(500).then(() => {
+        const minTimeToWaitForPlayer = 500;
+        Promise.all([timeout(minTimeToWaitForPlayer), nextMovementPromise])
+        .then((results) => {
+            const nextMovement = results[1];
             dispatch(handlePlayerMovement(player, nextMovement));
         });
     };
