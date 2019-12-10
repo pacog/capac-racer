@@ -34,7 +34,10 @@ export default class PartialCircuitSolution {
      *
      * @returns {PartialCircuitSolution[]}
      */
-    expand(otherPlayers) {
+    expand(otherPlayers, maxDepthForSolutions) {
+        if (this.currentIteration >= maxDepthForSolutions) {
+            return [];
+        }
         const otherPlayersToConsider =
             this.currentIteration === 1 ? otherPlayers : [];
 

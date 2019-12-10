@@ -1,6 +1,7 @@
 /* eslint-disable no-loop-func */
 import { getPossibleDestinations } from 'store/players/selectors';
 import { pickRandomFromArray } from 'utils/random';
+import { checkIfPlayerCanMove } from 'utils/circuit';
 import PartialCircuitSolution from './PartialCircuitSolution';
 import { waitForNextAnimationFrame } from './request-animation-frame';
 
@@ -12,6 +13,19 @@ export const chooseNextMovement = (
     gridSize,
 ) => {
     return new Promise((resolve) => {
+        if (shouldGetRandomSolution(player)) {
+            resolve(
+                returnRandomNonCrashingMove({
+                    player,
+                    otherPlayers,
+                    zoom,
+                    circuit,
+                    gridSize,
+                }),
+            );
+            return;
+        }
+
         const solutionsGenerator = createSolutionsGenerator({
             player,
             otherPlayers,
@@ -46,7 +60,9 @@ async function* createSolutionsGenerator({
     let finishedSolutions = [];
     let bestFinishedSolution = null;
 
-    const maxIterations = 5000;
+    const maxIterations = getMaxIterationsForPlayer(player);
+    const maxDepthForSolutions = getMaxDepthForPlayer(player);
+
     let currentIteration = 1;
     const yieldEvery = 50;
 
@@ -56,7 +72,10 @@ async function* createSolutionsGenerator({
         openSolutions = openSolutions.filter(
             (solution) => solution !== solutionToExpand,
         );
-        const newSolutions = solutionToExpand.expand(otherPlayers);
+        const newSolutions = solutionToExpand.expand(
+            otherPlayers,
+            maxDepthForSolutions,
+        );
         const newFinishedSolutions = newSolutions.filter((solution) =>
             solution.isFinished(),
         );
@@ -125,9 +144,78 @@ async function* createSolutionsGenerator({
     };
 }
 
+function getMaxIterationsForPlayer(player) {
+    switch (player.levelAI) {
+        case 0:
+            return 50;
+        case 1:
+            return 200;
+        case 2:
+            return 1000;
+        default:
+            return 5000;
+    }
+}
+
+function getMaxDepthForPlayer(player) {
+    switch (player.levelAI) {
+        case 0:
+            return 5;
+        case 1:
+            return 10;
+        case 2:
+            return 30;
+        default:
+            return 99999;
+    }
+}
+
+function shouldGetRandomSolution(player) {
+    let chance;
+    switch (player.levelAI) {
+        case 0:
+            chance = 10 / 100;
+            break;
+        case 1:
+            chance = 5 / 100;
+            break;
+        case 2:
+            chance = 2 / 100;
+            break;
+        default:
+            chance = 0;
+    }
+
+    return Math.random() < chance;
+}
+
 function returnRandomMove(player, otherPlayers) {
     const positions = getPossibleDestinations(player, otherPlayers);
     return pickRandomFromArray(positions);
+}
+
+function returnRandomNonCrashingMove({
+    player,
+    otherPlayers,
+    zoom,
+    circuit,
+    gridSize,
+}) {
+    const canMoveThere = (position) =>
+        checkIfPlayerCanMove({
+            from: player.position,
+            to: position,
+            zoom,
+            gridSize,
+            circuit,
+            otherPlayers: [],
+        });
+
+    const possiblePositions = getPossibleDestinations(
+        player,
+        otherPlayers,
+    ).filter((position) => canMoveThere(position));
+    return pickRandomFromArray(possiblePositions);
 }
 
 function getMostPromisingSolution(solutions) {
