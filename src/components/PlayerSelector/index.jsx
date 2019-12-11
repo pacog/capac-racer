@@ -62,7 +62,7 @@ function PlayerSelector({
                             value={player.levelAI}
                             type="range"
                             min="0"
-                            max="4"
+                            max="3"
                             step="1"
                             onChange={(event) =>
                                 onLevelAIChange(
@@ -87,10 +87,8 @@ function getRobotNameByLevel(level) {
         case 1:
             return 'Wall-E';
         case 2:
-            return 'Deep Blue';
-        case 3:
             return 'HAL-9000';
-        case 4:
+        case 3:
             return 'Skynet';
         default:
             return 'Rodolfo';

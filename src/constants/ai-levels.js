@@ -1,7 +1,7 @@
 const levels = [
     {
         // level 0
-        randomSolutionChance: 15 / 100,
+        randomSolutionChance: 20 / 100,
         maxIterations: 50,
         maxThinkingDepth: 5,
         timeThinking: {
@@ -11,7 +11,7 @@ const levels = [
     },
     {
         // level 1
-        randomSolutionChance: 10 / 100,
+        randomSolutionChance: 15 / 100,
         maxIterations: 200,
         maxThinkingDepth: 10,
         timeThinking: {
@@ -21,7 +21,7 @@ const levels = [
     },
     {
         // level 2
-        randomSolutionChance: 5 / 100,
+        randomSolutionChance: 7 / 100,
         maxIterations: 700,
         maxThinkingDepth: 30,
         timeThinking: {

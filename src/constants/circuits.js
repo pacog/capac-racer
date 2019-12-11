@@ -1,7 +1,7 @@
 export const circuits = {
-    circuit1: {
-        id: 'circuit1',
-        name: 'Circuito 1',
+    mouth: {
+        id: 'mouth',
+        name: 'The mouth',
         collisionImg: `${process.env.PUBLIC_URL}circuits/circuit1/collision.png`,
         bgImg: `${process.env.PUBLIC_URL}circuits/circuit1/bg.png`,
         checkpoints: [
@@ -14,52 +14,61 @@ export const circuits = {
             `${process.env.PUBLIC_URL}circuits/circuit1/cp7.png`,
             `${process.env.PUBLIC_URL}circuits/circuit1/cp8.png`,
             `${process.env.PUBLIC_URL}circuits/circuit1/cp9.png`,
-            `${process.env.PUBLIC_URL}circuits/circuit1/cp10.png`,
         ],
-        maxPlayers: 4,
+        maxPlayers: 3,
         startingPositions: [
             {
-                x: 4,
+                x: 37,
+                y: 22,
+            },
+            {
+                x: 37,
                 y: 23,
             },
             {
-                x: 5,
-                y: 23,
-            },
-            {
-                x: 6,
-                y: 23,
-            },
-            {
-                x: 7,
-                y: 23,
+                x: 37,
+                y: 24,
             },
         ],
         initialSpeed: {
-            x: 0,
-            y: -1,
+            x: 2,
+            y: 0,
         },
     },
-    circuit2: {
-        id: 'circuit2',
-        name: 'Corto',
+    smiley: {
+        id: 'smiley',
+        name: 'Smiley',
         collisionImg: `${process.env.PUBLIC_URL}circuits/circuit2/collision.png`,
         bgImg: `${process.env.PUBLIC_URL}circuits/circuit2/bg.png`,
         checkpoints: [
-            `${process.env.PUBLIC_URL}circuits/circuit2/checkpoint_1.png`,
-            `${process.env.PUBLIC_URL}circuits/circuit2/checkpoint_2.png`,
-            `${process.env.PUBLIC_URL}circuits/circuit2/checkpoint_3.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit2/cp1.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit2/cp2.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit2/cp3.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit2/cp4.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit2/cp5.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit2/cp6.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit2/cp7.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit2/cp8.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit2/cp9.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit2/cp10.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit2/cp11.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit2/cp12.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit2/cp13.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit2/cp14.png`,
         ],
-
-        maxPlayers: 2,
+        maxPlayers: 3,
         startingPositions: [
             {
-                x: 7,
-                y: 15,
+                x: 41,
+                y: 31,
             },
             {
-                x: 7,
-                y: 16,
+                x: 41,
+                y: 32,
+            },
+            {
+                x: 41,
+                y: 33,
             },
         ],
         initialSpeed: {
