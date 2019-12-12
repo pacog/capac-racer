@@ -35,9 +35,9 @@ export const circuits = {
             y: 0,
         },
     },
-    smiley: {
-        id: 'smiley',
-        name: 'Smiley',
+    heart: {
+        id: 'heart',
+        name: 'Heart',
         collisionImg: `${process.env.PUBLIC_URL}circuits/circuit2/collision.png`,
         bgImg: `${process.env.PUBLIC_URL}circuits/circuit2/bg.png`,
         checkpoints: [
@@ -48,97 +48,25 @@ export const circuits = {
             `${process.env.PUBLIC_URL}circuits/circuit2/cp5.png`,
             `${process.env.PUBLIC_URL}circuits/circuit2/cp6.png`,
             `${process.env.PUBLIC_URL}circuits/circuit2/cp7.png`,
-            `${process.env.PUBLIC_URL}circuits/circuit2/cp8.png`,
-            `${process.env.PUBLIC_URL}circuits/circuit2/cp9.png`,
-            `${process.env.PUBLIC_URL}circuits/circuit2/cp10.png`,
-            `${process.env.PUBLIC_URL}circuits/circuit2/cp11.png`,
-            `${process.env.PUBLIC_URL}circuits/circuit2/cp12.png`,
-            `${process.env.PUBLIC_URL}circuits/circuit2/cp13.png`,
-            `${process.env.PUBLIC_URL}circuits/circuit2/cp14.png`,
         ],
         maxPlayers: 3,
         startingPositions: [
             {
-                x: 41,
-                y: 31,
+                x: 37,
+                y: 28,
             },
             {
-                x: 41,
-                y: 32,
+                x: 36,
+                y: 27,
             },
             {
-                x: 41,
-                y: 33,
+                x: 35,
+                y: 26,
             },
         ],
         initialSpeed: {
-            x: 1,
-            y: 0,
-        },
-    },
-    circuit3: {
-        id: 'circuit3',
-        name: 'Silverstone',
-        collisionImg: `${process.env.PUBLIC_URL}circuits/circuit3/collision.png`,
-        bgImg: `${process.env.PUBLIC_URL}circuits/circuit3/bg.png`,
-        checkpoints: [
-            `${process.env.PUBLIC_URL}circuits/circuit3/checkpoint_1.png`,
-            `${process.env.PUBLIC_URL}circuits/circuit3/checkpoint_2.png`,
-            `${process.env.PUBLIC_URL}circuits/circuit3/checkpoint_3.png`,
-        ],
-
-        maxPlayers: 2,
-        startingPositions: [
-            {
-                x: 23,
-                y: 6,
-            },
-            {
-                x: 24,
-                y: 5,
-            },
-        ],
-        initialSpeed: {
-            x: 1,
-            y: 1,
-        },
-    },
-    circuit4: {
-        id: 'circuit4',
-        name: 'The worm',
-        collisionImg: `${process.env.PUBLIC_URL}circuits/circuit4/collision.png`,
-        bgImg: `${process.env.PUBLIC_URL}circuits/circuit4/bg.png`,
-        checkpoints: [
-            `${process.env.PUBLIC_URL}circuits/circuit4/cp1.png`,
-            `${process.env.PUBLIC_URL}circuits/circuit4/cp2.png`,
-            `${process.env.PUBLIC_URL}circuits/circuit4/cp3.png`,
-            `${process.env.PUBLIC_URL}circuits/circuit4/cp4.png`,
-            `${process.env.PUBLIC_URL}circuits/circuit4/cp5.png`,
-            `${process.env.PUBLIC_URL}circuits/circuit4/cp6.png`,
-            `${process.env.PUBLIC_URL}circuits/circuit4/cp7.png`,
-            `${process.env.PUBLIC_URL}circuits/circuit4/cp8.png`,
-            `${process.env.PUBLIC_URL}circuits/circuit4/cp9.png`,
-            `${process.env.PUBLIC_URL}circuits/circuit4/cp10.png`,
-            `${process.env.PUBLIC_URL}circuits/circuit4/cp11.png`,
-            `${process.env.PUBLIC_URL}circuits/circuit4/cp12.png`,
-            `${process.env.PUBLIC_URL}circuits/circuit4/cp13.png`,
-            `${process.env.PUBLIC_URL}circuits/circuit4/cp14.png`,
-        ],
-
-        maxPlayers: 2,
-        startingPositions: [
-            {
-                x: 25,
-                y: 32,
-            },
-            {
-                x: 25,
-                y: 33,
-            },
-        ],
-        initialSpeed: {
-            x: 1,
-            y: 0,
+            x: 2,
+            y: -2,
         },
     },
 };

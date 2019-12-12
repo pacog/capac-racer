@@ -22,6 +22,7 @@
     width: 100%;
     object-fit: contain;
     flex: 1;
+    max-height: calc(200px - 32px);
 }
 
 .circuit-selector-footer {
