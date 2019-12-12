@@ -69,4 +69,43 @@ export const circuits = {
             y: -2,
         },
     },
+    rosco: {
+        id: 'rosco',
+        name: 'Rosco',
+        collisionImg: `${process.env.PUBLIC_URL}circuits/circuit3/collision.png`,
+        bgImg: `${process.env.PUBLIC_URL}circuits/circuit3/bg.png`,
+        checkpoints: [
+            `${process.env.PUBLIC_URL}circuits/circuit3/cp1.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit3/cp2.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit3/cp3.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit3/cp4.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit3/cp5.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit3/cp6.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit3/cp7.png`,
+            `${process.env.PUBLIC_URL}circuits/circuit3/cp8.png`,
+        ],
+        maxPlayers: 4,
+        startingPositions: [
+            {
+                x: 33,
+                y: 34,
+            },
+            {
+                x: 33,
+                y: 33,
+            },
+            {
+                x: 33,
+                y: 32,
+            },
+            {
+                x: 33,
+                y: 35,
+            },
+        ],
+        initialSpeed: {
+            x: -2,
+            y: 0,
+        },
+    },
 };
