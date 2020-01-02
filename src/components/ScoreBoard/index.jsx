@@ -11,7 +11,9 @@ function ScoreBoard({ scores, highlightedScore }) {
                 scores.map((score, index) => (
                     <div
                         className={classNames('score-board-item', {
-                            'is-highlighted': highlightedScore.id === score.id,
+                            'is-highlighted':
+                                highlightedScore &&
+                                highlightedScore.id === score.id,
                         })}
                         key={`score-board-item-${score.id}`}
                     >
