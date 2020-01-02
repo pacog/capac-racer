@@ -1,8 +1,28 @@
+.score-board {
+    width: 100%;
+}
+
 .score-board-item {
     color: var(--white);
     margin-top: 8px;
+    padding: 4px 8px;
+    border-radius: 2px;
 }
 
 .score-board-item.is-highlighted {
-    background: var(--red-3);
+    background: var(--dark-blue);
+    color: var(--white);
+    display: flex;
+}
+
+.score-board-item.is-highlighted::after {
+    content: 'NEW!';
+    display: block;
+    background: var(--orange);
+    color: var(--white);
+    padding: 2px 4px;
+    border-radius: 2px;
+    margin-left: 4px;
+    font-size: 10px;
+    line-height: 12px;
 }
