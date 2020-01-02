@@ -34,7 +34,7 @@ import { distance } from 'utils/vector2d';
 import { getPossibleDestinations } from 'store/players/selectors';
 import { pickRandomFromArray, getRandomInRange } from 'utils/random';
 import { timeout } from 'utils/gameLoopTimeout';
-import { shouldScoreByAdded, addScore } from 'utils/highScoresStorage';
+import { shouldScoreBeAdded, addScore } from 'utils/highScoresStorage';
 import { AI } from 'constants/player-types';
 import { chooseNextMovement } from 'utils/ai';
 import aiLevels from 'constants/ai-levels';
@@ -132,26 +132,32 @@ export const handleCorrectMovement = (
         const hasPlayerWon = hasCurrentPlayerWon(getState());
         dispatch(moveTo(player.id, newIntendedPosition, timePassed));
         if (hasPlayerWon) {
-            const score = {
-                name: player.name,
-                date: new Date(),
-                turns: player.turnsSpent,
-                realTimeUsed: player.realTimeUsed,
-                maxSpeed: player.maxSpeed,
-                crashes: player.crashes,
-            };
-            if (shouldScoreByAdded(score, circuit)) {
-                const newScore = addScore(score, circuit);
-                dispatch(setLatestHighScore(newScore));
-                dispatch(setGameState(gameStates.NOTIFY_HIGH_SCORE));
-            } else {
-                dispatch(setGameState(gameStates.NOTIFY_VICTORY));
-            }
-        } else {
-            dispatch(nextTurn());
+            dispatch(handleVictory(player, circuit));
+            return;
         }
+        dispatch(nextTurn());
     };
 };
+
+function handleVictory(player, circuit) {
+    return (dispatch) => {
+        const score = {
+            name: player.name,
+            date: new Date(),
+            turns: player.turnsSpent,
+            realTimeUsed: player.realTimeUsed,
+            maxSpeed: player.maxSpeed,
+            crashes: player.crashes,
+        };
+        if (shouldScoreBeAdded(score, circuit, player)) {
+            const newScore = addScore(score, circuit, player);
+            dispatch(setLatestHighScore(newScore));
+            dispatch(setGameState(gameStates.NOTIFY_HIGH_SCORE));
+        } else {
+            dispatch(setGameState(gameStates.NOTIFY_VICTORY));
+        }
+    };
+}
 
 export const handlePlayerMovement = (player, newIntendedPosition) => {
     return (dispatch, getState) => {

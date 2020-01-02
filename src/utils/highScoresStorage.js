@@ -1,4 +1,5 @@
 import { v4 } from 'uuid';
+import { AI } from 'constants/player-types';
 
 const LOCAL_STORAGE_ID = 'high-scores';
 const MAX_SCORES_PER_CIRCUIT = 3;
@@ -17,7 +18,10 @@ export const getByCircuitId = (circuitId) => {
     return all[circuitId] || [];
 };
 
-export const shouldScoreByAdded = (score, circuit) => {
+export const shouldScoreBeAdded = (score, circuit, player) => {
+    if (player.type === AI) {
+        return false;
+    }
     const circuitScores = getByCircuitId(circuit.id);
     if (circuitScores.length < MAX_SCORES_PER_CIRCUIT) {
         return true;
@@ -30,8 +34,8 @@ export const shouldScoreByAdded = (score, circuit) => {
     return false;
 };
 
-export const addScore = (score, circuit) => {
-    if (!shouldScoreByAdded(score, circuit)) {
+export const addScore = (score, circuit, player) => {
+    if (!shouldScoreBeAdded(score, circuit, player)) {
         return null;
     }
     const circuitScores = getByCircuitId(circuit.id);
@@ -58,10 +62,10 @@ export const addScore = (score, circuit) => {
 };
 
 function isBetterScore(score, otherScore) {
-    if (score.turns > otherScore) {
+    if (score.turns > otherScore.turns) {
         return false;
     }
-    if (score.turns < otherScore) {
+    if (score.turns < otherScore.turns) {
         return true;
     }
 
