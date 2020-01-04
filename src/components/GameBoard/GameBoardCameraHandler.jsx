@@ -56,6 +56,25 @@ const GameBoardCameraHandler = ({ children, currentPlayer }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentPlayer, boardSize]);
 
+    const handlePointerDown = (event) => {
+        setIsDragging(true);
+        const coordinates = getCoordinatesFromPointerEvent(event);
+        setDragStart(coordinates);
+    };
+    const handlePointerUp = () => {
+        setIsDragging(false);
+        setDragStart(null);
+    };
+    const handlePointerMove = (event) => {
+        if (!isDragging || !dragStart) {
+            return;
+        }
+        const cursorPosition = getCoordinatesFromPointerEvent(event);
+        const movement = substract(cursorPosition, dragStart);
+        setDragStart(cursorPosition);
+        setCameraPosition(add(cameraPosition, movement));
+    };
+
     return (
         <div className="game-board">
             <ReactResizeDetector
@@ -74,30 +93,13 @@ const GameBoardCameraHandler = ({ children, currentPlayer }) => {
                         height: circuitInfo.height,
                         transform: `translate(${cameraPosition.x}px, ${cameraPosition.y}px)`,
                     }}
-                    onMouseDown={(event) => {
-                        setIsDragging(true);
-                        setDragStart({
-                            x: event.clientX,
-                            y: event.clientY,
-                        });
-                    }}
-                    onMouseUp={() => {
-                        setIsDragging(false);
-                        setDragStart(null);
-                    }}
-                    onMouseMove={(event) => {
-                        if (!isDragging || !dragStart) {
-                            return;
-                        }
-
-                        const cursorPosition = {
-                            x: event.clientX,
-                            y: event.clientY,
-                        };
-                        const movement = substract(cursorPosition, dragStart);
-                        setDragStart(cursorPosition);
-                        setCameraPosition(add(cameraPosition, movement));
-                    }}
+                    onMouseDown={handlePointerDown}
+                    onMouseUp={handlePointerUp}
+                    onMouseMove={handlePointerMove}
+                    onTouchStart={handlePointerDown}
+                    onTouchEnd={handlePointerUp}
+                    onTouchMove={handlePointerMove}
+                    onTouchCancel={handlePointerUp}
                 >
                     {children}
                 </div>
@@ -113,5 +115,18 @@ GameBoardCameraHandler.propTypes = {
 GameBoardCameraHandler.defaultProps = {
     currentPlayer: null,
 };
+
+function getCoordinatesFromPointerEvent(event) {
+    let eventToUse = event;
+
+    if (event.type === 'touchstart' || event.type === 'touchmove') {
+        // eslint-disable-next-line prefer-destructuring
+        eventToUse = event.touches[0];
+    }
+    return {
+        x: eventToUse.clientX,
+        y: eventToUse.clientY,
+    };
+}
 
 export default GameBoardCameraHandler;
