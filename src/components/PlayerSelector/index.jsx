@@ -26,15 +26,17 @@ function PlayerSelector({
                 <div className="player-selector-style-container">
                     <PlayerIcon playerStyle={player.style} />
                 </div>
-                {canBeRemoved && (
-                    <button
-                        type="button"
-                        className="button button-small"
-                        onClick={onRemove}
-                    >
-                        Delete
-                    </button>
-                )}
+                <button
+                    type="button"
+                    className="button button-small"
+                    onClick={onRemove}
+                    disabled={!canBeRemoved}
+                    style={{
+                        opacity: canBeRemoved ? 1 : 0,
+                    }}
+                >
+                    Delete
+                </button>
             </div>
             <div className="player-selector-bottom">
                 <button

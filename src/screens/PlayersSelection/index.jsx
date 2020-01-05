@@ -35,6 +35,8 @@ function PlayersSelection({ className }) {
         (state) => state.mainUI.randomizePlayerOrderOnStart,
     );
 
+    const canBeRemoved = players.length > 1;
+
     return (
         <div
             className={classNames(
@@ -52,8 +54,13 @@ function PlayersSelection({ className }) {
                         <PlayerSelector
                             key={player.id}
                             player={player}
-                            onRemove={() => dispatch(removePlayer(player.id))}
-                            canBeRemoved={players.length > 1}
+                            onRemove={() => {
+                                if (!canBeRemoved) {
+                                    return;
+                                }
+                                dispatch(removePlayer(player.id));
+                            }}
+                            canBeRemoved={canBeRemoved}
                             onNameChange={(newName) =>
                                 dispatch(
                                     updatePlayer(player.id, { name: newName }),
