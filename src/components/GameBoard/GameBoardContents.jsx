@@ -2,7 +2,10 @@ import React from 'react';
 import Grid from 'components/Grid';
 import Player from 'components/Player';
 import { useSelector, useDispatch } from 'react-redux';
-import { handlePlayerMovement } from 'store/game/async-actions';
+import {
+    handlePlayerPositionSelection,
+    confirmPositionSelection,
+} from 'store/game/async-actions';
 import {
     getCurrentPlayer,
     getAllPlayers,
@@ -54,9 +57,15 @@ const GameBoardContents = () => {
                         player={currentPlayer}
                         onPositionSelected={(position) =>
                             dispatch(
-                                handlePlayerMovement(currentPlayer, position),
+                                handlePlayerPositionSelection(
+                                    currentPlayer,
+                                    position,
+                                ),
                             )
                         }
+                        onConfirmSelection={() => {
+                            dispatch(confirmPositionSelection(currentPlayer));
+                        }}
                     />
                 </>
             )}

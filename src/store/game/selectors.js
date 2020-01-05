@@ -78,3 +78,7 @@ export const getPossibleDestinationsForPlayerInScreen = (state, player) => {
 export const getLatestHighScore = (state) => {
     return state.game.latestHighScore;
 };
+
+export const getSelectedPosition = (state) => {
+    return state.game.selectedPosition;
+};

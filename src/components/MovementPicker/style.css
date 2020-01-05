@@ -25,3 +25,10 @@
     left: 0;
     z-index: 9;
 }
+
+.movement-picker-select-button {
+    position: absolute;
+    transform: translate(-50%, 20px);
+    z-index: 12;
+    opacity: 0.75;
+}

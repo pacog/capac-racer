@@ -8,6 +8,7 @@ const defaultState = {
     currentTurnPlayerId: null,
     circuitInfo: null,
     latestHighScore: null, // If somebody achived a high score, it will be stored here until the next game starts
+    selectedPosition: null, // When we use a touch interface we can store the position that has been selected before confirming the move
 };
 
 const game = (state = defaultState, action) => {
@@ -20,6 +21,7 @@ const game = (state = defaultState, action) => {
                 players: action.playerOrder.slice(),
                 circuitInfo: { ...action.circuitInfo },
                 latestHighScore: null,
+                selectedPosition: null,
             };
         case actionTypes.ADVANCE_PLAYER_TURN:
             return {
@@ -28,6 +30,7 @@ const game = (state = defaultState, action) => {
                     state.players,
                     state.currentTurnPlayerId,
                 ),
+                selectedPosition: null,
             };
         case actionTypes.SET_GAME_STATE:
             return {
@@ -39,6 +42,11 @@ const game = (state = defaultState, action) => {
             return {
                 ...state,
                 latestHighScore: action.highScore,
+            };
+        case actionTypes.SET_SELECTED_POSITION:
+            return {
+                ...state,
+                selectedPosition: action.newPosition,
             };
 
         default:

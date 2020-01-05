@@ -14,12 +14,14 @@ import {
     setGameState,
     advancePlayerTurn,
     setLatestHighScore,
+    setSelectedPosition,
 } from 'store/game/actions';
 import {
     getAllPlayers,
     getCurrentPlayer,
     hasCurrentPlayerWon,
     getOtherPlayers,
+    getSelectedPosition,
 } from 'store/game/selectors';
 import { GAME, MAIN_MENU } from 'constants/screens';
 import { TIME_SHOWING_RANDOM_SELECTOR } from 'constants/ux';
@@ -38,6 +40,7 @@ import { shouldScoreBeAdded, addScore } from 'utils/highScoresStorage';
 import { AI } from 'constants/player-types';
 import { chooseNextMovement } from 'utils/ai';
 import aiLevels from 'constants/ai-levels';
+import { isTouchDevice } from 'utils/is-touch-device';
 
 export const startTurn = () => {
     return (dispatch, getState) => {
@@ -159,7 +162,7 @@ function handleVictory(player, circuit) {
     };
 }
 
-export const handlePlayerMovement = (player, newIntendedPosition) => {
+const handlePlayerMovement = (player, newIntendedPosition) => {
     return (dispatch, getState) => {
         const timePassed = waitingForPlayerCounter.getTimePassed();
         waitingForPlayerCounter.stop();
@@ -197,6 +200,23 @@ export const handlePlayerMovement = (player, newIntendedPosition) => {
                 circuit,
             ),
         );
+    };
+};
+
+export const handlePlayerPositionSelection = (player, newIntendedPosition) => {
+    return (dispatch) => {
+        if (isTouchDevice) {
+            dispatch(setSelectedPosition(newIntendedPosition));
+            return;
+        }
+        dispatch(handlePlayerMovement(player, newIntendedPosition));
+    };
+};
+
+export const confirmPositionSelection = (player) => {
+    return (dispatch, getState) => {
+        const newIntendedPosition = getSelectedPosition(getState());
+        dispatch(handlePlayerMovement(player, newIntendedPosition));
     };
 };
 

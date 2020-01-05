@@ -8,12 +8,14 @@ import { projectToScreenPosition } from 'store/map/selectors';
 import {
     getOtherPlayersPositionInScreen,
     getPossibleDestinationsForPlayerInScreen,
+    getSelectedPosition,
 } from 'store/game/selectors';
 import { setPlayerCSSVars, getColorForTempLine } from 'utils/playerPainter';
+import { isTouchDevice } from 'utils/is-touch-device';
 
 import './style.css';
 
-function MovementPicker({ player, onPositionSelected }) {
+function MovementPicker({ player, onPositionSelected, onConfirmSelection }) {
     const rootElement = useRef(null);
     const [tempLine, setTempLine] = useState(null);
     useEffect(() => {
@@ -36,6 +38,14 @@ function MovementPicker({ player, onPositionSelected }) {
         getOtherPlayersPositionInScreen(state, player.id),
     );
 
+    const selectedPosition = useSelector(getSelectedPosition);
+    const selectedPositionScreen = useSelector((state) =>
+        projectToScreenPosition(state, selectedPosition),
+    );
+    const selectButtonPosition = getSelectButtonPosition(possiblePositions);
+
+    const lineToPaint = tempLine || selectedPositionScreen;
+
     return (
         <div ref={rootElement}>
             {possiblePositions.map((eachPosition) => (
@@ -49,16 +59,29 @@ function MovementPicker({ player, onPositionSelected }) {
                     }}
                     onClick={() => onPositionSelected(eachPosition.position)}
                     onMouseEnter={() => setTempLine(eachPosition.screen)}
-                    onMouseLeave={() => setTempLine(eachPosition.null)}
+                    onMouseLeave={() => setTempLine(null)}
                 />
             ))}
-            {tempLine && (
+            {isTouchDevice && selectedPosition && (
+                // eslint-disable-next-line react/button-has-type
+                <button
+                    className="button button-bg movement-picker-select-button"
+                    style={{
+                        left: selectButtonPosition.x,
+                        top: selectButtonPosition.y,
+                    }}
+                    onClick={onConfirmSelection}
+                >
+                    Select
+                </button>
+            )}
+            {lineToPaint && (
                 <svg className="movement-picker-temp-line">
                     <PathLine
-                        points={[originalPlayerScreenPosition, tempLine]}
+                        points={[originalPlayerScreenPosition, lineToPaint]}
                         stroke={getColorForTempLine(
                             player,
-                            [originalPlayerScreenPosition, tempLine],
+                            [originalPlayerScreenPosition, lineToPaint],
                             circuit,
                             otherPlayersPosition,
                         )}
@@ -76,6 +99,32 @@ function MovementPicker({ player, onPositionSelected }) {
 MovementPicker.propTypes = {
     player: playerProp.isRequired,
     onPositionSelected: PropTypes.func.isRequired,
+    onConfirmSelection: PropTypes.func.isRequired,
 };
+
+/**
+ * Gets the position to put the button to select (only used for touch devices)
+ * Will get the highest y and the mean x
+ *
+ * @param {Array} possiblePlayerPositions
+ * @returns {Point}
+ */
+function getSelectButtonPosition(possiblePlayerPositions) {
+    if (!possiblePlayerPositions || !possiblePlayerPositions.length) {
+        return { x: 0, y: 0 };
+    }
+    const maxY = possiblePlayerPositions.reduce((acc, position) => {
+        return Math.max(acc, position.screen.y);
+    }, Number.MIN_VALUE);
+
+    const totalX = possiblePlayerPositions.reduce((acc, position) => {
+        return position.screen.x + acc;
+    }, 0);
+
+    return {
+        x: totalX / possiblePlayerPositions.length,
+        y: maxY,
+    };
+}
 
 export default MovementPicker;
