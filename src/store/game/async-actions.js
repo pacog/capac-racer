@@ -215,15 +215,22 @@ export const handlePlayerPositionSelection = (player, newIntendedPosition) => {
 
 export const confirmPositionSelection = (player) => {
     return (dispatch, getState) => {
-        const newIntendedPosition = getSelectedPosition(getState());
-        dispatch(handlePlayerMovement(player, newIntendedPosition));
+        const selectedPosition = getSelectedPosition(getState());
+        dispatch(handlePlayerMovement(player, selectedPosition));
     };
 };
 
 export const startWaitingForPlayerInput = () => {
-    return (dispatch) => {
+    return (dispatch, getState) => {
         dispatch(setGameState(gameStates.WAITING_FOR_PLAYER_INPUT));
         const callbackOnEnd = () => {
+            const selectedPosition = getSelectedPosition(getState());
+            if (selectedPosition) {
+                // If a position was alreayd selected we choose that one
+                const player = getCurrentPlayer(getState());
+                dispatch(handlePlayerMovement(player, selectedPosition));
+                return;
+            }
             dispatch(showRandomSelectorAndMovePlayer());
         };
         waitingForPlayerCounter.restart({ callbackOnEnd });
