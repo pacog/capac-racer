@@ -1,27 +1,30 @@
-.logo {
-    font-family: 'destroyregular';
-}
 .logo-big {
-    width: 256px;
-}
-.logo-up {
-    font-size: 93px;
-    color: var(--white);
-    text-shadow: 0 0 5px var(--darkest-blue);
-    line-height: 82px;
-}
-.logo-down {
-    font-size: 94px;
-    color: var(--red);
-    text-shadow: 0 0 5px var(--darkest-blue);
-    line-height: 58px;
+    --logo-size-x: 1;
 }
 
-.logo-small .logo-up {
-    font-size: 47px;
-    line-height: 41px;
+.logo-small {
+    --logo-size-x: 0.5;
 }
-.logo-small .logo-down {
-    font-size: 48px;
-    line-height: 27px;
+
+.logo {
+    font-family: 'destroyregular';
+    --logo-screen-size-x: 1;
+}
+@media screen and (max-width: 674px) {
+    .logo {
+        --logo-screen-size-x: 0.75;
+    }
+}
+
+.logo-up {
+    color: var(--white);
+    text-shadow: 0 0 5px var(--darkest-blue);
+    font-size: calc(93px * var(--logo-size-x) * var(--logo-screen-size-x));
+    line-height: calc(82px * var(--logo-size-x) * var(--logo-screen-size-x));
+}
+.logo-down {
+    color: var(--red);
+    text-shadow: 0 0 5px var(--darkest-blue);
+    font-size: calc(95px * var(--logo-size-x) * var(--logo-screen-size-x));
+    line-height: calc(58px * var(--logo-size-x) * var(--logo-screen-size-x));
 }

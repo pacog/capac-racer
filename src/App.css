@@ -110,6 +110,18 @@
     margin-top: 16px;
 }
 
+@media screen and (max-width: 674px) {
+    .menu-header {
+        padding: 24px;
+        align-items: center;
+    }
+    .menu-header-title {
+        font-size: 24px;
+        margin-left: 20px;
+        line-height: 20px;
+    }
+}
+
 .fade-enter .transition-from-top,
 .fade-enter .transition-from-right,
 .fade-enter .transition-from-bottom,

@@ -22,3 +22,15 @@
 .player-selection-checkbox input {
     margin-right: 10px;
 }
+
+@media screen and (max-width: 674px) {
+    .player-selection-content {
+        padding: 0;
+        width: 100%;
+        /** Will grow enough if needed, but this way won't hide the rest */
+        height: 100px;
+        /* display: flex;
+        flex-direction: content; */
+        margin-top: 5px;
+    }
+}

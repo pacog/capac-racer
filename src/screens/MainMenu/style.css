@@ -12,3 +12,12 @@
     justify-content: center;
     margin-left: 10px;
 }
+
+@media screen and (max-width: 470px) {
+    .main-menu-content {
+        flex-direction: column;
+    }
+    .main-menu-buttons {
+        margin-top: 20px;
+    }
+}

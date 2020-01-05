@@ -226,7 +226,7 @@ export const startWaitingForPlayerInput = () => {
         const callbackOnEnd = () => {
             const selectedPosition = getSelectedPosition(getState());
             if (selectedPosition) {
-                // If a position was alreayd selected we choose that one
+                // If a position was already selected we choose that one
                 const player = getCurrentPlayer(getState());
                 dispatch(handlePlayerMovement(player, selectedPosition));
                 return;
