@@ -27,6 +27,7 @@
     margin-left: 10px;
     height: 30px;
     width: 30px;
+    min-width: 30px;
     border-radius: 4px;
     background: var(--white);
     display: flex;
@@ -68,4 +69,14 @@
     top: 15px;
     left: 50%;
     transform: translateX(-50%);
+}
+
+@media screen and (max-width: 674px) {
+    .player-selector {
+        width: 100%;
+        padding: 0 20px;
+    }
+    .player-selector-input {
+        width: 170px;
+    }
 }

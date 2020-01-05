@@ -42,36 +42,42 @@ function PlayersSelection({ className }) {
                 <h1 className="menu-header-title">Choose players</h1>
             </div>
             <div className="menu-content player-selection-content transition-from-right">
-                {players.map((player) => (
-                    <PlayerSelector
-                        key={player.id}
-                        player={player}
-                        onRemove={() => dispatch(removePlayer(player.id))}
-                        canBeRemoved={players.length > 1}
-                        onNameChange={(newName) =>
-                            dispatch(updatePlayer(player.id, { name: newName }))
-                        }
-                        onTypeChange={(newType) =>
-                            dispatch(updatePlayer(player.id, { type: newType }))
-                        }
-                        onLevelAIChange={(newLevelAI) =>
-                            dispatch(
-                                updatePlayer(player.id, {
-                                    levelAI: newLevelAI,
-                                }),
-                            )
-                        }
-                    />
-                ))}
-                {players.length < circuit.maxPlayers && (
-                    <button
-                        type="button"
-                        className="button player-selection-add-player-button"
-                        onClick={() => dispatch(addRandomPlayer())}
-                    >
-                        Add Player
-                    </button>
-                )}
+                <div className="player-selection-content-inner">
+                    {players.map((player) => (
+                        <PlayerSelector
+                            key={player.id}
+                            player={player}
+                            onRemove={() => dispatch(removePlayer(player.id))}
+                            canBeRemoved={players.length > 1}
+                            onNameChange={(newName) =>
+                                dispatch(
+                                    updatePlayer(player.id, { name: newName }),
+                                )
+                            }
+                            onTypeChange={(newType) =>
+                                dispatch(
+                                    updatePlayer(player.id, { type: newType }),
+                                )
+                            }
+                            onLevelAIChange={(newLevelAI) =>
+                                dispatch(
+                                    updatePlayer(player.id, {
+                                        levelAI: newLevelAI,
+                                    }),
+                                )
+                            }
+                        />
+                    ))}
+                    {players.length < circuit.maxPlayers && (
+                        <button
+                            type="button"
+                            className="button player-selection-add-player-button"
+                            onClick={() => dispatch(addRandomPlayer())}
+                        >
+                            Add Player
+                        </button>
+                    )}
+                </div>
             </div>
 
             {players.length > 1 && (

@@ -28,9 +28,20 @@
         padding: 0;
         width: 100%;
         /** Will grow enough if needed, but this way won't hide the rest */
-        height: 100px;
+        /* height: 100px; */
         /* display: flex;
         flex-direction: content; */
         margin-top: 5px;
+        position: relative;
+        flex: 1;
+    }
+
+    .player-selection-content-inner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: auto;
     }
 }
