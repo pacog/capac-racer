@@ -52,7 +52,7 @@ function Router() {
     ];
 
     return (
-        <TransitionGroup className="menu-screen full-screen">
+        <TransitionGroup className="menu-screen">
             {allScreens
                 .filter(
                     ({ screenName }) =>

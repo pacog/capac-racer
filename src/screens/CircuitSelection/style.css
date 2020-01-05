@@ -3,17 +3,9 @@
     flex-direction: column;
     align-items: stretch;
     justify-content: center;
-    padding: 0 40px;
-    width: 100%;
 }
 
 @media screen and (max-width: 674px) {
-    .circuit-selection-content {
-        padding: 0;
-        width: 100%;
-        /** Will grow enough if needed, but this way won't hide the rest */
-        height: 100px;
-    }
     .circuit-selection-list {
         flex-direction: column;
     }

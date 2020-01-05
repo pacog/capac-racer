@@ -13,7 +13,12 @@ const circuitsArray = Object.values(circuits);
 function CircuitSelection({ className }) {
     const dispatch = useDispatch();
     return (
-        <div className={classNames('full-screen circuit-selection', className)}>
+        <div
+            className={classNames(
+                'full-screen full-screen-with-header-and-footer circuit-selection',
+                className,
+            )}
+        >
             <div className="menu-header transition-from-top">
                 <Logo variant="small" />
                 <h1 className="menu-header-title">Select circuit</h1>

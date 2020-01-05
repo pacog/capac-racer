@@ -1,17 +1,20 @@
 .full-screen {
     min-height: 100vh;
+    max-height: 100vh;
     min-width: 100vw;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
 }
+.full-screen.full-screen-with-header-and-footer {
+    grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
 .full-screen.fade-entering,
 .full-screen.fade-exiting {
     pointer-events: none;
@@ -94,8 +97,11 @@
     line-height: 40px;
 }
 .menu-content {
-    flex: 1;
+    max-height: 100%;
+    overflow: auto;
+    padding: 0;
 }
+
 .menu-footer {
     width: 100%;
     padding: 24px;

@@ -36,7 +36,12 @@ function PlayersSelection({ className }) {
     );
 
     return (
-        <div className={classNames('full-screen', className)}>
+        <div
+            className={classNames(
+                'full-screen full-screen-with-header-and-footer',
+                className,
+            )}
+        >
             <div className="menu-header transition-from-right">
                 <Logo variant="small" />
                 <h1 className="menu-header-title">Choose players</h1>
@@ -77,23 +82,25 @@ function PlayersSelection({ className }) {
                             Add Player
                         </button>
                     )}
+
+                    {players.length > 1 && (
+                        <div className="transition-from-right">
+                            <label className="player-selection-checkbox">
+                                <input
+                                    type="checkbox"
+                                    checked={randomizePlayerOrderOnStart}
+                                    onChange={() =>
+                                        dispatch(
+                                            toggleRandomizePlayerOrderOnStart(),
+                                        )
+                                    }
+                                />
+                                Randomize player order when race starts
+                            </label>
+                        </div>
+                    )}
                 </div>
             </div>
-
-            {players.length > 1 && (
-                <div className="transition-from-right">
-                    <label className="player-selection-checkbox">
-                        <input
-                            type="checkbox"
-                            checked={randomizePlayerOrderOnStart}
-                            onChange={() =>
-                                dispatch(toggleRandomizePlayerOrderOnStart())
-                            }
-                        />
-                        Randomize player order when race starts
-                    </label>
-                </div>
-            )}
 
             <footer className="menu-footer transition-from-right">
                 <button

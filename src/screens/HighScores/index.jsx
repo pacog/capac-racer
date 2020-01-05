@@ -25,7 +25,7 @@ function HighScores() {
     const dispatch = useDispatch();
 
     return (
-        <div className="full-screen high-scores">
+        <div className="full-screen full-screen-with-header-and-footer high-scores">
             <div className="menu-header transition-from-top">
                 <Logo variant="small" />
                 <h1 className="menu-header-title">High scores</h1>

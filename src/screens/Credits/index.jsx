@@ -10,7 +10,13 @@ import './style.css';
 const Credits = ({ className }) => {
     const dispatch = useDispatch();
     return (
-        <div className={classNames('full-screen', className)}>
+        <div
+            className={classNames(
+                'full-screen',
+                'full-screen-with-header-and-footer',
+                className,
+            )}
+        >
             <div className="menu-header transition-from-right">
                 <Logo variant="small" />
                 <h1 className="menu-header-title">Credits</h1>
