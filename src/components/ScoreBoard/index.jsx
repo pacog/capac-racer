@@ -17,8 +17,31 @@ function ScoreBoard({ scores, highlightedScore }) {
                         })}
                         key={`score-board-item-${score.id}`}
                     >
-                        {index + 1}. {score.name} - {score.turns} turns -{' '}
-                        {(score.realTimeUsed / 1000).toFixed(2)} seconds
+                        <div className="score-board-item-index">
+                            {index + 1}
+                        </div>
+                        <div className="score-board-item-name">
+                            {score.name}
+                        </div>
+                        <div className="score-board-item-turns">
+                            <span className="score-board-item-value">
+                                {score.turns}
+                            </span>
+                            <span className="score-board-item-text">
+                                {' '}
+                                turns
+                            </span>
+                        </div>
+                        <div className="score-board-item-time">
+                            (
+                            <span className="score-board-item-value">
+                                {(score.realTimeUsed / 1000).toFixed(2)}{' '}
+                            </span>
+                            <span className="score-board-item-text">
+                                seconds
+                            </span>
+                            )
+                        </div>
                     </div>
                 ))}
 

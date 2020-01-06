@@ -2,7 +2,7 @@ import { v4 } from 'uuid';
 import { AI } from 'constants/player-types';
 
 const LOCAL_STORAGE_ID = 'high-scores';
-const MAX_SCORES_PER_CIRCUIT = 3;
+const MAX_SCORES_PER_CIRCUIT = 5;
 
 export const getAll = () => {
     try {

@@ -31,19 +31,25 @@ function HighScores() {
                 <h1 className="menu-header-title">High scores</h1>
             </div>
             <div className="menu-content transition-from-bottom">
-                <div className="high-scores-circuit-tabs">
-                    {circuitsArray.map((circuit) => (
-                        <div
-                            key={circuit.id}
-                            className={classNames('high-scores-circuit-tab', {
-                                'is-active': circuit.id === activeCircuit.id,
-                            })}
-                        >
-                            <div onClick={() => setActiveCircuit(circuit)}>
-                                {circuit.name}
+                <div className="high-scores-circuit-tabs-container">
+                    <div className="high-scores-circuit-tabs">
+                        {circuitsArray.map((circuit) => (
+                            <div
+                                key={circuit.id}
+                                className={classNames(
+                                    'high-scores-circuit-tab',
+                                    {
+                                        'is-active':
+                                            circuit.id === activeCircuit.id,
+                                    },
+                                )}
+                            >
+                                <div onClick={() => setActiveCircuit(circuit)}>
+                                    {circuit.name}
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
 
                 <div className="high-scores-circuit">
