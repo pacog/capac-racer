@@ -1,6 +1,11 @@
 .full-screen {
     min-height: 100vh;
     max-height: 100vh;
+    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    /* This var --vh is set from js */
+    min-height: calc(var(--vh, 1vh) * 100);
+    max-height: calc(var(--vh, 1vh) * 100);
+    height: calc(var(--vh, 1vh) * 100);
     min-width: 100vw;
     display: flex;
     flex-direction: column;
