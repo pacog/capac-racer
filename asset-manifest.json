@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/capac-racer/static/css/main.f0849048.chunk.css",
+    "main.js": "/capac-racer/static/js/main.9c6e82e9.chunk.js",
+    "main.js.map": "/capac-racer/static/js/main.9c6e82e9.chunk.js.map",
+    "runtime-main.js": "/capac-racer/static/js/runtime-main.60e2173a.js",
+    "runtime-main.js.map": "/capac-racer/static/js/runtime-main.60e2173a.js.map",
+    "static/js/2.49e3a265.chunk.js": "/capac-racer/static/js/2.49e3a265.chunk.js",
+    "static/js/2.49e3a265.chunk.js.map": "/capac-racer/static/js/2.49e3a265.chunk.js.map",
+    "index.html": "/capac-racer/index.html",
+    "precache-manifest.ffa6b9c9be3acf9a47148b6ec77da2ca.js": "/capac-racer/precache-manifest.ffa6b9c9be3acf9a47148b6ec77da2ca.js",
+    "service-worker.js": "/capac-racer/service-worker.js",
+    "static/css/main.f0849048.chunk.css.map": "/capac-racer/static/css/main.f0849048.chunk.css.map",
+    "static/js/2.49e3a265.chunk.js.LICENSE": "/capac-racer/static/js/2.49e3a265.chunk.js.LICENSE",
+    "static/media/index.css": "/capac-racer/static/media/doppioone-regular-webfont.3d276e82.woff2"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.60e2173a.js",
+    "static/js/2.49e3a265.chunk.js",
+    "static/css/main.f0849048.chunk.css",
+    "static/js/main.9c6e82e9.chunk.js"
+  ]
+}
