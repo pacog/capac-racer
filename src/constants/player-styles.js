@@ -7,7 +7,7 @@ export const CAR = {
     trailColor: '#e4223c',
     trailDotsSize: 6, // px
     trailWidth: 2, // px
-    icon: `${process.env.PUBLIC_URL}player-icons/car.png`,
+    icon: `${process.env.PUBLIC_URL}/player-icons/car.png`,
 };
 
 export const ROCKET = {
@@ -19,7 +19,7 @@ export const ROCKET = {
     trailColor: '#39c3b6',
     trailDotsSize: 6, // px
     trailWidth: 2, // px
-    icon: `${process.env.PUBLIC_URL}player-icons/rocket.png`,
+    icon: `${process.env.PUBLIC_URL}/player-icons/rocket.png`,
 };
 
 export const TURTLE = {
@@ -31,7 +31,7 @@ export const TURTLE = {
     trailColor: '#43c830',
     trailDotsSize: 6, // px
     trailWidth: 2, // px
-    icon: `${process.env.PUBLIC_URL}player-icons/turtle.png`,
+    icon: `${process.env.PUBLIC_URL}/player-icons/turtle.png`,
 };
 
 export const SKULL = {
@@ -43,7 +43,7 @@ export const SKULL = {
     trailColor: '#666666',
     trailDotsSize: 6, // px
     trailWidth: 2, // px
-    icon: `${process.env.PUBLIC_URL}player-icons/skull.png`,
+    icon: `${process.env.PUBLIC_URL}/player-icons/skull.png`,
 };
 
 export const CLOWN = {
@@ -55,7 +55,7 @@ export const CLOWN = {
     trailColor: '#fdfffc',
     trailDotsSize: 6, // px
     trailWidth: 2, // px
-    icon: `${process.env.PUBLIC_URL}player-icons/clown.png`,
+    icon: `${process.env.PUBLIC_URL}/player-icons/clown.png`,
 };
 
 export const DANCER = {
@@ -67,7 +67,7 @@ export const DANCER = {
     trailColor: '#cce019',
     trailDotsSize: 6, // px
     trailWidth: 2, // px
-    icon: `${process.env.PUBLIC_URL}player-icons/dancer.png`,
+    icon: `${process.env.PUBLIC_URL}/player-icons/dancer.png`,
 };
 
 // export const PANDA = {
@@ -79,7 +79,7 @@ export const DANCER = {
 //     trailColor: '#212121',
 //     trailDotsSize: 6, // px
 //     trailWidth: 2, // px
-//     icon: `${process.env.PUBLIC_URL}player-icons/panda.png`,
+//     icon: `${process.env.PUBLIC_URL}/player-icons/panda.png`,
 // };
 
 export const STYLES = {
