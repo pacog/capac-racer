@@ -9,7 +9,7 @@ function CircuitSelector({ circuit, onClick }) {
         <div className="circuit-selector" onClick={onClick}>
             <img
                 className="circuit-selector-img"
-                src={`${process.env.PUBLIC_URL}${circuit.bgImg}`}
+                src={circuit.bgImg}
                 alt={circuit.name}
             />
             <div className="circuit-selector-footer">
