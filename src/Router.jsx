@@ -8,6 +8,7 @@ import CircuitSelection from 'screens/CircuitSelection';
 import PlayersSelection from 'screens/PlayersSelection';
 import HighScores from 'screens/HighScores';
 import Credits from 'screens/Credits';
+import LoadingGame from 'screens/LoadingGame';
 
 const TIME_TO_SHOW_FIRST_SCREEN = 500; // ms
 const STATE_CHANGE_TRANSITION_TIME = 300; // ms
@@ -48,6 +49,10 @@ function Router() {
         {
             screenName: screens.CREDITS,
             Component: Credits,
+        },
+        {
+            screenName: screens.LOADING_GAME,
+            Component: LoadingGame,
         },
     ];
 

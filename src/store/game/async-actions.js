@@ -23,7 +23,7 @@ import {
     getOtherPlayers,
     getSelectedPosition,
 } from 'store/game/selectors';
-import { GAME, MAIN_MENU } from 'constants/screens';
+import { GAME, MAIN_MENU, LOADING_GAME } from 'constants/screens';
 import { TIME_SHOWING_RANDOM_SELECTOR } from 'constants/ux';
 import waitingForPlayerCounter from 'utils/waitingForPlayerCounter';
 import {
@@ -76,13 +76,13 @@ export const reduceGroundedAndNextTurn = () => {
 
 export const initGameWithConfig = ({ players, playerOrder, circuit }) => {
     return (dispatch) => {
+        dispatch(changeScreen(LOADING_GAME));
         const playersWithMapPosition = initMapPositionForPlayers({
             players,
             playerOrder,
             circuit,
         });
         dispatch(setPlayers(playersWithMapPosition));
-        // TODO: add a loading map state (or screen)
         createFromConfig(circuit).then((circuitInfo) => {
             dispatch(initGame(playerOrder, circuitInfo));
             dispatch(changeScreen(GAME));
