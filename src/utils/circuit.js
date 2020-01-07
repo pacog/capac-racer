@@ -18,7 +18,7 @@ export const createFromConfig = (config) => {
         ...config,
     };
 
-    return loadImage(process.env.PUBLIC_URL + config.collisionImg)
+    return loadImage(config.collisionImg)
         .then((collisionImg) => {
             result.width = collisionImg.width;
             result.height = collisionImg.height;
@@ -29,7 +29,7 @@ export const createFromConfig = (config) => {
 
             return Promise.all(
                 config.checkpoints.map((checkpointImg) =>
-                    loadImage(process.env.PUBLIC_URL + checkpointImg),
+                    loadImage(checkpointImg),
                 ),
             );
         })
