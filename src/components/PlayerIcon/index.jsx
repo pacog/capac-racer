@@ -6,7 +6,9 @@ function PlayerIcon({ playerStyle }) {
     return (
         <div
             className="player-icon"
-            style={{ backgroundImage: `url(${playerStyle.icon})` }}
+            style={{
+                backgroundImage: `url(${process.env.PUBLIC_URL}${playerStyle.icon})`,
+            }}
         />
     );
 }
