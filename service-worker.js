@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/capac-racer/precache-manifest.bff9c142b67266044f73cfe192e670aa.js"
+  "/capac-racer/precache-manifest.4b0ac3f8fcaaba8ed38efeffed4317c8.js"
 );
 
 self.addEventListener('message', (event) => {
