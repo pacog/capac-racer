@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import gridImg from 'assets/grid.png';
 import './style.css';
 
-const GRID_IMAGE_SIZE = 30; // px
+const GRID_IMAGE_SIZE = 60; // px
 
 const Grid = ({ zoom, cellSize }) => {
     const GRID_IMG_DENSITY = GRID_IMAGE_SIZE / cellSize;
