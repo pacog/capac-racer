@@ -26,7 +26,7 @@
         "predeploy": "npm run build",
         "deploy": "gh-pages -d build",
         "start": "REACT_APP_VERSION=$npm_package_version react-scripts start",
-        "build": "react-scripts build",
+        "build": "REACT_APP_VERSION=$npm_package_version react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
