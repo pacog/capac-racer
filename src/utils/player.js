@@ -21,6 +21,7 @@ export const crashPlayer = (player, speed, timePassed) => {
     return {
         ...player,
         speed: newSpeed,
+        prevPositions: player.prevPositions.concat(player.position),
         turnsGrounded,
         crashes: player.crashes + 1,
         turnsSpent: player.turnsSpent + 1,
