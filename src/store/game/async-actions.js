@@ -98,7 +98,8 @@ export const initGameWithConfig = ({ players, playerOrder, circuit }) => {
             players,
             playerOrder,
             circuit,
-        });
+        }).map(fixPlayersWithoutName);
+
         dispatch(setPlayers(playersWithMapPosition));
         createFromConfig(circuit).then((circuitInfo) => {
             dispatch(initGame(playerOrder, circuitInfo));
@@ -391,3 +392,28 @@ export const tryToShowInGameMenu = () => {
         }
     };
 };
+
+function fixPlayersWithoutName(player, index) {
+    if (player.name) {
+        return player;
+    }
+    return {
+        ...player,
+        name: getNameForPlayerWithoutName(index),
+    };
+}
+
+function getNameForPlayerWithoutName(index) {
+    switch (index) {
+        case 0:
+            return 'Anonymous';
+        case 1:
+            return 'Mistery racer';
+        case 2:
+            return 'Shy runner';
+        case 3:
+            return 'Jane Doe';
+        default:
+            return 'John Doe';
+    }
+}
