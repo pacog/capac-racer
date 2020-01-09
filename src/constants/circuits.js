@@ -1,7 +1,7 @@
 export const circuits = {
     mouth: {
         id: 'mouth',
-        name: 'The mouth',
+        name: 'Mouth',
         collisionImg: `${process.env.PUBLIC_URL}/circuits/circuit1/collision.png`,
         bgImg: `${process.env.PUBLIC_URL}/circuits/circuit1/bg.png`,
         checkpoints: [
@@ -110,7 +110,7 @@ export const circuits = {
     },
     horse: {
         id: 'horse',
-        name: 'The horse',
+        name: 'Horse',
         collisionImg: `${process.env.PUBLIC_URL}/circuits/circuit4/collision.png`,
         bgImg: `${process.env.PUBLIC_URL}/circuits/circuit4/bg.png`,
         checkpoints: [
