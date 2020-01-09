@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b248f51dac8093cd1163f6abed246b71",
+    "revision": "0f8ab1e4353ea8b107f6aac41ae45efa",
     "url": "/capac-racer/index.html"
   },
   {
-    "revision": "cfa3f4b10ffd6deb9ba6",
-    "url": "/capac-racer/static/css/main.7952d92a.chunk.css"
+    "revision": "a57c5cb9e23938d620f5",
+    "url": "/capac-racer/static/css/main.c6a3ec31.chunk.css"
   },
   {
     "revision": "cf9898e11f742730f4bb",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/capac-racer/static/js/2.39eb84ca.chunk.js.LICENSE"
   },
   {
-    "revision": "cfa3f4b10ffd6deb9ba6",
-    "url": "/capac-racer/static/js/main.225ca274.chunk.js"
+    "revision": "a57c5cb9e23938d620f5",
+    "url": "/capac-racer/static/js/main.39ffd39f.chunk.js"
   },
   {
     "revision": "0d0f1a32045196fb4d3a",
