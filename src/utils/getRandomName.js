@@ -1,23 +1,26 @@
 import { pickRandomFromArray } from './random';
 
 const FIRST_NAMES = [
-    'The amazing',
-    'Marvelous',
-    'Mr.',
-    'The great',
     'Max',
-    'Jeroen',
-    'Manolo',
+    'Carlitros',
+    'Michael',
+    'Fernando',
+    'Lolín',
+    'Esquizo',
+    'Agapito',
+    'Tolomeo',
 ];
 
 const LAST_NAMES = [
     'Cucaracha',
-    'López',
     'Aubergine',
     'Tentacles',
     'Rex',
-    'Agapito',
-    'Tolomeo',
+    'Danger',
+    'Senna',
+    'Alonso',
+    'Schumacher',
+    'Jander',
 ];
 
 export const getRandomName = () => {
