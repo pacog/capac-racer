@@ -50,6 +50,7 @@ const MainMenu = ({ className }) => {
                     </button>
                 </div>
             </div>
+            <div className="app-version">v{window.capac_racer_version}</div>
         </div>
     );
 };

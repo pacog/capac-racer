@@ -21,3 +21,11 @@
         margin-top: 20px;
     }
 }
+
+.app-version {
+    position: fixed;
+    bottom: 8px;
+    right: 12px;
+    font-size: 10px;
+    color: var(--grey-1);
+}
