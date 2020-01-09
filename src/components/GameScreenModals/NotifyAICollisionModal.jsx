@@ -1,24 +1,32 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { nextTurn } from 'store/game/async-actions';
+import React, { useEffect, useState } from 'react';
+import classNames from 'classnames';
+import { useSelector } from 'react-redux';
 import { getCurrentPlayer } from 'store/game/selectors';
 
 const NotifyAICollisionModal = () => {
-    const dispatch = useDispatch();
+    const [showContent, setShowContent] = useState(false);
+    useEffect(() => {
+        const timeout = setTimeout(() => setShowContent(true), 100);
+        return () => {
+            clearTimeout(timeout);
+        };
+    }, []);
+
     const currentPlayer = useSelector((state) => getCurrentPlayer(state));
+
     return (
         // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-        <div className="game-screen-modal" onClick={() => dispatch(nextTurn())}>
-            <div className="game-screen-modal-content">
-                <div>{currentPlayer.name} crashed!</div>
-                <div>Turns grounded: {currentPlayer.turnsGrounded}</div>
-                <button
-                    className="button game-screen-modal-button"
-                    type="button"
-                >
-                    Next turn
-                </button>
+        <div className="game-screen-modal game-screen-modal-non-invasive">
+            <div
+                className={classNames('game-screen-modal-content', {
+                    'is-hidden': !showContent,
+                })}
+            >
+                <div>
+                    <span className="player-name">{currentPlayer.name}</span>{' '}
+                    has crashed :(
+                </div>
             </div>
         </div>
     );

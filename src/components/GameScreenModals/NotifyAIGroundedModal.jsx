@@ -1,12 +1,14 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 import { getCurrentPlayer } from 'store/game/selectors';
+import pluralize from 'pluralize';
 
-const AIThinkingModal = () => {
+const NotifyAIGroundedModal = () => {
     const [showContent, setShowContent] = useState(false);
     useEffect(() => {
-        const timeout = setTimeout(() => setShowContent(true), 1000);
+        const timeout = setTimeout(() => setShowContent(true), 100);
         return () => {
             clearTimeout(timeout);
         };
@@ -24,11 +26,15 @@ const AIThinkingModal = () => {
             >
                 <div>
                     <span className="player-name">{currentPlayer.name}</span> is
-                    choosing its next move...
+                    grounded after a crash.
+                </div>
+                <div className="secondary-text">
+                    ({currentPlayer.turnsGrounded}{' '}
+                    {pluralize('turn', currentPlayer.turnsGrounded)} left)
                 </div>
             </div>
         </div>
     );
 };
 
-export default AIThinkingModal;
+export default NotifyAIGroundedModal;

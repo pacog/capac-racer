@@ -17,8 +17,8 @@ const NotifyHighScoreModal = () => {
         <div className="game-screen-modal">
             <div className="game-screen-modal-content">
                 <div>
-                    {currentPlayer.name} won, and set a high score for this
-                    circuit!
+                    <span className="player-name">{currentPlayer.name}</span>{' '}
+                    won, and set a high score for this circuit!
                 </div>
                 <div className="notify-high-scores-circuit">
                     <ScoreBoard

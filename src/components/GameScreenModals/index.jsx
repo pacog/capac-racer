@@ -7,6 +7,7 @@ import StartTurnModal from './StartTurnModal';
 import NotifyCollisionModal from './NotifyCollisionModal';
 import NotifyAICollisionModal from './NotifyAICollisionModal';
 import NotifyGroundedModal from './NotifyGroundedModal';
+import NotifyAIGroundedModal from './NotifyAIGroundedModal';
 import NotifyVictoryModal from './NotifyVictoryModal';
 import InGameMenuModal from './InGameMenuModal';
 import NotifyHighScoreModal from './NotifyHighScoreModal';
@@ -27,6 +28,8 @@ const GameScreenModals = () => {
             return <NotifyAICollisionModal />;
         case gameStates.NOTIFY_GROUNDED:
             return <NotifyGroundedModal />;
+        case gameStates.NOTIFY_AI_GROUNDED:
+            return <NotifyAIGroundedModal />;
         case gameStates.NOTIFY_VICTORY:
             return <NotifyVictoryModal />;
         case gameStates.NOTIFY_HIGH_SCORE:

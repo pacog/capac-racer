@@ -37,16 +37,32 @@ import { getPossibleDestinations } from 'store/players/selectors';
 import { pickRandomFromArray, getRandomInRange } from 'utils/random';
 import { timeout } from 'utils/gameLoopTimeout';
 import { shouldScoreBeAdded, addScore } from 'utils/highScoresStorage';
-import { AI } from 'constants/player-types';
+import { AI, HUMAN } from 'constants/player-types';
 import { chooseNextMovement } from 'utils/ai';
 import aiLevels from 'constants/ai-levels';
 import { isTouchDevice } from 'utils/is-touch-device';
+
+const WAIT_AFTER_AI_COLLISION = 2000;
+const WAIT_AFTER_AI_GROUNDED = 2000;
+
+const notifyGrounded = (nextPlayer) => {
+    return (dispatch) => {
+        if (nextPlayer.type === HUMAN) {
+            dispatch(setGameState(gameStates.NOTIFY_GROUNDED));
+            return;
+        }
+        dispatch(setGameState(gameStates.NOTIFY_AI_GROUNDED));
+        setTimeout(() => {
+            dispatch(reduceGroundedAndNextTurn());
+        }, WAIT_AFTER_AI_GROUNDED);
+    };
+};
 
 export const startTurn = () => {
     return (dispatch, getState) => {
         const nextPlayer = getCurrentPlayer(getState());
         if (nextPlayer.turnsGrounded) {
-            dispatch(setGameState(gameStates.NOTIFY_GROUNDED));
+            dispatch(notifyGrounded(nextPlayer));
             return;
         }
 
@@ -117,6 +133,9 @@ export const handlePlayerCollision = (
         dispatch(notifyCollision(player.id, speed, timePassed));
         if (player.type === AI) {
             dispatch(setGameState(gameStates.NOTIFY_AI_COLLISION));
+            setTimeout(() => {
+                dispatch(nextTurn());
+            }, WAIT_AFTER_AI_COLLISION);
             return;
         }
         dispatch(setGameState(gameStates.NOTIFY_COLLISION));

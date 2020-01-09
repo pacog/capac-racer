@@ -3,6 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { reduceGroundedAndNextTurn } from 'store/game/async-actions';
 import { getCurrentPlayer } from 'store/game/selectors';
+import pluralize from 'pluralize';
 
 const NotifyGroundedModal = () => {
     const dispatch = useDispatch();
@@ -15,9 +16,14 @@ const NotifyGroundedModal = () => {
         >
             <div className="game-screen-modal-content">
                 <div>
-                    {currentPlayer.name}, you are grounded because you crashed!
+                    <span className="player-name">{currentPlayer.name}</span>,
+                    you are grounded because you crashed!
                 </div>
-                <div>Turns left: {currentPlayer.turnsGrounded}</div>
+                <div className="secondary-text mt-s">
+                    ({currentPlayer.turnsGrounded}{' '}
+                    {pluralize('turn', currentPlayer.turnsGrounded)} left)
+                </div>
+
                 <button
                     className="button game-screen-modal-button"
                     type="button"

@@ -65,6 +65,11 @@
     font-size: 18px;
 }
 
+.secondary-text {
+    font-size: 12px;
+    color: var(--grey-1);
+}
+
 .menu-screen {
     background: linear-gradient(
         to bottom,
@@ -117,9 +122,19 @@
 .menu-footer-filler {
     flex: 1;
 }
+.mt-s {
+    margin-top: 8px;
+}
+.mt-sm {
+    margin-top: 12px;
+}
 
 .mt-m {
     margin-top: 16px;
+}
+
+.player-name {
+    color: var(--blue);
 }
 
 @media screen and (max-width: 674px) {
