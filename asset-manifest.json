@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/capac-racer/static/css/main.c6a3ec31.chunk.css",
-    "main.js": "/capac-racer/static/js/main.39ffd39f.chunk.js",
-    "main.js.map": "/capac-racer/static/js/main.39ffd39f.chunk.js.map",
+    "main.js": "/capac-racer/static/js/main.cf694b2d.chunk.js",
+    "main.js.map": "/capac-racer/static/js/main.cf694b2d.chunk.js.map",
     "runtime-main.js": "/capac-racer/static/js/runtime-main.60e2173a.js",
     "runtime-main.js.map": "/capac-racer/static/js/runtime-main.60e2173a.js.map",
     "static/js/2.39eb84ca.chunk.js": "/capac-racer/static/js/2.39eb84ca.chunk.js",
     "static/js/2.39eb84ca.chunk.js.map": "/capac-racer/static/js/2.39eb84ca.chunk.js.map",
     "index.html": "/capac-racer/index.html",
-    "precache-manifest.53c587e0382f353cbb638f114e93e00d.js": "/capac-racer/precache-manifest.53c587e0382f353cbb638f114e93e00d.js",
+    "precache-manifest.ed149e5fa4e57788be3dfe0a0b557907.js": "/capac-racer/precache-manifest.ed149e5fa4e57788be3dfe0a0b557907.js",
     "service-worker.js": "/capac-racer/service-worker.js",
     "static/css/main.c6a3ec31.chunk.css.map": "/capac-racer/static/css/main.c6a3ec31.chunk.css.map",
     "static/js/2.39eb84ca.chunk.js.LICENSE": "/capac-racer/static/js/2.39eb84ca.chunk.js.LICENSE",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.60e2173a.js",
     "static/js/2.39eb84ca.chunk.js",
     "static/css/main.c6a3ec31.chunk.css",
-    "static/js/main.39ffd39f.chunk.js"
+    "static/js/main.cf694b2d.chunk.js"
   ]
 }
