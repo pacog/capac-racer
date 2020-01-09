@@ -81,13 +81,28 @@ const GameBoardContents = () => {
                 <>
                     <RandomSelectionAnimation
                         player={currentPlayer}
-                        switchRandomEvery={350}
+                        switchRandomEvery={getRandomSpeedForAI(currentPlayer)}
                     />
                 </>
             )}
         </>
     );
 };
+
+function getRandomSpeedForAI(player) {
+    switch (player.levelAI) {
+        case 0:
+            return 800;
+        case 1:
+            return 400;
+        case 2:
+            return 200;
+        case 3:
+            return 100;
+        default:
+            return 75;
+    }
+}
 
 GameBoardContents.propTypes = {};
 
