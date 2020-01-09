@@ -10,6 +10,7 @@ import {
     getPossibleDestinationsForPlayerInScreen,
     getSelectedPosition,
 } from 'store/game/selectors';
+import { doesLineCollide } from 'utils/circuit';
 import { setPlayerCSSVars, getColorForTempLine } from 'utils/playerPainter';
 import { isTouchDevice } from 'utils/is-touch-device';
 
@@ -45,6 +46,14 @@ function MovementPicker({ player, onPositionSelected, onConfirmSelection }) {
     const selectButtonPosition = getSelectButtonPosition(possiblePositions);
 
     const lineToPaint = tempLine || selectedPositionScreen;
+
+    const wouldCollide =
+        lineToPaint &&
+        doesLineCollide(
+            [originalPlayerScreenPosition, lineToPaint],
+            circuit,
+            otherPlayersPosition,
+        );
 
     return (
         <div ref={rootElement}>
@@ -91,6 +100,16 @@ function MovementPicker({ player, onPositionSelected, onConfirmSelection }) {
                         r={2}
                     />
                 </svg>
+            )}
+
+            {lineToPaint && wouldCollide && (
+                <div
+                    className="movement-picker-crash"
+                    style={{
+                        left: lineToPaint.x,
+                        top: lineToPaint.y,
+                    }}
+                />
             )}
         </div>
     );

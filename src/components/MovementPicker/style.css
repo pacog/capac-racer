@@ -32,3 +32,17 @@
     z-index: 12;
     opacity: 0.75;
 }
+
+.movement-picker-crash {
+    --crash-size: 20px;
+    position: absolute;
+    height: var(--crash-size);
+    width: var(--crash-size);
+    margin-left: calc(var(--crash-size) / -2);
+    margin-top: calc(var(--crash-size) / -2);
+    pointer-events: none;
+    background-image: url('./fire.png');
+    background-size: contain;
+
+    z-index: 20;
+}
