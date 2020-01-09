@@ -36,6 +36,7 @@
     cursor: pointer;
     outline: 0;
     border: 1px solid transparent;
+    padding: 0;
 }
 
 .player-selector-style-container:hover {

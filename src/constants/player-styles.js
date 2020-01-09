@@ -37,10 +37,10 @@ export const TURTLE = {
 export const SKULL = {
     id: 'skull',
     name: 'skull',
-    dotColor: '#666666',
+    dotColor: '#9a9e9f',
     dotSize: 12, // px
     round: '50%',
-    trailColor: '#666666',
+    trailColor: '#9a9e9f',
     trailDotsSize: 6, // px
     trailWidth: 2, // px
     icon: `${process.env.PUBLIC_URL}/player-icons/skull.png`,
@@ -61,26 +61,62 @@ export const CLOWN = {
 export const DANCER = {
     id: 'dancer',
     name: 'dancer',
-    dotColor: '#cce019',
+    dotColor: '#5c0eab',
     dotSize: 12, // px
     round: '50%',
-    trailColor: '#cce019',
+    trailColor: '#5c0eab',
     trailDotsSize: 6, // px
     trailWidth: 2, // px
     icon: `${process.env.PUBLIC_URL}/player-icons/dancer.png`,
 };
 
-// export const PANDA = {
-//     id: 'panda',
-//     name: 'panda',
-//     dotColor: '#212121',
-//     dotSize: 12, // px
-//     round: '50%',
-//     trailColor: '#212121',
-//     trailDotsSize: 6, // px
-//     trailWidth: 2, // px
-//     icon: `${process.env.PUBLIC_URL}/player-icons/panda.png`,
-// };
+export const PANDA = {
+    id: 'panda',
+    name: 'panda',
+    dotColor: '#212121',
+    dotSize: 12, // px
+    round: '50%',
+    trailColor: '#212121',
+    trailDotsSize: 6, // px
+    trailWidth: 2, // px
+    icon: `${process.env.PUBLIC_URL}/player-icons/panda.png`,
+};
+
+export const COFFIN = {
+    id: 'coffin',
+    name: 'coffin',
+    dotColor: '#ad7222',
+    dotSize: 12, // px
+    round: '50%',
+    trailColor: '#ad7222',
+    trailDotsSize: 6, // px
+    trailWidth: 2, // px
+    icon: `${process.env.PUBLIC_URL}/player-icons/coffin.png`,
+};
+
+export const BROOM = {
+    id: 'broom',
+    name: 'broom',
+    dotColor: '#c5db0f',
+    dotSize: 12, // px
+    round: '50%',
+    trailColor: '#c5db0f',
+    trailDotsSize: 6, // px
+    trailWidth: 2, // px
+    icon: `${process.env.PUBLIC_URL}/player-icons/broom.png`,
+};
+
+export const SAILBOAT = {
+    id: 'sailboat',
+    name: 'sailboat',
+    dotColor: '#016fdf',
+    dotSize: 12, // px
+    round: '50%',
+    trailColor: '#016fdf',
+    trailDotsSize: 6, // px
+    trailWidth: 2, // px
+    icon: `${process.env.PUBLIC_URL}/player-icons/sailboat.png`,
+};
 
 export const STYLES = {
     [CAR.id]: CAR,
@@ -89,5 +125,8 @@ export const STYLES = {
     [SKULL.id]: SKULL,
     [CLOWN.id]: CLOWN,
     [DANCER.id]: DANCER,
-    // [PANDA.id]: PANDA,
+    [PANDA.id]: PANDA,
+    [COFFIN.id]: COFFIN,
+    [BROOM.id]: BROOM,
+    [SAILBOAT.id]: SAILBOAT,
 };
