@@ -24,7 +24,11 @@ import {
     getSelectedPosition,
 } from 'store/game/selectors';
 import { GAME, MAIN_MENU, LOADING_GAME } from 'constants/screens';
-import { TIME_SHOWING_RANDOM_SELECTOR } from 'constants/ux';
+import {
+    TIME_SHOWING_RANDOM_SELECTOR,
+    WAIT_AFTER_AI_GROUNDED,
+    WAIT_AFTER_AI_COLLISION,
+} from 'constants/ux';
 import waitingForPlayerCounter from 'utils/waitingForPlayerCounter';
 import {
     createFromConfig,
@@ -41,9 +45,6 @@ import { AI, HUMAN } from 'constants/player-types';
 import { chooseNextMovement } from 'utils/ai';
 import aiLevels from 'constants/ai-levels';
 import { isTouchDevice } from 'utils/is-touch-device';
-
-const WAIT_AFTER_AI_COLLISION = 2000;
-const WAIT_AFTER_AI_GROUNDED = 2000;
 
 const notifyGrounded = (nextPlayer) => {
     return (dispatch) => {

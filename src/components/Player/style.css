@@ -20,3 +20,37 @@
     opacity: 1;
     filter: none;
 }
+
+.player-active-indicator {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    margin-left: calc(var(--player-size) / 2);
+    margin-top: calc(var(--player-size) / 2);
+    opacity: 0.7;
+}
+
+.player-active-indicator:after {
+    content: ' ';
+    display: block;
+    width: 32px;
+    height: 32px;
+    margin: 4px;
+    border-radius: 50%;
+    border: 3px solid var(--player-color);
+    border-color: var(--player-color) transparent var(--player-color)
+        transparent;
+    animation: lds-dual-ring 2.4s linear infinite;
+}
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
