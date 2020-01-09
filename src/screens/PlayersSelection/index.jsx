@@ -10,7 +10,10 @@ import {
     toggleRandomizePlayerOrderOnStart,
     limitPlayersTo,
 } from 'store/main-ui/actions';
-import { addRandomPlayer } from 'store/main-ui/async-actions';
+import {
+    addRandomPlayer,
+    selectNewStyleForPlayer,
+} from 'store/main-ui/async-actions';
 import { initGameWithSavedConfig } from 'store/game/async-actions';
 import { circuits } from 'constants/circuits';
 import { CIRCUIT_SELECTION } from 'constants/screens';
@@ -70,6 +73,9 @@ function PlayersSelection({ className }) {
                                 dispatch(
                                     updatePlayer(player.id, { type: newType }),
                                 )
+                            }
+                            onSelectNewStyle={() =>
+                                dispatch(selectNewStyleForPlayer(player))
                             }
                             onLevelAIChange={(newLevelAI) =>
                                 dispatch(

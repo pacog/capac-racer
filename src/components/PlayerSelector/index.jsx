@@ -13,6 +13,7 @@ function PlayerSelector({
     onNameChange,
     onTypeChange,
     onLevelAIChange,
+    onSelectNewStyle,
 }) {
     return (
         <div className="player-selector">
@@ -23,9 +24,13 @@ function PlayerSelector({
                     value={player.name}
                     onChange={(event) => onNameChange(event.target.value)}
                 />
-                <div className="player-selector-style-container">
+                <button
+                    type="button"
+                    className="player-selector-style-container"
+                    onClick={onSelectNewStyle}
+                >
                     <PlayerIcon playerStyle={player.style} />
-                </div>
+                </button>
                 <button
                     type="button"
                     className="button button-small"
@@ -102,6 +107,7 @@ PlayerSelector.propTypes = {
     onRemove: PropTypes.func.isRequired,
     onNameChange: PropTypes.func.isRequired,
     onTypeChange: PropTypes.func.isRequired,
+    onSelectNewStyle: PropTypes.func.isRequired,
     canBeRemoved: PropTypes.bool.isRequired,
 };
 

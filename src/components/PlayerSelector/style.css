@@ -33,6 +33,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    outline: 0;
+    border: 1px solid transparent;
+}
+
+.player-selector-style-container:hover {
+    border-color: var(--orange);
 }
 
 .player-selector-toggle {
