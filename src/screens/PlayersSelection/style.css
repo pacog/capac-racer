@@ -5,6 +5,13 @@
     align-items: center;
 }
 
+@media screen and (max-width: 674px) {
+    .player-selection-content {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+}
+
 .player-selection-add-player-button {
     width: 100%;
 }

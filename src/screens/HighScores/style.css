@@ -1,6 +1,7 @@
 .high-scores .menu-content {
     padding-left: 20px;
     padding-right: 20px;
+    margin: 0 auto;
 }
 .high-scores-circuit-tabs-container {
     width: 100%;
@@ -46,5 +47,6 @@
 
 .score-board-empty {
     color: var(--grey-1);
-    text-align: center;
+    text-align: left;
+    margin-left: 20px;
 }
