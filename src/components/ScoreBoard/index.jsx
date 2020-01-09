@@ -32,6 +32,12 @@ function ScoreBoard({ scores, highlightedScore }) {
                                 turns
                             </span>
                         </div>
+                        <div className="score-board-item-turns">
+                            <span className="score-board-item-value">
+                                {score.date?.toLocaleDateString()}
+                            </span>
+                        </div>
+
                         <div className="score-board-item-time">
                             (
                             <span className="score-board-item-value">

@@ -171,6 +171,7 @@ function handleVictory(player, circuit) {
             realTimeUsed: player.realTimeUsed,
             maxSpeed: player.maxSpeed,
             crashes: player.crashes,
+            path: player.prevPositions,
         };
         if (shouldScoreBeAdded(score, circuit, player)) {
             const newScore = addScore(score, circuit, player);
