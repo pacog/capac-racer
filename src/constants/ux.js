@@ -1,4 +1,4 @@
-export const TIME_FOR_USER_TO_PICK_POSITION = 15999; // ms
+export const TIME_FOR_USER_TO_PICK_POSITION = 30999; // ms
 export const TIME_SHOWING_RANDOM_SELECTOR = 3000; // ms
 export const SWITCH_RANDOM_SELECTION_EVERY = 100; // ms
 export const WAIT_AFTER_AI_COLLISION = 2000;
