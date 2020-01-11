@@ -8,11 +8,11 @@ import {
     removePlayer,
     updatePlayer,
     toggleRandomizePlayerOrderOnStart,
-    limitPlayersTo,
 } from 'store/main-ui/actions';
 import {
     addRandomPlayer,
     selectNewStyleForPlayer,
+    limitPlayersTo,
 } from 'store/main-ui/async-actions';
 import { initGameWithSavedConfig } from 'store/game/async-actions';
 import { circuits } from 'constants/circuits';

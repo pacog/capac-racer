@@ -45,6 +45,7 @@ import { AI, HUMAN } from 'constants/player-types';
 import { chooseNextMovement } from 'utils/ai';
 import aiLevels from 'constants/ai-levels';
 import { isTouchDevice } from 'utils/is-touch-device';
+import { storeSavedPlayers } from 'utils/playersStorage';
 
 const notifyGrounded = (nextPlayer) => {
     return (dispatch) => {
@@ -115,6 +116,12 @@ export const initGameWithSavedConfig = () => {
         const playerOrder = randomizePlayerOrderOnStart
             ? shuffle(state.mainUI.selectedPlayerOrder)
             : state.mainUI.selectedPlayerOrder;
+
+        storeSavedPlayers(
+            state.mainUI.selectedPlayerOrder,
+            state.mainUI.selectedPlayers,
+        );
+
         dispatch(
             initGameWithConfig({
                 players: state.mainUI.selectedPlayers,

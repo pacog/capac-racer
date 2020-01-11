@@ -3,6 +3,7 @@ import { getRandomName } from 'utils/getRandomName';
 import { pickRandomFromArray, keepPickingUntilNotInArray } from 'utils/random';
 import { STYLES } from 'constants/player-styles';
 import { HUMAN } from 'constants/player-types';
+import { getPlayersOrderedBy } from 'utils/players-order';
 import { setSelectedPlayers, updatePlayer } from './actions';
 
 export const addRandomPlayer = () => {
@@ -75,3 +76,18 @@ function isStyleUsedByPlayers(style, players) {
     }
     return false;
 }
+
+export const limitPlayersTo = (numberOfPlayers) => {
+    return (dispatch, getState) => {
+        const state = getState();
+        const players = state.mainUI.selectedPlayers;
+        const order = state.mainUI.selectedPlayerOrder;
+        const orderedPlayers = getPlayersOrderedBy(players, order);
+        dispatch(
+            setSelectedPlayers(
+                orderedPlayers.slice(0, numberOfPlayers),
+                order.slice(0, numberOfPlayers),
+            ),
+        );
+    };
+};

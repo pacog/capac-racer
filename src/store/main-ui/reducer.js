@@ -38,8 +38,6 @@ const selectedPlayers = (state = initialPlayers, action) => {
     switch (action.type) {
         case actionTypes.SET_SELECTED_PLAYERS:
             return action.players;
-        case actionTypes.LIMIT_PLAYERS_TO:
-            return state.slice(0, action.numberOfPlayers);
         case actionTypes.REMOVE_PLAYER:
             return state.filter((player) => player.id !== action.playerId);
         case actionTypes.UPDATE_PLAYER:
@@ -62,8 +60,6 @@ const selectedPlayerOrder = (state = defaultOrder, action) => {
     switch (action.type) {
         case actionTypes.SET_SELECTED_PLAYERS:
             return action.playerOrder;
-        case actionTypes.LIMIT_PLAYERS_TO:
-            return state.slice(0, action.numberOfPlayers);
         case actionTypes.REMOVE_PLAYER:
             return state.filter((playerId) => playerId !== action.playerId);
         default:
