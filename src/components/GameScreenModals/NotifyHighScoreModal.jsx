@@ -22,6 +22,7 @@ const NotifyHighScoreModal = () => {
                 </div>
                 <div className="notify-high-scores-circuit">
                     <ScoreBoard
+                        circuit={circuit}
                         scores={highScoresForCircuit}
                         highlightedScore={highScore}
                     />

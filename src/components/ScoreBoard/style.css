@@ -52,3 +52,10 @@
     font-size: 10px;
     line-height: 12px;
 }
+
+.score-board-item.is-clickable {
+    cursor: pointer;
+}
+.score-board-item.is-clickable:hover {
+    background: var(--darker-blue);
+}

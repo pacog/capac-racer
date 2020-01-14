@@ -38,3 +38,8 @@ export const Score = PropTypes.shape({
     turns: PropTypes.number,
     time: PropTypes.number,
 });
+
+export const Circuit = PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+});

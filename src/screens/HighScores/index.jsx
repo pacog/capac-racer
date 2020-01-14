@@ -53,7 +53,11 @@ function HighScores() {
                 </div>
 
                 <div className="high-scores-circuit">
-                    <ScoreBoard scores={scoresForCurrentCircuit} />
+                    <ScoreBoard
+                        circuit={activeCircuit}
+                        scores={scoresForCurrentCircuit}
+                        canReplay
+                    />
                 </div>
             </div>
 

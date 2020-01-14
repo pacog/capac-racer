@@ -1,3 +1,6 @@
+#root {
+    overflow: hidden;
+}
 .full-screen {
     min-height: 100vh;
     max-height: 100vh;

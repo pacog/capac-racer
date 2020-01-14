@@ -23,7 +23,7 @@ import {
     getOtherPlayers,
     getSelectedPosition,
 } from 'store/game/selectors';
-import { GAME, MAIN_MENU, LOADING_GAME } from 'constants/screens';
+import { GAME, MAIN_MENU, LOADING_GAME, REPLAY_GAME } from 'constants/screens';
 import {
     TIME_SHOWING_RANDOM_SELECTOR,
     WAIT_AFTER_AI_GROUNDED,
@@ -424,3 +424,13 @@ function getNameForPlayerWithoutName(index) {
             return 'John Doe';
     }
 }
+
+export const showReplay = (score, circuit) => {
+    return (dispatch) => {
+        dispatch(setPlayers([{ ...score }]));
+        createFromConfig(circuit).then((circuitInfo) => {
+            dispatch(initGame([score.id], circuitInfo));
+            dispatch(changeScreen(REPLAY_GAME));
+        });
+    };
+};
