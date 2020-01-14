@@ -1,0 +1,1 @@
+-   Unhide pause button when AI is moving and make it work
