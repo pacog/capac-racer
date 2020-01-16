@@ -9,6 +9,7 @@ const defaultState = {
     circuitInfo: null,
     latestHighScore: null, // If somebody achived a high score, it will be stored here until the next game starts
     selectedPosition: null, // When we use a touch interface we can store the position that has been selected before confirming the move
+    raceHistory: null, // Used when replaying a game
 };
 
 const game = (state = defaultState, action) => {
@@ -22,6 +23,13 @@ const game = (state = defaultState, action) => {
                 circuitInfo: { ...action.circuitInfo },
                 latestHighScore: null,
                 selectedPosition: null,
+            };
+        case actionTypes.INIT_REPLAY:
+            return {
+                ...state,
+                gameState: gameStates.START_SCREEN,
+                circuitInfo: { ...action.circuitInfo },
+                raceHistory: action.raceHistory,
             };
         case actionTypes.ADVANCE_PLAYER_TURN:
             return {

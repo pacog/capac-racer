@@ -19,6 +19,7 @@ export const getByCircuitId = (circuitId) => {
         ...score,
         date: new Date(score.date),
         path: JSON.parse(score.path),
+        playerStyle: JSON.parse(score.playerStyle),
     }));
 };
 

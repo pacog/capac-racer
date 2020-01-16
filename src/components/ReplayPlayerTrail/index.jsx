@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
-import { player as playerProp } from 'components/propTypes';
+import { raceHistory as raceHistoryProp } from 'components/propTypes';
 import { projectToScreenPosition } from 'store/map/selectors';
 import { PathLine } from 'react-svg-pathline';
 import { CAR } from 'constants/player-styles';
@@ -11,17 +11,17 @@ import './style.css';
 
 const defaultStyle = CAR;
 
-const ReplayPlayerTrail = ({ player, isActive }) => {
+const ReplayPlayerTrail = ({ raceHistory, isActive }) => {
     const rootElement = useRef(null);
     useEffect(() => {
-        setCSSVars(rootElement.current, defaultStyle);
-    }, []);
+        setCSSVars(rootElement.current, raceHistory.style || defaultStyle);
+    }, [raceHistory]);
     const storeState = useSelector((state) => state);
 
-    if (!player.path.length) {
+    if (!raceHistory.path.length) {
         return '';
     }
-    const points = player.path.map((position) =>
+    const points = raceHistory.path.map((position) =>
         projectToScreenPosition(storeState, position),
     );
 
@@ -47,7 +47,7 @@ const ReplayPlayerTrail = ({ player, isActive }) => {
                 })
                 .map((point) => (
                     <div
-                        key={`${player.id}_${point.x}_${point.y}_${point.turn}`}
+                        key={`${point.x}_${point.y}_${point.turn}`}
                         className="player-trail-point"
                         style={{
                             left: point.x,
@@ -60,7 +60,7 @@ const ReplayPlayerTrail = ({ player, isActive }) => {
 };
 
 ReplayPlayerTrail.propTypes = {
-    player: playerProp.isRequired,
+    raceHistory: raceHistoryProp.isRequired,
     isActive: PropTypes.bool.isRequired,
 };
 

@@ -15,6 +15,7 @@ import {
     advancePlayerTurn,
     setLatestHighScore,
     setSelectedPosition,
+    initReplay,
 } from 'store/game/actions';
 import {
     getAllPlayers,
@@ -429,9 +430,8 @@ function getNameForPlayerWithoutName(index) {
 
 export const showReplay = (score, circuit) => {
     return (dispatch) => {
-        dispatch(setPlayers([{ ...score }]));
         createFromConfig(circuit).then((circuitInfo) => {
-            dispatch(initGame([score.id], circuitInfo));
+            dispatch(initReplay(score, circuitInfo));
             dispatch(changeScreen(REPLAY_GAME));
         });
     };

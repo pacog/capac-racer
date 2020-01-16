@@ -32,6 +32,13 @@ export const player = PropTypes.shape({
     prevPositions: PropTypes.arrayOf(vector2d),
 });
 
+export const raceHistory = PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    style: playerStyle,
+    path: PropTypes.arrayOf(vector2d),
+});
+
 export const Score = PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,

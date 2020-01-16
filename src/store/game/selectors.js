@@ -82,3 +82,7 @@ export const getLatestHighScore = (state) => {
 export const getSelectedPosition = (state) => {
     return state.game.selectedPosition;
 };
+
+export const getRaceHistory = (state) => {
+    return state.game.raceHistory;
+};
