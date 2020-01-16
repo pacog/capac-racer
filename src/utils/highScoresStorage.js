@@ -54,6 +54,7 @@ export const addScore = (score, circuit, player) => {
         ...score,
         id: v4(),
         path: JSON.stringify(score.path),
+        playerStyle: JSON.stringify(score.playerStyle),
     };
     let newScores = circuitScores.slice();
     if (typeof insertBefore === 'number') {

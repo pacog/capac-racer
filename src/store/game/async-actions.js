@@ -163,7 +163,7 @@ export const handleCorrectMovement = (
         const hasPlayerWon = hasCurrentPlayerWon(getState());
         dispatch(moveTo(player.id, newIntendedPosition, timePassed));
         if (hasPlayerWon) {
-            dispatch(handleVictory(player, circuit));
+            dispatch(handleVictory(getCurrentPlayer(getState()), circuit));
             return;
         }
         dispatch(nextTurn());
@@ -180,7 +180,9 @@ function handleVictory(player, circuit) {
             maxSpeed: player.maxSpeed,
             crashes: player.crashes,
             path: player.prevPositions,
+            playerStyle: player.style,
         };
+
         if (shouldScoreBeAdded(score, circuit, player)) {
             const newScore = addScore(score, circuit, player);
             dispatch(setLatestHighScore(newScore));
