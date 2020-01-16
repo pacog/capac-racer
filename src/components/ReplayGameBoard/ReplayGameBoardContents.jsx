@@ -3,8 +3,10 @@ import Grid from 'components/Grid';
 import { useSelector } from 'react-redux';
 import { getRaceHistory } from 'store/game/selectors';
 import ReplayPlayerTrail from 'components/ReplayPlayerTrail';
+import Player from 'components/Player';
+import { player as playerProp } from 'components/propTypes';
 
-const ReplayGameBoardContents = () => {
+const ReplayGameBoardContents = ({ playerInPosition }) => {
     const raceHistory = useSelector((state) => getRaceHistory(state));
     const mapZoom = useSelector((state) => state.map.zoom);
     const gridSize = useSelector((state) => state.map.gridSize);
@@ -20,16 +22,15 @@ const ReplayGameBoardContents = () => {
                 }}
             />
             <Grid zoom={mapZoom} cellSize={gridSize} />
-            {/* <Player
-                        player={player}
-                        isActive={player === currentPlayer}
-                    /> */}
+            <Player player={playerInPosition} isActive />
             <ReplayPlayerTrail raceHistory={raceHistory} isActive />
         </>
     );
 };
 
-ReplayGameBoardContents.propTypes = {};
+ReplayGameBoardContents.propTypes = {
+    playerInPosition: playerProp.isRequired,
+};
 
 ReplayGameBoardContents.defaultProps = {};
 

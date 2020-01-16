@@ -18,8 +18,6 @@ export const getByCircuitId = (circuitId) => {
     return (all[circuitId] || []).map((score) => ({
         ...score,
         date: new Date(score.date),
-        path: JSON.parse(score.path),
-        playerStyle: JSON.parse(score.playerStyle),
     }));
 };
 
@@ -54,8 +52,6 @@ export const addScore = (score, circuit, player) => {
     const scoreToAdd = {
         ...score,
         id: v4(),
-        path: JSON.stringify(score.path),
-        playerStyle: JSON.stringify(score.playerStyle),
     };
     let newScores = circuitScores.slice();
     if (typeof insertBefore === 'number') {

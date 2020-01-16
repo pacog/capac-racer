@@ -4,3 +4,36 @@
     height: 100%;
     background-position: 0 0;
 }
+
+.replay-game-board-turn-selector {
+    position: absolute;
+    width: 80vw;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    background-color: var(--darkest-blue);
+    color: var(--white);
+    padding: 4px 8px;
+    border-radius: 8px;
+}
+.replay-game-board-turn-selector input {
+    display: block;
+    flex: 1;
+}
+.replay-game-board-turn-selector-label {
+    margin-right: 10px;
+}
+.replay-game-board-turn-selector-value {
+    margin-left: 10px;
+}
+
+.game-board-back-button-container {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    border-radius: 4px;
+    padding: 8px;
+    background-color: var(--darkest-blue);
+}
