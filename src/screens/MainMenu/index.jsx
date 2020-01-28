@@ -2,7 +2,12 @@ import React from 'react';
 import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
 import { changeScreen } from 'store/main-ui/actions';
-import { CIRCUIT_SELECTION, HIGH_SCORES, CREDITS } from 'constants/screens';
+import {
+    CIRCUIT_SELECTION,
+    HIGH_SCORES,
+    CREDITS,
+    TUTORIAL,
+} from 'constants/screens';
 import Logo from 'components/Logo';
 
 import './style.css';
@@ -20,19 +25,18 @@ const MainMenu = ({ className }) => {
                     <button
                         className="button"
                         type="button"
-                        disabled
-                        onClick={() => console.log('continue')}
-                    >
-                        Continue game
-                    </button>
-                    <button
-                        className="button"
-                        type="button"
                         onClick={() =>
                             dispatch(changeScreen(CIRCUIT_SELECTION))
                         }
                     >
                         Start new game
+                    </button>
+                    <button
+                        className="button"
+                        type="button"
+                        onClick={() => dispatch(changeScreen(TUTORIAL))}
+                    >
+                        How to play
                     </button>
                     <button
                         className="button"

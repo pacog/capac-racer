@@ -10,6 +10,7 @@ import HighScores from 'screens/HighScores';
 import Credits from 'screens/Credits';
 import LoadingGame from 'screens/LoadingGame';
 import ReplayGame from 'screens/ReplayGame';
+import Tutorial from 'screens/Tutorial';
 
 const TIME_TO_SHOW_FIRST_SCREEN = 500; // ms
 const STATE_CHANGE_TRANSITION_TIME = 300; // ms
@@ -58,6 +59,10 @@ function Router() {
         {
             screenName: screens.REPLAY_GAME,
             Component: ReplayGame,
+        },
+        {
+            screenName: screens.TUTORIAL,
+            Component: Tutorial,
         },
     ];
 
