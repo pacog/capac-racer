@@ -1,0 +1,46 @@
+.tutorial-screen-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tutorial-screen {
+    width: 600px;
+    min-height: 200px;
+    margin: 0 auto;
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.tutorial-screen-image {
+    flex: 1;
+}
+.tutorial-screen-text {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: left;
+}
+.tutorial-screen-text p {
+    width: 100%;
+}
+.tutorial-screen-text-filler {
+    flex: 1;
+    width: 100%;
+    justify-content: center;
+    align-items: stretch;
+    flex-direction: column;
+    display: flex;
+}
+
+.button.tutorial-screen-button {
+    background: var(--red-2);
+    border-radius: 6px;
+    font-size: 18px;
+    padding: 8px 16px;
+    margin-top: 12px;
+    width: 100%;
+}
