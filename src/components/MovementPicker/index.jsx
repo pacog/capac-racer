@@ -1,3 +1,5 @@
+// TODO: complex component, transform to class
+
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
