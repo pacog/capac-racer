@@ -9,6 +9,8 @@ import {
     getOtherPlayersPositionInScreen,
     getPossibleDestinationsForPlayerInScreen,
     getSelectedPosition,
+    getMovedPixelsSinceLastTurn,
+    getPivotForPlayerInScreen,
 } from 'store/game/selectors';
 import { doesLineCollide } from 'utils/circuit';
 import { setPlayerCSSVars, getColorForTempLine } from 'utils/playerPainter';
@@ -19,9 +21,23 @@ import './style.css';
 function MovementPicker({ player, onPositionSelected, onConfirmSelection }) {
     const rootElement = useRef(null);
     const [tempLine, setTempLine] = useState(null);
+
     useEffect(() => {
         setPlayerCSSVars(rootElement.current, player.style);
     }, [player.style]);
+
+    const lastMovement = useSelector((state) =>
+        getMovedPixelsSinceLastTurn(state, player),
+    ) || { x: 0, y: 0 };
+
+    const [translate, setTranslate] = useState(lastMovement);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => setTranslate({ x: 0, y: 0 }));
+
+        return () => clearTimeout(timeout);
+    }, []);
+
     useEffect(() => {
         setTempLine(null);
         return () => setTempLine(null);
@@ -33,6 +49,10 @@ function MovementPicker({ player, onPositionSelected, onConfirmSelection }) {
     );
     const possiblePositions = useSelector((state) =>
         getPossibleDestinationsForPlayerInScreen(state, player),
+    );
+
+    const nextPivot = useSelector((state) =>
+        getPivotForPlayerInScreen(state, player),
     );
 
     const otherPlayersPosition = useSelector((state) =>
@@ -56,7 +76,13 @@ function MovementPicker({ player, onPositionSelected, onConfirmSelection }) {
         );
 
     return (
-        <div ref={rootElement}>
+        <div
+            ref={rootElement}
+            className="movement-picker-container"
+            style={{
+                transform: `translate(${translate.x}px, ${translate.y}px)`,
+            }}
+        >
             {possiblePositions.map((eachPosition) => (
                 // eslint-disable-next-line jsx-a11y/no-static-element-interactions
                 <div
@@ -101,6 +127,16 @@ function MovementPicker({ player, onPositionSelected, onConfirmSelection }) {
                     />
                 </svg>
             )}
+            <svg className="movement-picker-ghost-line">
+                <PathLine
+                    points={[originalPlayerScreenPosition, nextPivot]}
+                    stroke={player.style.trailColor}
+                    strokeWidth={player.style.trailWidth}
+                    strokeDasharray="1"
+                    fill="none"
+                    r={2}
+                />
+            </svg>
 
             {lineToPaint && wouldCollide && (
                 <div

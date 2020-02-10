@@ -5,6 +5,9 @@ import { MAIN_MENU } from 'constants/screens';
 import Logo from 'components/Logo';
 import { changeScreen } from 'store/main-ui/actions';
 import TutorialScreen0 from './TutorialScreen0';
+import TutorialScreen1 from './TutorialScreen1';
+import TutorialScreen2 from './TutorialScreen2';
+import TutorialScreen3 from './TutorialScreen3';
 import './style.css';
 
 function Tutorial({ className }) {
@@ -28,6 +31,19 @@ function Tutorial({ className }) {
             <div className="menu-content transition-from-right tutorial-screen-container">
                 {currentScreen === 0 && (
                     <TutorialScreen0 onNext={goToNextScreen} />
+                )}
+                {currentScreen === 1 && (
+                    <TutorialScreen1 onNext={goToNextScreen} />
+                )}
+                {currentScreen === 2 && (
+                    <TutorialScreen2 onNext={goToNextScreen} />
+                )}
+                {currentScreen === 3 && (
+                    <TutorialScreen3
+                        onNext={() => {
+                            dispatch(changeScreen(MAIN_MENU));
+                        }}
+                    />
                 )}
             </div>
 

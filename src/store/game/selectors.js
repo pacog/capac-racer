@@ -75,6 +75,26 @@ export const getPossibleDestinationsForPlayerInScreen = (state, player) => {
     });
 };
 
+export const getMovedPixelsSinceLastTurn = (state, player) => {
+    if (!player.prevPositions.length || player.prevPositions.length < 2) {
+        return null;
+    }
+    const lastPosition = player.prevPositions[player.prevPositions.length - 2];
+    const moved = {
+        x: lastPosition.x - player.position.x,
+        y: lastPosition.y - player.position.y,
+    };
+    return projectToScreenPosition(state, moved);
+};
+
+export const getPivotForPlayerInScreen = (state, player) => {
+    const positionAfterSpeed = {
+        x: player.position.x + player.speed.x,
+        y: player.position.y + player.speed.y,
+    };
+    return projectToScreenPosition(state, positionAfterSpeed);
+};
+
 export const getLatestHighScore = (state) => {
     return state.game.latestHighScore;
 };

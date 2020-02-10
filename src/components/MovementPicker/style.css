@@ -1,3 +1,9 @@
+.movement-picker-container {
+    position: relative;
+    transition: transform 1s ease-out;
+    z-index: 10;
+}
+
 .movement-picker {
     position: absolute;
     height: var(--player-size);
@@ -18,12 +24,17 @@
     z-index: 11;
 }
 
-.movement-picker-temp-line {
+.movement-picker-temp-line,
+.movement-picker-ghost-line {
     overflow: visible;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 9;
+}
+
+.movement-picker-ghost-line {
+    opacity: 0.5;
 }
 
 .movement-picker-select-button {
