@@ -1,6 +1,9 @@
 .movement-picker-container {
+    --movement-picker-delay: 0.5s;
+    --movement-picker-easing: cubic-bezier(0.83, 0.4, 0.53, 0.855);
     position: relative;
-    transition: transform 1s ease-out;
+    transition: transform var(--movement-picker-delay)
+        var(--movement-picker-easing);
     z-index: 10;
 }
 
@@ -17,6 +20,8 @@
 
     z-index: 7;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s var(--movement-picker-delay)
+        var(--movement-picker-easing);
 }
 
 .movement-picker:hover {

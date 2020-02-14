@@ -1,6 +1,17 @@
 export const getScreenCoordinates = (worldPosition, gridSize, mapZoom) => {
+    const project = (n) => {
+        if (typeof n === 'number') {
+            return n * gridSize * mapZoom;
+        }
+        return n;
+    };
+
     return {
-        x: worldPosition.x * gridSize * mapZoom,
-        y: worldPosition.y * gridSize * mapZoom,
+        x: project(worldPosition.x),
+        y: project(worldPosition.y),
+        dx: project(worldPosition.dx),
+        dy: project(worldPosition.dy),
+        baseX: project(worldPosition.baseX),
+        baseY: project(worldPosition.baseY),
     };
 };

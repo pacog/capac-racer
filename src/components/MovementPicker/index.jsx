@@ -23,6 +23,7 @@ import './style.css';
 function MovementPicker({ player, onPositionSelected, onConfirmSelection }) {
     const rootElement = useRef(null);
     const [tempLine, setTempLine] = useState(null);
+    const [animatePoints, setAnimatePoints] = useState(false);
 
     useEffect(() => {
         setPlayerCSSVars(rootElement.current, player.style);
@@ -35,7 +36,10 @@ function MovementPicker({ player, onPositionSelected, onConfirmSelection }) {
     const [translate, setTranslate] = useState(lastMovement);
 
     useEffect(() => {
-        const timeout = setTimeout(() => setTranslate({ x: 0, y: 0 }));
+        const timeout = setTimeout(() => {
+            setTranslate({ x: 0, y: 0 });
+            setAnimatePoints(true);
+        });
 
         return () => clearTimeout(timeout);
     }, []);
@@ -91,8 +95,11 @@ function MovementPicker({ player, onPositionSelected, onConfirmSelection }) {
                     key={`${player.id}_${eachPosition.position.x}_${eachPosition.position.y}`}
                     className="movement-picker"
                     style={{
-                        left: eachPosition.screen.x,
-                        top: eachPosition.screen.y,
+                        left: eachPosition.screen.baseX,
+                        top: eachPosition.screen.baseY,
+                        transform: animatePoints
+                            ? `translate(${eachPosition.screen.dx}px, ${eachPosition.screen.dy}px)`
+                            : 'translate(0, 0)',
                     }}
                     onClick={() => onPositionSelected(eachPosition.position)}
                     onMouseEnter={() => setTempLine(eachPosition.screen)}

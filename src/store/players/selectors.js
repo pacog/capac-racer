@@ -11,8 +11,12 @@ export const getPossibleDestinations = (player, otherPlayers) => {
     for (let i = -DISTANCE_TO_MOVE; i <= DISTANCE_TO_MOVE; i += 1) {
         for (let j = -DISTANCE_TO_MOVE; j <= DISTANCE_TO_MOVE; j += 1) {
             positions.push({
+                baseX: positionAfterSpeed.x,
+                baseY: positionAfterSpeed.y,
                 x: positionAfterSpeed.x + i,
                 y: positionAfterSpeed.y + j,
+                dx: i,
+                dy: j,
             });
         }
     }
