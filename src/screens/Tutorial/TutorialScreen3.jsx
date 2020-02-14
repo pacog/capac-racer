@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 function TutorialScreen3({ onNext }) {
     return (
         <div className="tutorial-screen">
-            <div className="tutorial-screen-image">Image</div>
+            <div
+                className="tutorial-screen-image  tutorial-screen-image-3
+            "
+            />
             <div className="tutorial-screen-text">
                 <div className="tutorial-screen-text-filler">
                     <p>If you go too fast, you may crash and be penalised.</p>

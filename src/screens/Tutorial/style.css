@@ -14,15 +14,33 @@
 }
 
 .tutorial-screen-image {
-    flex: 1;
+    width: 200px;
+    height: 200px;
+    background-position: center center;
+    background-size: cover;
+    margin-right: 30px;
 }
+
+.tutorial-screen-image-0 {
+    background-image: url(./tut_0.png);
+}
+.tutorial-screen-image-1 {
+    background-image: url(./tut_1.png);
+}
+.tutorial-screen-image-2 {
+    background-image: url(./tut_2.png);
+}
+.tutorial-screen-image-3 {
+    background-image: url(./tut_3.png);
+}
+
 .tutorial-screen-text {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    text-align: left;
+    text-align: center;
 }
 .tutorial-screen-text p {
     width: 100%;
@@ -43,4 +61,5 @@
     padding: 8px 16px;
     margin-top: 12px;
     width: 100%;
+    max-width: 200px;
 }

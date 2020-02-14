@@ -9,10 +9,10 @@
 
 .movement-picker {
     position: absolute;
-    height: var(--player-size);
-    width: var(--player-size);
-    margin-left: calc(var(--player-size) / -2);
-    margin-top: calc(var(--player-size) / -2);
+    height: var(--movement-picker-size);
+    width: var(--movement-picker-size);
+    margin-left: calc(var(--movement-picker-size) / -2);
+    margin-top: calc(var(--movement-picker-size) / -2);
 
     border: 1px solid var(--player-color);
     border-radius: var(--player-border-radius);
@@ -22,6 +22,13 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     transition: transform 0.2s var(--movement-picker-delay)
         var(--movement-picker-easing);
+}
+
+.movement-picker-center {
+    height: var(--movement-picker-size-center);
+    width: var(--movement-picker-size-center);
+    margin-left: calc(var(--movement-picker-size-center) / -2);
+    margin-top: calc(var(--movement-picker-size-center) / -2);
 }
 
 .movement-picker:hover {

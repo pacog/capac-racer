@@ -2,6 +2,7 @@
 
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useRef, useEffect } from 'react';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { PathLine } from 'react-svg-pathline';
@@ -93,7 +94,10 @@ function MovementPicker({ player, onPositionSelected, onConfirmSelection }) {
                 // eslint-disable-next-line jsx-a11y/no-static-element-interactions
                 <div
                     key={`${player.id}_${eachPosition.position.x}_${eachPosition.position.y}`}
-                    className="movement-picker"
+                    className={classNames('movement-picker', {
+                        'movement-picker-center':
+                            !eachPosition.screen.dx && !eachPosition.screen.dy,
+                    })}
                     style={{
                         left: eachPosition.screen.baseX,
                         top: eachPosition.screen.baseY,

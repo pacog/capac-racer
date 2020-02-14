@@ -1,5 +1,7 @@
 .player {
     --player-size: 20px;
+    --movement-picker-size: 16px;
+    --movement-picker-size-center: 20px;
 
     position: absolute;
     height: var(--player-size);
