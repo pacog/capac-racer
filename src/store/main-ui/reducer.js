@@ -76,12 +76,22 @@ const randomizePlayerOrderOnStart = (state = true, action) => {
     }
 };
 
+const playWithTimer = (state = true, action) => {
+    switch (action.type) {
+        case actionTypes.TOGGLE_PLAY_WITH_TIMER:
+            return !state;
+        default:
+            return state;
+    }
+};
+
 const mainUI = combineReducers({
     currentScreen,
     selectedCircuit,
     selectedPlayerOrder,
     selectedPlayers,
     randomizePlayerOrderOnStart,
+    playWithTimer,
 });
 
 export default mainUI;

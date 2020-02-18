@@ -8,6 +8,7 @@ import {
     removePlayer,
     updatePlayer,
     toggleRandomizePlayerOrderOnStart,
+    togglePlayWithTimer,
 } from 'store/main-ui/actions';
 import {
     addRandomPlayer,
@@ -37,6 +38,8 @@ function PlayersSelection({ className }) {
     const randomizePlayerOrderOnStart = useSelector(
         (state) => state.mainUI.randomizePlayerOrderOnStart,
     );
+
+    const playWithTimer = useSelector((state) => state.mainUI.playWithTimer);
 
     const canBeRemoved = players.length > 1;
 
@@ -112,6 +115,16 @@ function PlayersSelection({ className }) {
                             </label>
                         </div>
                     )}
+                    <div className="transition-from-right">
+                        <label className="player-selection-checkbox player-selection-checkbox-last">
+                            <input
+                                type="checkbox"
+                                checked={playWithTimer}
+                                onChange={() => dispatch(togglePlayWithTimer())}
+                            />
+                            Play with timer
+                        </label>
+                    </div>
                 </div>
             </div>
 

@@ -30,3 +30,7 @@
 .player-selection-checkbox input {
     margin-right: 10px;
 }
+
+.player-selection-checkbox-last {
+    margin-bottom: 10px;
+}
