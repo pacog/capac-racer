@@ -21,6 +21,24 @@
     margin-right: 30px;
 }
 
+@media screen and (max-width: 674px) {
+    .tutorial-screen {
+        width: 100%;
+        padding: 0 16px;
+        color: var(--white);
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tutorial-screen-image {
+        margin-right: 0;
+    }
+
+    .tutorial-screen-text {
+        margin-top: 16px;
+    }
+}
+
 .tutorial-screen-image-0 {
     background-image: url(./tut_0.png);
 }
