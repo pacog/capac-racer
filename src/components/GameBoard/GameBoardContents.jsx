@@ -54,6 +54,7 @@ const GameBoardContents = () => {
             {currentPlayer && waitingForPlayerInput && (
                 <>
                     <MovementPicker
+                        key={currentPlayer?.id}
                         player={currentPlayer}
                         onPositionSelected={(position) =>
                             dispatch(

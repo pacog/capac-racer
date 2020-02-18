@@ -76,7 +76,7 @@ const randomizePlayerOrderOnStart = (state = true, action) => {
     }
 };
 
-const playWithTimer = (state = true, action) => {
+const playWithTimer = (state = false, action) => {
     switch (action.type) {
         case actionTypes.TOGGLE_PLAY_WITH_TIMER:
             return !state;

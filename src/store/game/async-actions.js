@@ -74,7 +74,11 @@ export const startTurn = () => {
             return;
         }
 
-        dispatch(setGameState(gameStates.PLAYER_TURN_START_SCREEN));
+        if (getState().mainUI.playWithTimer) {
+            dispatch(setGameState(gameStates.PLAYER_TURN_START_SCREEN));
+        } else {
+            dispatch(startWaitingForPlayerInput());
+        }
     };
 };
 
@@ -94,7 +98,7 @@ export const reduceGroundedAndNextTurn = () => {
 };
 
 export const initGameWithConfig = ({ players, playerOrder, circuit }) => {
-    return (dispatch) => {
+    return (dispatch, getState) => {
         dispatch(changeScreen(LOADING_GAME));
         const playersWithMapPosition = initMapPositionForPlayers({
             players,
@@ -103,6 +107,12 @@ export const initGameWithConfig = ({ players, playerOrder, circuit }) => {
         }).map(fixPlayersWithoutName);
 
         dispatch(setPlayers(playersWithMapPosition));
+
+        // if we don't want timer, set infinite time
+        if (!getState().mainUI.playWithTimer) {
+            waitingForPlayerCounter.setTimeToWait(-1);
+        }
+
         createFromConfig(circuit).then((circuitInfo) => {
             dispatch(initGame(playerOrder, circuitInfo));
             dispatch(changeScreen(GAME));
@@ -255,16 +265,21 @@ export const confirmPositionSelection = (player) => {
 export const startWaitingForPlayerInput = () => {
     return (dispatch, getState) => {
         dispatch(setGameState(gameStates.WAITING_FOR_PLAYER_INPUT));
-        const callbackOnEnd = () => {
-            const selectedPosition = getSelectedPosition(getState());
-            if (selectedPosition) {
-                // If a position was already selected we choose that one
-                const player = getCurrentPlayer(getState());
-                dispatch(handlePlayerMovement(player, selectedPosition));
-                return;
-            }
-            dispatch(showRandomSelectorAndMovePlayer());
-        };
+        let callbackOnEnd = () => {};
+
+        if (getState().mainUI.playWithTimer) {
+            callbackOnEnd = () => {
+                const selectedPosition = getSelectedPosition(getState());
+                if (selectedPosition) {
+                    // If a position was already selected we choose that one
+                    const player = getCurrentPlayer(getState());
+                    dispatch(handlePlayerMovement(player, selectedPosition));
+                    return;
+                }
+                dispatch(showRandomSelectorAndMovePlayer());
+            };
+        }
+
         waitingForPlayerCounter.restart({ callbackOnEnd });
     };
 };

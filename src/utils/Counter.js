@@ -5,6 +5,12 @@ export default class {
         this._elapsedTime = 0;
     }
 
+    setTimeToWait(timeToWait = 10000) {
+        if (timeToWait <= 0) {
+            this._timeToWait = Number.MAX_VALUE;
+        }
+    }
+
     notifyTimePassed(time) {
         if (!this._isRunning) {
             return;

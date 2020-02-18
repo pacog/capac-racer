@@ -17,6 +17,7 @@ const GameBoard = () => {
     const dispatch = useDispatch();
     const currentPlayer = useSelector((state) => getCurrentPlayer(state));
     const waitingForPlayerInput = useSelector(isWaitingForPlayerInput);
+    const playWithTimer = useSelector((state) => state.mainUI.playWithTimer);
     const shouldShowPauseButton =
         !currentPlayer || currentPlayer.type === HUMAN;
 
@@ -25,7 +26,7 @@ const GameBoard = () => {
             <GameBoardCameraHandler currentPlayer={currentPlayer}>
                 <GameBoardContents />
             </GameBoardCameraHandler>
-            {waitingForPlayerInput && (
+            {waitingForPlayerInput && playWithTimer && (
                 <CounterDisplay counterObject={waitingForPlayerCounter} />
             )}
             {shouldShowPauseButton && (
