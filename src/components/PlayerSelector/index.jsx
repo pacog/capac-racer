@@ -90,15 +90,15 @@ function PlayerSelector({
 function getRobotNameByLevel(level) {
     switch (level) {
         case 0:
-            return 'Bender';
+            return 'Super Easy';
         case 1:
-            return 'Wall-E';
+            return 'Very Easy';
         case 2:
-            return 'HAL-9000';
+            return 'Easy';
         case 3:
-            return 'Skynet';
+            return 'Normal';
         default:
-            return 'Rodolfo';
+            return 'Normal';
     }
 }
 
