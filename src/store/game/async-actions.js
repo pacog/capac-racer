@@ -16,6 +16,7 @@ import {
     setLatestHighScore,
     setSelectedPosition,
     initReplay,
+    setSelectedAIMove,
 } from 'store/game/actions';
 import {
     getAllPlayers,
@@ -285,7 +286,7 @@ export const startWaitingForPlayerInput = () => {
 };
 
 export const handleAITurn = (player) => {
-    return (dispatch, getState) => {
+    return async (dispatch, getState) => {
         dispatch(setGameState(gameStates.AI_THINKING_SCREEN));
         const state = getState();
         const circuit = state.game.circuitInfo;
@@ -303,13 +304,15 @@ export const handleAITurn = (player) => {
         );
 
         const minTimeToWaitForPlayer = getMinTimeToWaitForPlayer(player);
-        Promise.all([
+        // eslint-disable-next-line no-unused-vars
+        const result = await Promise.all([
             timeout(minTimeToWaitForPlayer),
             nextMovementPromise,
-        ]).then((results) => {
-            const nextMovement = results[1];
-            dispatch(handlePlayerMovement(player, nextMovement));
-        });
+        ]);
+        const nextMovement = result[1];
+        dispatch(setSelectedAIMove(nextMovement));
+        await timeout(1000);
+        dispatch(handlePlayerMovement(player, nextMovement));
     };
 };
 

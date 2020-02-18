@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 import { PathLine } from 'react-svg-pathline';
-import { player as playerProp } from 'components/propTypes';
+import { player as playerProp, Move } from 'components/propTypes';
 import { projectToScreenPosition } from 'store/map/selectors';
 import {
     getOtherPlayersPositionInScreen,
@@ -15,7 +15,12 @@ import { pickRandomFromArray } from 'utils/random';
 import { SWITCH_RANDOM_SELECTION_EVERY } from 'constants/ux.js';
 import './style.css';
 
-function RandomSelectionAnimation({ player, children, switchRandomEvery }) {
+function RandomSelectionAnimation({
+    player,
+    children,
+    switchRandomEvery,
+    highlightMove,
+}) {
     const rootElement = useRef(null);
     const [tempLine, setTempLine] = useState(null);
     const [highlightedPosition, setHighlightedPosition] = useState(null);
@@ -47,6 +52,9 @@ function RandomSelectionAnimation({ player, children, switchRandomEvery }) {
     const otherPlayersPosition = useSelector((state) =>
         getOtherPlayersPositionInScreen(state, player.id),
     );
+    const moveToHighlight = useSelector((state) =>
+        projectToScreenPosition(state, highlightMove),
+    );
 
     return (
         <div ref={rootElement}>
@@ -68,6 +76,7 @@ function RandomSelectionAnimation({ player, children, switchRandomEvery }) {
                         key={key}
                         className={classNames('random-selection-animation', {
                             'is-highlighted':
+                                !moveToHighlight &&
                                 highlightedPosition &&
                                 getKey(player, highlightedPosition) === key,
                         })}
@@ -79,7 +88,17 @@ function RandomSelectionAnimation({ player, children, switchRandomEvery }) {
                 );
             })}
 
-            {tempLine && (
+            {moveToHighlight && (
+                <div
+                    className="random-selection-animation-highlighted-move"
+                    style={{
+                        left: moveToHighlight.x,
+                        top: moveToHighlight.y,
+                    }}
+                />
+            )}
+
+            {!moveToHighlight && tempLine && (
                 <svg className="random-selection-animation-temp-line">
                     <PathLine
                         points={[originalPlayerScreenPosition, tempLine]}
@@ -108,11 +127,13 @@ RandomSelectionAnimation.propTypes = {
     player: playerProp.isRequired,
     children: PropTypes.node,
     switchRandomEvery: PropTypes.number,
+    highlightMove: Move,
 };
 
 RandomSelectionAnimation.defaultProps = {
     children: null,
     switchRandomEvery: SWITCH_RANDOM_SELECTION_EVERY,
+    highlightMove: null,
 };
 
 export default RandomSelectionAnimation;

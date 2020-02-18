@@ -10,6 +10,7 @@ const defaultState = {
     latestHighScore: null, // If somebody achived a high score, it will be stored here until the next game starts
     selectedPosition: null, // When we use a touch interface we can store the position that has been selected before confirming the move
     raceHistory: null, // Used when replaying a game
+    selectedAIMove: null, // When AI selects a move, we show it briefly before moving the player
 };
 
 const game = (state = defaultState, action) => {
@@ -23,6 +24,7 @@ const game = (state = defaultState, action) => {
                 circuitInfo: { ...action.circuitInfo },
                 latestHighScore: null,
                 selectedPosition: null,
+                selectedAIMove: null,
             };
         case actionTypes.INIT_REPLAY:
             return {
@@ -39,6 +41,7 @@ const game = (state = defaultState, action) => {
                     state.currentTurnPlayerId,
                 ),
                 selectedPosition: null,
+                selectedAIMove: null,
             };
         case actionTypes.SET_GAME_STATE:
             return {
@@ -55,6 +58,11 @@ const game = (state = defaultState, action) => {
             return {
                 ...state,
                 selectedPosition: action.newPosition,
+            };
+        case actionTypes.SET_SELECTED_AI_MOVE:
+            return {
+                ...state,
+                selectedAIMove: action.newMove,
             };
 
         default:

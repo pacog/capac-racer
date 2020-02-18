@@ -12,6 +12,7 @@ import {
     isWaitingForPlayerInput,
     isAnimatingRandomSelection,
     isAnimatingAISelection,
+    getAISelectedMove,
 } from 'store/game/selectors';
 import MovementPicker from 'components/MovementPicker';
 import RandomSelectionAnimation from 'components/RandomSelectionAnimation';
@@ -28,6 +29,7 @@ const GameBoardContents = () => {
     const waitingForPlayerInput = useSelector(isWaitingForPlayerInput);
     const animatingRandomSelection = useSelector(isAnimatingRandomSelection);
     const animatingAISelection = useSelector(isAnimatingAISelection);
+    const AIMove = useSelector(getAISelectedMove);
 
     return (
         <>
@@ -83,6 +85,7 @@ const GameBoardContents = () => {
                     <RandomSelectionAnimation
                         player={currentPlayer}
                         switchRandomEvery={getRandomSpeedForAI(currentPlayer)}
+                        highlightMove={AIMove}
                     />
                 </>
             )}

@@ -6,6 +6,7 @@ export const actionTypes = {
     SET_CIRCUIT: 'SET_CIRCUIT',
     SET_LATEST_HIGH_SCORE: 'SET_LATEST_HIGH_SCORE',
     SET_SELECTED_POSITION: 'SET_SELECTED_POSITION',
+    SET_SELECTED_AI_MOVE: 'SET_SELECTED_AI_MOVE',
 };
 export const initGame = (playerOrder, circuitInfo) => {
     return {
@@ -47,5 +48,12 @@ export const setSelectedPosition = (newPosition) => {
     return {
         type: actionTypes.SET_SELECTED_POSITION,
         newPosition,
+    };
+};
+
+export const setSelectedAIMove = (newMove) => {
+    return {
+        type: actionTypes.SET_SELECTED_AI_MOVE,
+        newMove,
     };
 };

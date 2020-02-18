@@ -50,3 +50,12 @@ export const Circuit = PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
 });
+
+export const Move = PropTypes.shape({
+    x: PropTypes.number,
+    y: PropTypes.number,
+    dx: PropTypes.number,
+    yy: PropTypes.number,
+    baseX: PropTypes.number,
+    baseY: PropTypes.number,
+});

@@ -18,6 +18,10 @@ export const isAnimatingAISelection = (state) => {
     return state.game.gameState === gameStates.AI_THINKING_SCREEN;
 };
 
+export const getAISelectedMove = (state) => {
+    return state.game.selectedAIMove;
+};
+
 export const getCurrentPlayer = (state) => {
     if (!isGameStarted(state)) {
         return null;
