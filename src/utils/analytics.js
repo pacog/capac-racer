@@ -1,4 +1,4 @@
-const log = true;
+const log = false;
 
 /**
  * Tracks a google analytics event
