@@ -48,6 +48,7 @@ import { chooseNextMovement } from 'utils/ai';
 import aiLevels from 'constants/ai-levels';
 import { isTouchDevice } from 'utils/is-touch-device';
 import { storeSavedPlayers } from 'utils/playersStorage';
+import { track } from 'utils/analytics';
 
 const notifyGrounded = (nextPlayer) => {
     return (dispatch) => {
@@ -109,6 +110,23 @@ export const initGameWithConfig = ({ players, playerOrder, circuit }) => {
 
         dispatch(setPlayers(playersWithMapPosition));
 
+        track('init_game', { category: 'game', label: circuit?.id });
+        track('total_players', {
+            category: 'game',
+            value: players.length,
+            label: circuit?.id,
+        });
+        track('human_players', {
+            category: 'game',
+            value: players.filter((player) => player.type === HUMAN).length,
+            label: circuit?.id,
+        });
+        track('ai_players', {
+            category: 'game',
+            value: players.filter((player) => player.type === AI).length,
+            label: circuit?.id,
+        });
+
         // if we don't want timer, set infinite time
         if (!getState().mainUI.playWithTimer) {
             waitingForPlayerCounter.setTimeToWait(-1);
@@ -151,6 +169,11 @@ export const handlePlayerCollision = (
 ) => {
     return (dispatch) => {
         const speed = distance(player.position, newIntendedPosition);
+        track('collision', {
+            category: 'game',
+            label: player?.type === AI ? 'ai' : 'human',
+            value: speed,
+        });
         dispatch(notifyCollision(player.id, speed, timePassed));
         if (player.type === AI) {
             dispatch(setGameState(gameStates.NOTIFY_AI_COLLISION));
@@ -184,6 +207,7 @@ export const handleCorrectMovement = (
 
 function handleVictory(player, circuit) {
     return (dispatch) => {
+        track('victory', { category: 'game' });
         const score = {
             name: player.name,
             date: new Date(),
@@ -197,6 +221,11 @@ function handleVictory(player, circuit) {
 
         if (shouldScoreBeAdded(score, circuit, player)) {
             const newScore = addScore(score, circuit, player);
+            track('high_score', {
+                category: 'game',
+                label: circuit?.id,
+                value: newScore?.turns,
+            });
             dispatch(setLatestHighScore(newScore));
             dispatch(setGameState(gameStates.NOTIFY_HIGH_SCORE));
         } else {
@@ -357,6 +386,7 @@ export const detectAndStoreCheckpoints = (movementLine, circuit) => {
 
 export const finishGame = () => {
     return (dispatch) => {
+        track('finish_game', { category: 'game' });
         dispatch(changeScreen(MAIN_MENU));
         waitingForPlayerCounter.reset();
     };
@@ -448,6 +478,7 @@ function getNameForPlayerWithoutName(index) {
 
 export const showReplay = (score, circuit) => {
     return (dispatch) => {
+        track('show_replay', { category: 'replay' });
         createFromConfig(circuit).then((circuitInfo) => {
             dispatch(initReplay(score, circuitInfo));
             dispatch(changeScreen(REPLAY_GAME));
