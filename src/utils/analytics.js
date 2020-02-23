@@ -1,4 +1,4 @@
-const log = false;
+const log = process.env.NODE_ENV === 'development';
 
 /**
  * Tracks a google analytics event
@@ -15,6 +15,9 @@ export const track = (action, { category, label, value } = {}) => {
         console.log('track', action, category, label, value);
     }
     if (!window.gtag) {
+        return;
+    }
+    if (process.env.NODE_ENV === 'development') {
         return;
     }
     window.gtag('event', action, {
