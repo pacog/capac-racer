@@ -68,7 +68,7 @@ function PlayerSelector({
                         <input
                             value={player.levelAI}
                             type="range"
-                            min="0"
+                            min="1"
                             max="3"
                             step="1"
                             onChange={(event) =>
