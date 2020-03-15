@@ -1,3 +1,4 @@
+/** @type {PlayerStyle} */
 export const CAR = {
     id: 'car',
     name: 'car',
@@ -10,6 +11,7 @@ export const CAR = {
     icon: `${process.env.PUBLIC_URL}/player-icons/car.png`,
 };
 
+/** @type {PlayerStyle} */
 export const ROCKET = {
     id: 'rocket',
     name: 'rocket',
@@ -22,6 +24,7 @@ export const ROCKET = {
     icon: `${process.env.PUBLIC_URL}/player-icons/rocket.png`,
 };
 
+/** @type {PlayerStyle} */
 export const TURTLE = {
     id: 'turtle',
     name: 'turtle',
@@ -34,6 +37,7 @@ export const TURTLE = {
     icon: `${process.env.PUBLIC_URL}/player-icons/turtle.png`,
 };
 
+/** @type {PlayerStyle} */
 export const SKULL = {
     id: 'skull',
     name: 'skull',
@@ -46,6 +50,7 @@ export const SKULL = {
     icon: `${process.env.PUBLIC_URL}/player-icons/skull.png`,
 };
 
+/** @type {PlayerStyle} */
 export const CLOWN = {
     id: 'clown',
     name: 'clown',
@@ -58,6 +63,7 @@ export const CLOWN = {
     icon: `${process.env.PUBLIC_URL}/player-icons/clown.png`,
 };
 
+/** @type {PlayerStyle} */
 export const DANCER = {
     id: 'dancer',
     name: 'dancer',
@@ -70,6 +76,7 @@ export const DANCER = {
     icon: `${process.env.PUBLIC_URL}/player-icons/dancer.png`,
 };
 
+/** @type {PlayerStyle} */
 export const PANDA = {
     id: 'panda',
     name: 'panda',
@@ -82,6 +89,7 @@ export const PANDA = {
     icon: `${process.env.PUBLIC_URL}/player-icons/panda.png`,
 };
 
+/** @type {PlayerStyle} */
 export const COFFIN = {
     id: 'coffin',
     name: 'coffin',
@@ -94,6 +102,7 @@ export const COFFIN = {
     icon: `${process.env.PUBLIC_URL}/player-icons/coffin.png`,
 };
 
+/** @type {PlayerStyle} */
 export const BROOM = {
     id: 'broom',
     name: 'broom',
@@ -106,6 +115,7 @@ export const BROOM = {
     icon: `${process.env.PUBLIC_URL}/player-icons/broom.png`,
 };
 
+/** @type {PlayerStyle} */
 export const SAILBOAT = {
     id: 'sailboat',
     name: 'sailboat',

@@ -10,6 +10,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import addVHCSSVar from './utils/add-vh-css-var';
 
+// @ts-ignore
 window.capac_racer_version = process.env.REACT_APP_VERSION;
 
 ReactDOM.render(<App />, document.getElementById('root'));

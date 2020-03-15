@@ -11,15 +11,14 @@ import Credits from 'screens/Credits';
 import LoadingGame from 'screens/LoadingGame';
 import ReplayGame from 'screens/ReplayGame';
 import Tutorial from 'screens/Tutorial';
+import { getCurrentScreen } from 'store/main-ui/selectors';
 
 const TIME_TO_SHOW_FIRST_SCREEN = 500; // ms
 const STATE_CHANGE_TRANSITION_TIME = 300; // ms
 
 function Router() {
     const [gameReady, setGameReady] = useState(false);
-    const currentScreenName = useSelector(
-        (state) => state.mainUI.currentScreen,
-    );
+    const currentScreenName = useSelector(getCurrentScreen);
     useEffect(() => {
         const timeout = setTimeout(() => {
             setGameReady(true);
@@ -71,7 +70,8 @@ function Router() {
             {allScreens
                 .filter(
                     ({ screenName }) =>
-                        gameReady && currentScreenName === screenName,
+                        gameReady &&
+                        currentScreenName === screenName.toString(),
                 )
                 .map(({ screenName, Component }) => (
                     <CSSTransition
@@ -79,7 +79,7 @@ function Router() {
                         timeout={STATE_CHANGE_TRANSITION_TIME}
                         classNames="fade"
                     >
-                        <Component />
+                        <Component className="" />
                     </CSSTransition>
                 ))}
         </TransitionGroup>

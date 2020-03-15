@@ -24,6 +24,7 @@ const selectedCircuit = (state = null, action) => {
     }
 };
 
+/** @type {Player[]} */
 const initialPlayers = [
     {
         id: 'DEFAULT_PLAYER',
@@ -85,6 +86,9 @@ const playWithTimer = (state = false, action) => {
     }
 };
 
+/**
+ * @type {import('react').Reducer<import('redux').CombinedState<MainUIState>, import('redux').AnyAction>}
+ */
 const mainUI = combineReducers({
     currentScreen,
     selectedCircuit,

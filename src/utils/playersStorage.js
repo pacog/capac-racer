@@ -3,6 +3,7 @@ export const storeSavedPlayers = (playerOrder, players) => {
         return;
     }
     const playersInfoToStore = {
+        // @ts-ignore
         version: window.capac_racer_version,
         playerOrder,
         players,

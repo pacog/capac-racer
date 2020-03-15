@@ -29,7 +29,8 @@
         "build": "REACT_APP_VERSION=$npm_package_version react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "e2e": "jest -c e2e/jest.config.js"
+        "e2e": "jest -c e2e/jest.config.js",
+        "typecheck": "tsc --baseUrl ./src --jsx react -allowJs -checkJs -noEmit -allowSyntheticDefaultImports -moduleResolution node -target ES6 src/index.js"
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -61,6 +62,7 @@
         "jest-puppeteer": "^4.4.0",
         "prettier": "^1.19.1",
         "puppeteer": "^2.1.1",
-        "source-map-explorer": "^2.2.1"
+        "source-map-explorer": "^2.2.1",
+        "typescript": "^3.8.3"
     }
 }
