@@ -83,7 +83,10 @@ function updateCircuitScores(circuit, newScores) {
         [circuit.id]: newScores,
     };
     try {
-        localStorage.setItem(LOCAL_STORAGE_ID, JSON.stringify(newAll, 2));
+        localStorage.setItem(
+            LOCAL_STORAGE_ID,
+            JSON.stringify(newAll, undefined, 2),
+        );
     } catch (e) {
         // eslint-disable-next-line no-console
         console.warn('error saving high score', e);

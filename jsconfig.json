@@ -2,7 +2,8 @@
     "compilerOptions": {
         "checkJs": true,
         "jsx": "react",
-        "baseUrl": "./src"
+        "baseUrl": "./src",
+        "lib": ["dom", "esnext"]
     },
     "exclude": ["node_modules", "**/node_modules/*"]
 }

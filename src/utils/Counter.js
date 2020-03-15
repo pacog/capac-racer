@@ -17,7 +17,7 @@ export default class {
         }
         this._elapsedTime += time;
         if (this._elapsedTime >= this._timeToWait) {
-            this._callbackOnEnd(this._timeToWait - this._elapsedTime);
+            this._callbackOnEnd();
             this._isRunning = false;
         }
     }

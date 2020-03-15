@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // Based on https://stackoverflow.com/a/4819886/3493388
 function checkTouchDevice() {
     const prefixes = ' -webkit- -moz- -o- -ms- '.split(' ');
@@ -8,7 +9,7 @@ function checkTouchDevice() {
 
     if (
         'ontouchstart' in window ||
-        // eslint-disable-next-line no-undef
+        // @ts-ignore
         (window.DocumentTouch && document instanceof DocumentTouch)
     ) {
         return true;

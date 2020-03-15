@@ -21,12 +21,17 @@ import { CIRCUIT_SELECTION } from 'constants/screens';
 import { getOrderedPlayers } from 'store/game/selectors';
 import PlayerSelector from 'components/PlayerSelector';
 import Logo from 'components/Logo';
+import {
+    getSelectedCircuit,
+    shouldRandomizePlayerOrderOnStart,
+    shouldPlayWithTimer,
+} from 'store/main-ui/selectors';
 import './style.css';
 
 function PlayersSelection({ className }) {
     const dispatch = useDispatch();
     const players = useSelector(getOrderedPlayers);
-    const circuitId = useSelector((state) => state.mainUI.selectedCircuit);
+    const circuitId = useSelector(getSelectedCircuit);
     const circuit = circuits[circuitId];
 
     useEffect(() => {
@@ -36,10 +41,10 @@ function PlayersSelection({ className }) {
     }, [players, circuit, dispatch]);
 
     const randomizePlayerOrderOnStart = useSelector(
-        (state) => state.mainUI.randomizePlayerOrderOnStart,
+        shouldRandomizePlayerOrderOnStart,
     );
 
-    const playWithTimer = useSelector((state) => state.mainUI.playWithTimer);
+    const playWithTimer = useSelector(shouldPlayWithTimer);
 
     const canBeRemoved = players.length > 1;
 
