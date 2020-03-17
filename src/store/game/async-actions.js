@@ -24,6 +24,7 @@ import {
     hasCurrentPlayerWon,
     getOtherPlayers,
     getSelectedPosition,
+    getCircuitInfo,
 } from 'store/game/selectors';
 import { GAME, MAIN_MENU, LOADING_GAME, REPLAY_GAME } from 'constants/screens';
 import {
@@ -99,6 +100,15 @@ export const reduceGroundedAndNextTurn = () => {
     };
 };
 
+/**
+ * Inits the game with a certain config
+ *
+ * @param {Object} config
+ * @param {Player[]} config.players
+ * @param {string[]} config.playerOrder
+ * @param {Circuit} config.circuit
+ * @returns {(dispatch: any, getState: any) => void}
+ */
 export const initGameWithConfig = ({ players, playerOrder, circuit }) => {
     return (dispatch, getState) => {
         dispatch(changeScreen(LOADING_GAME));
@@ -141,6 +151,7 @@ export const initGameWithConfig = ({ players, playerOrder, circuit }) => {
 
 export const initGameWithSavedConfig = () => {
     return (dispatch, getState) => {
+        /** @type {RootState} */
         const state = getState();
         const { randomizePlayerOrderOnStart } = state.mainUI;
         const playerOrder = randomizePlayerOrderOnStart
@@ -239,7 +250,7 @@ const handlePlayerMovement = (player, newIntendedPosition) => {
         const timePassed = waitingForPlayerCounter.getTimePassed();
         waitingForPlayerCounter.stop();
         const state = getState();
-        const circuit = state.game.circuitInfo;
+        const circuit = getCircuitInfo(state);
         const mapZoom = state.map.zoom;
         const mapGridSize = state.map.gridSize;
         const canMoveThere = checkIfPlayerCanMove({
@@ -318,7 +329,7 @@ export const handleAITurn = (player) => {
     return async (dispatch, getState) => {
         dispatch(setGameState(gameStates.AI_THINKING_SCREEN));
         const state = getState();
-        const circuit = state.game.circuitInfo;
+        const circuit = getCircuitInfo(state);
         const otherPlayers = getAllPlayers(getState()).filter(
             (otherPlayer) => otherPlayer.id !== player.id,
         );

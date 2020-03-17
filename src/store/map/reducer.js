@@ -14,6 +14,9 @@ const gridSize = (state = 10, action) => {
     }
 };
 
+/**
+ * @type {import('react').Reducer<import('redux').CombinedState<MapState>, import('redux').AnyAction>}
+ */
 const map = combineReducers({
     zoom,
     gridSize,

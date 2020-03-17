@@ -1,6 +1,7 @@
 import * as gameStates from 'constants/game-states';
 import { actionTypes } from './actions';
 
+/** @type {GameState} */
 const defaultState = {
     gameState: gameStates.NOT_STARTED,
     prevGameState: null, // We store one game state previous to the current so we can go back after pausing
@@ -13,6 +14,12 @@ const defaultState = {
     selectedAIMove: null, // When AI selects a move, we show it briefly before moving the player
 };
 
+/**
+ *
+ * @param {GameState} state
+ * @param {import('redux').AnyAction} action
+ * @returns {GameState}
+ */
 const game = (state = defaultState, action) => {
     switch (action.type) {
         case actionTypes.INIT_GAME:

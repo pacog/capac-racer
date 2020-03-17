@@ -11,6 +11,7 @@ import {
     isInsideViewport,
     getClosestPointInsideViewport,
 } from 'utils/vector2d';
+import { getCircuitInfo } from 'store/game/selectors';
 import './style.css';
 
 const PADDING_FOR_VIEWPORT = { x: 120, y: 100 };
@@ -20,7 +21,7 @@ const GameBoardCameraHandler = ({ children, currentPlayer }) => {
     const [boardSize, setBoardSize] = useState(null);
     const [isDragging, setIsDragging] = useState(false);
     const [dragStart, setDragStart] = useState(null);
-    const circuitInfo = useSelector((state) => state.game.circuitInfo);
+    const circuitInfo = useSelector(getCircuitInfo);
     const playerScreenPosition = useSelector((state) =>
         projectToScreenPosition(state, currentPlayer.position),
     );

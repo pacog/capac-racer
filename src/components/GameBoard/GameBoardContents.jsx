@@ -13,19 +13,21 @@ import {
     isAnimatingRandomSelection,
     isAnimatingAISelection,
     getAISelectedMove,
+    getCircuitInfo,
 } from 'store/game/selectors';
 import MovementPicker from 'components/MovementPicker';
 import RandomSelectionAnimation from 'components/RandomSelectionAnimation';
 import PlayerTrail from 'components/PlayerTrail';
+import { getZoom, getGridSize } from 'store/map/selectors';
 import './style.css';
 
 const GameBoardContents = () => {
     const dispatch = useDispatch();
-    const players = useSelector((state) => getAllPlayers(state));
-    const currentPlayer = useSelector((state) => getCurrentPlayer(state));
-    const mapZoom = useSelector((state) => state.map.zoom);
-    const gridSize = useSelector((state) => state.map.gridSize);
-    const circuitInfo = useSelector((state) => state.game.circuitInfo);
+    const players = useSelector(getAllPlayers);
+    const currentPlayer = useSelector(getCurrentPlayer);
+    const mapZoom = useSelector(getZoom);
+    const gridSize = useSelector(getGridSize);
+    const circuitInfo = useSelector(getCircuitInfo);
     const waitingForPlayerInput = useSelector(isWaitingForPlayerInput);
     const animatingRandomSelection = useSelector(isAnimatingRandomSelection);
     const animatingAISelection = useSelector(isAnimatingAISelection);

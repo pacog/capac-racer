@@ -2,15 +2,19 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { finishGame } from 'store/game/async-actions';
-import { getCurrentPlayer, getLatestHighScore } from 'store/game/selectors';
+import {
+    getCurrentPlayer,
+    getLatestHighScore,
+    getCircuitInfo,
+} from 'store/game/selectors';
 import ScoreBoard from 'components/ScoreBoard';
 import { getByCircuitId } from 'utils/highScoresStorage';
 
 const NotifyHighScoreModal = () => {
     const dispatch = useDispatch();
-    const currentPlayer = useSelector((state) => getCurrentPlayer(state));
-    const highScore = useSelector((state) => getLatestHighScore(state));
-    const circuit = useSelector((state) => state.game.circuitInfo);
+    const currentPlayer = useSelector(getCurrentPlayer);
+    const highScore = useSelector(getLatestHighScore);
+    const circuit = useSelector(getCircuitInfo);
     const highScoresForCircuit = getByCircuitId(circuit.id);
 
     return (

@@ -14,6 +14,7 @@ import {
     getSelectedPosition,
     getMovedPixelsSinceLastTurn,
     getPivotForPlayerInScreen,
+    getCircuitInfo,
 } from 'store/game/selectors';
 import { doesLineCollide } from 'utils/circuit';
 import { setPlayerCSSVars, getColorForTempLine } from 'utils/playerPainter';
@@ -50,7 +51,7 @@ function MovementPicker({ player, onPositionSelected, onConfirmSelection }) {
         return () => setTempLine(null);
     }, [player]);
 
-    const circuit = useSelector((state) => state.game.circuitInfo);
+    const circuit = useSelector(getCircuitInfo);
     const originalPlayerScreenPosition = useSelector((state) =>
         projectToScreenPosition(state, player.position),
     );

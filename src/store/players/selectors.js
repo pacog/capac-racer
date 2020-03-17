@@ -2,6 +2,11 @@ import { isEqual } from 'utils/vector2d';
 
 const DISTANCE_TO_MOVE = 1;
 
+/**
+ * @param {Player} player
+ * @param {Player[]} otherPlayers
+ * @returns {Point[]}
+ */
 export const getPossibleDestinations = (player, otherPlayers) => {
     const positionAfterSpeed = {
         x: player.position.x + player.speed.x,

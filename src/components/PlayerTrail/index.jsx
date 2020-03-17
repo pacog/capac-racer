@@ -15,7 +15,7 @@ const PlayerTrail = ({ player, isActive }) => {
     }, [player.style]);
     const storeState = useSelector((state) => state);
     if (!player.prevPositions.length) {
-        return '';
+        return <></>;
     }
     const points = player.prevPositions.map((position) =>
         projectToScreenPosition(storeState, position),

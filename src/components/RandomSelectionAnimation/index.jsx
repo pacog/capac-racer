@@ -9,6 +9,7 @@ import { projectToScreenPosition } from 'store/map/selectors';
 import {
     getOtherPlayersPositionInScreen,
     getPossibleDestinationsForPlayerInScreen,
+    getCircuitInfo,
 } from 'store/game/selectors';
 import { setPlayerCSSVars, getColorForTempLine } from 'utils/playerPainter';
 import { pickRandomFromArray } from 'utils/random';
@@ -32,7 +33,7 @@ function RandomSelectionAnimation({
         return () => setTempLine(null);
     }, [player]);
 
-    const circuit = useSelector((state) => state.game.circuitInfo);
+    const circuit = useSelector(getCircuitInfo);
     const originalPlayerScreenPosition = useSelector((state) =>
         projectToScreenPosition(state, player.position),
     );

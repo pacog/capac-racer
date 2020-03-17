@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from 'components/Grid';
 import { useSelector } from 'react-redux';
-import { getRaceHistory } from 'store/game/selectors';
+import { getRaceHistory, getCircuitInfo } from 'store/game/selectors';
 import ReplayPlayerTrail from 'components/ReplayPlayerTrail';
 import Player from 'components/Player';
 import { player as playerProp } from 'components/propTypes';
@@ -10,7 +10,7 @@ const ReplayGameBoardContents = ({ playerInPosition }) => {
     const raceHistory = useSelector((state) => getRaceHistory(state));
     const mapZoom = useSelector((state) => state.map.zoom);
     const gridSize = useSelector((state) => state.map.gridSize);
-    const circuitInfo = useSelector((state) => state.game.circuitInfo);
+    const circuitInfo = useSelector(getCircuitInfo);
 
     return (
         <>

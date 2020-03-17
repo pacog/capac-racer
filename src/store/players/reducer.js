@@ -8,6 +8,9 @@ import {
 } from 'utils/player';
 import { actionTypes } from './actions';
 
+/**
+ * @type {import('react').Reducer<import('redux').CombinedState<PlayersState>, import('redux').AnyAction>}
+ */
 const players = combineReducers({
     byId,
 });

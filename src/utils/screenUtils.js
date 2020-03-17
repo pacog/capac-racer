@@ -1,3 +1,10 @@
+/**
+ *
+ * @param {Point} worldPosition
+ * @param {number} gridSize
+ * @param {number} mapZoom
+ * @returns {Point}
+ */
 export const getScreenCoordinates = (worldPosition, gridSize, mapZoom) => {
     const project = (n) => {
         if (typeof n === 'number') {
