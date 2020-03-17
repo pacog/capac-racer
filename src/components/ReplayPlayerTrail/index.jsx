@@ -19,7 +19,7 @@ const ReplayPlayerTrail = ({ raceHistory, isActive }) => {
     const storeState = useSelector((state) => state);
 
     if (!raceHistory.path.length) {
-        return '';
+        return <></>;
     }
     const points = raceHistory.path.map((position) =>
         projectToScreenPosition(storeState, position),

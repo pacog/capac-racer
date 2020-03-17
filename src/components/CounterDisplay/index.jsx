@@ -10,10 +10,12 @@ function CounterDisplay({ counterObject }) {
 
     const animate = () => {
         setTimeLeft(counterObject.getTimeLeft());
+        // @ts-ignore
         requestRef.current = requestAnimationFrame(animate);
     };
 
     React.useEffect(() => {
+        // @ts-ignore
         requestRef.current = requestAnimationFrame(animate);
         return () => cancelAnimationFrame(requestRef.current);
         // eslint-disable-next-line react-hooks/exhaustive-deps

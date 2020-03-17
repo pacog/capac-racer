@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import gridImg from 'assets/grid.png';
+// @ts-ignore
+import gridImg from './grid.png';
 import './style.css';
 
 const GRID_IMAGE_SIZE = 60; // px

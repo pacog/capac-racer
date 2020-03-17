@@ -51,6 +51,7 @@
         "@types/expect-puppeteer": "^4.4.0",
         "@types/jest-environment-puppeteer": "^4.3.1",
         "@types/puppeteer": "^2.0.0",
+        "@types/react": "^16.9.23",
         "eslint": "^6.8.0",
         "eslint-config-airbnb": "^18.0.1",
         "eslint-config-prettier": "^6.9.0",

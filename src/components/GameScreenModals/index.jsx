@@ -39,7 +39,7 @@ const GameScreenModals = () => {
         case gameStates.AI_THINKING_SCREEN:
             return <AIThinkingModal />;
         default:
-            return '';
+            return <></>;
     }
 };
 
