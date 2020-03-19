@@ -106,7 +106,7 @@ export const reduceGroundedAndNextTurn = () => {
  * @param {Object} config
  * @param {Player[]} config.players
  * @param {string[]} config.playerOrder
- * @param {Circuit} config.circuit
+ * @param {CircuitConfig} config.circuit
  * @returns {(dispatch: any, getState: any) => void}
  */
 export const initGameWithConfig = ({ players, playerOrder, circuit }) => {

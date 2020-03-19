@@ -5,6 +5,7 @@ import {
     getCurrentPlayer,
     isWaitingForPlayerInput,
 } from 'store/game/selectors';
+import { shouldPlayWithTimer } from 'store/main-ui/selectors';
 import { pause } from 'store/game/async-actions';
 import CounterDisplay from 'components/CounterDisplay';
 import waitingForPlayerCounter from 'utils/waitingForPlayerCounter';
@@ -15,9 +16,9 @@ import './style.css';
 
 const GameBoard = () => {
     const dispatch = useDispatch();
-    const currentPlayer = useSelector((state) => getCurrentPlayer(state));
+    const currentPlayer = useSelector(getCurrentPlayer);
     const waitingForPlayerInput = useSelector(isWaitingForPlayerInput);
-    const playWithTimer = useSelector((state) => state.mainUI.playWithTimer);
+    const playWithTimer = useSelector(shouldPlayWithTimer);
     const shouldShowPauseButton =
         !currentPlayer || currentPlayer.type === HUMAN;
 

@@ -35,9 +35,9 @@
  */
 
 /**
- * Circuit
+ * Circuit config
  *
- * @typedef {object} Circuit
+ * @typedef {object} CircuitConfig
  * @property {string} id
  * @property {string} name
  * @property {string} collisionImg Path to the png image that will say which pixels are collision or not
@@ -50,6 +50,26 @@
  */
 
 /**
+ * Circuit
+ *
+ * @typedef {object} Circuit
+ * @property {string} id
+ * @property {string} name
+ * @property {string} collisionImg Path to the png image that will say which pixels are collision or not
+ * @property {string} bgImg Path to the background png image
+ * @property {string} bgImg Path to the background png image
+ * @property {string[]} checkpoints List of images used to detect that the players is passing through every checkpoint.
+ * @property {number} maxPlayers Max players allowed for this circuit
+ * @property {Point[]} startingPositions Staring position for each player
+ * @property {Point} initialSpeed Initial speed for all players
+ * @property {number} width
+ * @property {number} height
+ * @property {PixelGetter} collisionPixelGetter
+ * @property {PixelGetter[]} checkpointPixelGetters
+ * @property {Point[]} centerOfCheckpoints
+ */
+
+/**
  * Point
  *
  * @typedef {object} Point
@@ -59,6 +79,47 @@
  * @property {number} [dy]
  * @property {number} [baseX]
  * @property {number} [baseY]
+ */
+
+/**
+ * Line
+ *
+ * @typedef {Point[]} Line
+ */
+
+/**
+ * Pixel
+ *
+ * @typedef {object} Pixel
+ * @property {number} r
+ * @property {number} g
+ * @property {number} b
+ * @property {number} a
+ */
+
+/**
+ * Size
+ *
+ * @typedef {object} Size
+ * @property {number} width
+ * @property {number} height
+ */
+
+/**
+ * Viewport
+ *
+ * @typedef {object} Viewport
+ * @property {Point} topLeft
+ * @property {Size} size
+ */
+
+/**
+ * Pixel getter: object that allows us to get pixels from a certain image
+ *
+ * @typedef {object} PixelGetter
+ * @property {number} width
+ * @property {number} height
+ * @property {(x: number, y:number) => Pixel} getPixel
  */
 
 // State
@@ -101,7 +162,7 @@
  * @property {Symbol} prevGameState We store one game state previous to the current so we can go back after pausing
  * @property {string[]} players
  * @property {string} currentTurnPlayerId
- * @property {Circuit} circuitInfo
+ * @property {CircuitConfig} circuitInfo
  * @property {boolean} latestHighScore If somebody achived a high score, it will be stored here until the next game starts
  * @property {Point} selectedPosition When we use a touch interface we can store the position that has been selected before confirming the move
  * @property {boolean} raceHistory Used when replaying a game

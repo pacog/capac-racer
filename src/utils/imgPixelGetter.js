@@ -1,3 +1,9 @@
+/**
+ * Creates a pixel geter object that can access pixels of an image
+ *
+ * @param {HTMLImageElement} img
+ * @returns {PixelGetter}
+ */
 export const createFromImage = (img) => {
     const canvas = document.createElement('canvas');
     const { width, height } = img;

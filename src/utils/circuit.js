@@ -13,42 +13,38 @@ import { range } from 'utils/range';
 import { hasContent } from 'utils/pixel';
 import { getScreenCoordinates } from 'utils/screenUtils';
 
-export const createFromConfig = (config) => {
-    const result = {
+/**
+ *
+ * @param {CircuitConfig} config
+ * @returns {Promise<Circuit>}
+ */
+export const createFromConfig = async (config) => {
+    const collisionImg = await loadImage(config.collisionImg);
+    const collisionPixelGetter = await createPixelGetterFromImage(collisionImg);
+    const loadedCheckpointImages = await Promise.all(
+        config.checkpoints.map((checkpointImg) => loadImage(checkpointImg)),
+    );
+    const checkpointPixelGetters = await Promise.all(
+        loadedCheckpointImages.map((checkpointImage) =>
+            createPixelGetterFromImage(checkpointImage),
+        ),
+    );
+    return {
         ...config,
+        width: collisionImg.width,
+        height: collisionImg.height,
+        collisionPixelGetter,
+        checkpointPixelGetters,
+        centerOfCheckpoints: checkpointPixelGetters.map(getCenterOfCheckpoint),
     };
-
-    return loadImage(config.collisionImg)
-        .then((collisionImg) => {
-            result.width = collisionImg.width;
-            result.height = collisionImg.height;
-            return createPixelGetterFromImage(collisionImg);
-        })
-        .then((collisionPixelGetter) => {
-            result.collisionPixelGetter = collisionPixelGetter;
-
-            return Promise.all(
-                config.checkpoints.map((checkpointImg) =>
-                    loadImage(checkpointImg),
-                ),
-            );
-        })
-        .then((loadedCheckpointImages) => {
-            return Promise.all(
-                loadedCheckpointImages.map((checkpointImage) =>
-                    createPixelGetterFromImage(checkpointImage),
-                ),
-            );
-        })
-        .then((checkpointPixelGetters) => {
-            result.checkpointPixelGetters = checkpointPixelGetters;
-            result.centerOfCheckpoints = checkpointPixelGetters.map((cp) =>
-                getCenterOfCheckpoint(cp),
-            );
-            return result;
-        });
 };
 
+/**
+ *
+ * @param {Line} line
+ * @param {Circuit} circuit
+ * @param {Point[]} otherPlayersPosition
+ */
 export const doesLineCollide = (line, circuit, otherPlayersPosition) => {
     const pixelsToCheck = getPixelsToCheck(line).map(round);
     if (
@@ -68,6 +64,16 @@ export const doesLineCollide = (line, circuit, otherPlayersPosition) => {
     return false;
 };
 
+/**
+ * Checks if a player can move between two points. Will return false if it collides with the circuit or other players, true otherwise
+ * @param {Object} params
+ * @param {Point} params.from
+ * @param {Point} params.to
+ * @param {Circuit} params.circuit
+ * @param {Player[]} params.otherPlayers
+ * @param {number} params.zoom
+ * @param {number} params.gridSize
+ */
 export const checkIfPlayerCanMove = ({
     from,
     to,
@@ -87,6 +93,13 @@ export const checkIfPlayerCanMove = ({
     return !doesLineCollide(movementLine, circuit, otherPlayersPosition);
 };
 
+/**
+ * Gets the checkpoints visited in a line of movement.
+ *
+ * @param {Line} line
+ * @param {Circuit} circuit
+ * @returns {number[]} The indexes of checkpoints that have been visited
+ */
 export const getCheckpointsVisitedInLine = (line, circuit) => {
     const pixelsToCheck = getPixelsToCheck(line).map(round);
     return circuit.checkpointPixelGetters
@@ -98,6 +111,16 @@ export const getCheckpointsVisitedInLine = (line, circuit) => {
         .map(({ index }) => index);
 };
 
+/**
+ *
+ * @param {Object} params
+ * @param {Point} params.from
+ * @param {Point} params.to
+ * @param {Circuit} params.circuit
+ * @param {number} params.zoom
+ * @param {number} params.gridSize
+ * @returns {number[]} The indexes of checkpoints that have been visited
+ */
 export const getCheckpointsInMovement = ({
     from,
     to,
@@ -112,6 +135,14 @@ export const getCheckpointsInMovement = ({
     return getCheckpointsVisitedInLine(movementLine, circuit);
 };
 
+/**
+ * Gets the distance from a player to the next checkpoint
+ * @param {Object} params
+ * @param {Player} params.player
+ * @param {Circuit} params.circuit
+ * @param {number} params.gridSize
+ * @param {number} params.zoom
+ */
 export const getDistanceToNextCheckpoint = ({
     player,
     circuit,
@@ -135,6 +166,10 @@ export const getDistanceToNextCheckpoint = ({
     return 0;
 };
 
+/**
+ * Gets the maximum distance between two consecutive checkpoints in a circuit
+ * @param {Circuit} circuit
+ */
 export const getMaxCheckpointDistance = (circuit) => {
     const checkpoints = circuit.centerOfCheckpoints;
     const distances = checkpoints.map((cp, index) => {
@@ -145,6 +180,10 @@ export const getMaxCheckpointDistance = (circuit) => {
     }, 0);
 };
 
+/**
+ * @param {Point[]} pixelsToCheck
+ * @param {PixelGetter} imagePixelGetter
+ */
 function doesAnyPixelCollideInImage(pixelsToCheck, imagePixelGetter) {
     for (const pixelToCheck of pixelsToCheck) {
         const pixelInCollisionMap = imagePixelGetter.getPixel(
@@ -158,6 +197,9 @@ function doesAnyPixelCollideInImage(pixelsToCheck, imagePixelGetter) {
     return false;
 }
 
+/**
+ * @param {Line} line
+ */
 function getPixelsToCheck([start, end]) {
     const lineLength = distance(start, end);
     const nPixelsToCheck = Math.ceil(lineLength * 2);
@@ -173,6 +215,10 @@ function getPixelsToCheck([start, end]) {
     return result;
 }
 
+/**
+ * @param {PixelGetter} checkpoint
+ * @returns {Point}
+ */
 function getCenterOfCheckpoint(checkpoint) {
     const pixelsToCheck = [];
     for (let i = 0; i < checkpoint.width; i += 1) {

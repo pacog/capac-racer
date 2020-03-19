@@ -1,3 +1,4 @@
+/** @type {Object.<string, CircuitConfig>} */
 export const circuits = {
     mouth: {
         id: 'mouth',
