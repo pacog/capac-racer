@@ -51,6 +51,9 @@ import { isTouchDevice } from 'utils/is-touch-device';
 import { storeSavedPlayers } from 'utils/playersStorage';
 import { track } from 'utils/analytics';
 
+/**
+ * @param {Player} nextPlayer
+ */
 const notifyGrounded = (nextPlayer) => {
     return (dispatch) => {
         if (nextPlayer.type === HUMAN) {
@@ -173,6 +176,11 @@ export const initGameWithSavedConfig = () => {
     };
 };
 
+/**
+ * @param {Player} player
+ * @param {Point} newIntendedPosition
+ * @param {number} timePassed
+ */
 export const handlePlayerCollision = (
     player,
     newIntendedPosition,
@@ -197,6 +205,13 @@ export const handlePlayerCollision = (
     };
 };
 
+/**
+ * @param {Player} player
+ * @param {Point} newIntendedPosition
+ * @param {number} timePassed
+ * @param {Line} movementLine
+ * @param {Circuit} circuit
+ */
 export const handleCorrectMovement = (
     player,
     newIntendedPosition,
@@ -216,6 +231,10 @@ export const handleCorrectMovement = (
     };
 };
 
+/**
+ * @param {Player} player
+ * @param {Circuit} circuit
+ */
 function handleVictory(player, circuit) {
     return (dispatch) => {
         track('victory', { category: 'game' });
@@ -245,6 +264,10 @@ function handleVictory(player, circuit) {
     };
 }
 
+/**
+ * @param {Player} player
+ * @param {Point} newIntendedPosition
+ */
 const handlePlayerMovement = (player, newIntendedPosition) => {
     return (dispatch, getState) => {
         const timePassed = waitingForPlayerCounter.getTimePassed();
@@ -286,6 +309,10 @@ const handlePlayerMovement = (player, newIntendedPosition) => {
     };
 };
 
+/**
+ * @param {Player} player
+ * @param {Point} newIntendedPosition
+ */
 export const handlePlayerPositionSelection = (player, newIntendedPosition) => {
     return (dispatch) => {
         if (isTouchDevice) {
@@ -296,6 +323,9 @@ export const handlePlayerPositionSelection = (player, newIntendedPosition) => {
     };
 };
 
+/**
+ * @param {Player} player
+ */
 export const confirmPositionSelection = (player) => {
     return (dispatch, getState) => {
         const selectedPosition = getSelectedPosition(getState());
@@ -325,6 +355,9 @@ export const startWaitingForPlayerInput = () => {
     };
 };
 
+/**
+ * @param {Player} player
+ */
 export const handleAITurn = (player) => {
     return async (dispatch, getState) => {
         dispatch(setGameState(gameStates.AI_THINKING_SCREEN));
@@ -356,6 +389,9 @@ export const handleAITurn = (player) => {
     };
 };
 
+/**
+ * @param {Player} player
+ */
 function getMinTimeToWaitForPlayer(player) {
     const { timeThinking } = aiLevels[player.levelAI];
     return getRandomInRange(timeThinking.min, timeThinking.max);
@@ -376,6 +412,10 @@ function showRandomSelectorAndMovePlayer() {
     };
 }
 
+/**
+ * @param {Line} movementLine
+ * @param {Circuit} circuit
+ */
 export const detectAndStoreCheckpoints = (movementLine, circuit) => {
     return (dispatch, getState) => {
         const visitedCheckpointsInTurn = getCheckpointsVisitedInLine(
@@ -403,6 +443,12 @@ export const finishGame = () => {
     };
 };
 
+/**
+ * @param {Object} params
+ * @param {Player[]} params.players
+ * @param {string[]} params.playerOrder
+ * @param {CircuitConfig} params.circuit
+ */
 function initMapPositionForPlayers({ players, playerOrder, circuit }) {
     const orderedPlayers = playerOrder.map((playerId) =>
         players.find((player) => player.id === playerId),
@@ -462,6 +508,10 @@ export const tryToShowInGameMenu = () => {
     };
 };
 
+/**
+ * @param {Player} player
+ * @param {number} index
+ */
 function fixPlayersWithoutName(player, index) {
     if (player.name) {
         return player;
@@ -472,6 +522,9 @@ function fixPlayersWithoutName(player, index) {
     };
 }
 
+/**
+ * @param {number} index
+ */
 function getNameForPlayerWithoutName(index) {
     switch (index) {
         case 0:
@@ -487,6 +540,10 @@ function getNameForPlayerWithoutName(index) {
     }
 }
 
+/**
+ * @param {*} score
+ * @param {Circuit} circuit
+ */
 export const showReplay = (score, circuit) => {
     return (dispatch) => {
         track('show_replay', { category: 'replay' });

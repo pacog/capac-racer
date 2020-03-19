@@ -162,7 +162,7 @@
  * @property {Symbol} prevGameState We store one game state previous to the current so we can go back after pausing
  * @property {string[]} players
  * @property {string} currentTurnPlayerId
- * @property {CircuitConfig} circuitInfo
+ * @property {Circuit} circuitInfo
  * @property {boolean} latestHighScore If somebody achived a high score, it will be stored here until the next game starts
  * @property {Point} selectedPosition When we use a touch interface we can store the position that has been selected before confirming the move
  * @property {boolean} raceHistory Used when replaying a game
