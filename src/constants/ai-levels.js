@@ -1,3 +1,4 @@
+/** @type {AILevel[]} */
 const levels = [
     {
         // level 0

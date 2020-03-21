@@ -116,10 +116,30 @@
 /**
  * Pixel getter: object that allows us to get pixels from a certain image
  *
+ * @typedef {object} AILevel
+ * @property {number} randomSolutionChance The chance that the AI will ignore the best solution and just pick a random one (per turn)
+ * @property {number} maxIterations Number of solutions the AI will find in each turn
+ * @property {number} maxThinkingDepth How many moves in advance will the AI think of
+ * @property {Object} timeThinking
+ * @property {number} timeThinking.min
+ * @property {number} timeThinking.max
+ */
+
+/**
+ * Pixel getter: object that allows us to get pixels from a certain image
+ *
  * @typedef {object} PixelGetter
  * @property {number} width
  * @property {number} height
  * @property {(x: number, y:number) => Pixel} getPixel
+ */
+
+/**
+ * AI next move solution
+ *
+ * @typedef {object} AINextMoveSolution
+ * @property {Point} [move]
+ * @property {isFinished} bool
  */
 
 // State

@@ -6,6 +6,14 @@ import aiLevels from 'constants/ai-levels';
 import PartialCircuitSolution from './PartialCircuitSolution';
 import { waitForNextAnimationFrame } from './request-animation-frame';
 
+/**
+ * @param {Player} player
+ * @param {Player[]} otherPlayers
+ * @param {Circuit} circuit
+ * @param {number} zoom
+ * @param {number} gridSize
+ * @returns {Promise<Point>}
+ */
 export const chooseNextMovement = (
     player,
     otherPlayers,
@@ -48,6 +56,13 @@ export const chooseNextMovement = (
     });
 };
 
+/**
+ * Generate numbers in the Fibonacci sequence.
+ *
+ * @generator
+ * @function createSolutionsGenerator
+ * @yields {AINextMoveSolution}
+ */
 async function* createSolutionsGenerator({
     player,
     otherPlayers,
@@ -58,6 +73,7 @@ async function* createSolutionsGenerator({
     let openSolutions = [
         new PartialCircuitSolution(player, 1, circuit, zoom, gridSize),
     ];
+    /** @type {PartialCircuitSolution[]} */
     let finishedSolutions = [];
     let bestFinishedSolution = null;
 
@@ -131,6 +147,7 @@ async function* createSolutionsGenerator({
         }
     }
 
+    /** @type {Point} */
     let move;
     if (bestFinishedSolution) {
         move = bestFinishedSolution.getFirstMove();
@@ -145,11 +162,19 @@ async function* createSolutionsGenerator({
     };
 }
 
+/**
+ * @param {Player} player
+ */
 function shouldGetRandomSolution(player) {
     const chance = aiLevels[player.levelAI].randomSolutionChance;
     return Math.random() < chance;
 }
 
+/**
+ * @param {Player} player
+ * @param {Player[]} otherPlayers
+ * @returns {Point}
+ */
 function returnRandomMove(player, otherPlayers) {
     const positions = getPossibleDestinations(player, otherPlayers);
     return pickRandomFromArray(positions);
@@ -185,6 +210,10 @@ function returnRandomNonCrashingMove({
     return pickRandomFromArray(possiblePositions);
 }
 
+/**
+ *
+ * @param {PartialCircuitSolution[]} solutions
+ */
 function getMostPromisingSolution(solutions) {
     return solutions.reduce((best, solution) => {
         if (solution.getScore() > best.getScore()) {
