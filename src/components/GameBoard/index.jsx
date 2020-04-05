@@ -24,7 +24,7 @@ const GameBoard = () => {
 
     return (
         <div className="game-board-container">
-            <GameBoardCameraHandler currentPlayer={currentPlayer}>
+            <GameBoardCameraHandler>
                 <GameBoardContents />
             </GameBoardCameraHandler>
             {waitingForPlayerInput && playWithTimer && (
