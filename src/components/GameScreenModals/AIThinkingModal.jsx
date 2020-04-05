@@ -1,33 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 import { getCurrentPlayer } from 'store/game/selectors';
+import ShowContentAfter from 'components/ShowContentAfter';
 
 const AIThinkingModal = () => {
-    const [showContent, setShowContent] = useState(false);
-    useEffect(() => {
-        const timeout = setTimeout(() => setShowContent(true), 1000);
-        return () => {
-            clearTimeout(timeout);
-        };
-    }, []);
-
     const currentPlayer = useSelector(getCurrentPlayer);
 
     return (
-        // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-        <div className="game-screen-modal game-screen-modal-non-invasive">
-            <div
-                className={classNames('game-screen-modal-content', {
-                    'is-hidden': !showContent,
-                })}
-            >
-                <div>
-                    <span className="player-name">{currentPlayer.name}</span> is
-                    choosing its next move...
+        <ShowContentAfter
+            showAfter={1000}
+            render={(showContent) => (
+                <div className="game-screen-modal game-screen-modal-non-invasive">
+                    <div
+                        className={classNames('game-screen-modal-content', {
+                            'is-hidden': !showContent,
+                        })}
+                    >
+                        <div>
+                            <span className="player-name">
+                                {currentPlayer.name}
+                            </span>{' '}
+                            is choosing its next move...
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            )}
+        />
     );
 };
 
