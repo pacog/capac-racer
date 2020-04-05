@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
@@ -11,7 +11,7 @@ import {
     getPossibleDestinationsForPlayerInScreen,
     getCircuitInfo,
 } from 'store/game/selectors';
-import { setPlayerCSSVars, getColorForTempLine } from 'utils/playerPainter';
+import { getPlayerStyleCSS, getColorForTempLine } from 'utils/playerPainter';
 import { pickRandomFromArray } from 'utils/random';
 import { SWITCH_RANDOM_SELECTION_EVERY } from 'constants/ux.js';
 import './style.css';
@@ -22,12 +22,9 @@ function RandomSelectionAnimation({
     switchRandomEvery,
     highlightMove,
 }) {
-    const rootElement = useRef(null);
     const [tempLine, setTempLine] = useState(null);
     const [highlightedPosition, setHighlightedPosition] = useState(null);
-    useEffect(() => {
-        setPlayerCSSVars(rootElement.current, player.style);
-    }, [player.style]);
+
     useEffect(() => {
         setTempLine(null);
         return () => setTempLine(null);
@@ -58,7 +55,7 @@ function RandomSelectionAnimation({
     );
 
     return (
-        <div ref={rootElement}>
+        <div style={getPlayerStyleCSS(player)}>
             {children && (
                 <div
                     className="random-selection-animation-warning"

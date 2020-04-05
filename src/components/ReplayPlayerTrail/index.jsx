@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
@@ -6,16 +6,13 @@ import { raceHistory as raceHistoryProp } from 'components/propTypes';
 import { projectToScreenPosition } from 'store/map/selectors';
 import { PathLine } from 'react-svg-pathline';
 import { CAR } from 'constants/player-styles';
+import { getPlayerStyleCSS } from 'utils/playerPainter';
 
 import './style.css';
 
 const defaultStyle = CAR;
 
 const ReplayPlayerTrail = ({ raceHistory, isActive }) => {
-    const rootElement = useRef(null);
-    useEffect(() => {
-        setCSSVars(rootElement.current, raceHistory.style || defaultStyle);
-    }, [raceHistory]);
     const storeState = useSelector((state) => state);
 
     if (!raceHistory.path.length) {
@@ -30,7 +27,7 @@ const ReplayPlayerTrail = ({ raceHistory, isActive }) => {
             className={classNames('player-trail-container', {
                 'is-active': isActive,
             })}
-            ref={rootElement}
+            style={getPlayerStyleCSS(raceHistory)}
         >
             <svg className="player-trail">
                 <PathLine
@@ -63,14 +60,5 @@ ReplayPlayerTrail.propTypes = {
     raceHistory: raceHistoryProp.isRequired,
     isActive: PropTypes.bool.isRequired,
 };
-
-function setCSSVars(element, style) {
-    if (!element) {
-        return;
-    }
-    element.style.setProperty('--player-trail-color', style.dotColor);
-    element.style.setProperty('--player-trail-size', `${style.dotSize}px`);
-    element.style.setProperty('--player-trail-border-radius', style.round);
-}
 
 export default ReplayPlayerTrail;

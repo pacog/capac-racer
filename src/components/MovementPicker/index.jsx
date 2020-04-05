@@ -1,7 +1,7 @@
 // TODO: complex component, transform to class
 
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
@@ -17,19 +17,14 @@ import {
     getCircuitInfo,
 } from 'store/game/selectors';
 import { doesLineCollide } from 'utils/circuit';
-import { setPlayerCSSVars, getColorForTempLine } from 'utils/playerPainter';
+import { getColorForTempLine, getPlayerStyleCSS } from 'utils/playerPainter';
 import { isTouchDevice } from 'utils/is-touch-device';
 
 import './style.css';
 
 function MovementPicker({ player, onPositionSelected, onConfirmSelection }) {
-    const rootElement = useRef(null);
     const [tempLine, setTempLine] = useState(null);
     const [animatePoints, setAnimatePoints] = useState(false);
-
-    useEffect(() => {
-        setPlayerCSSVars(rootElement.current, player.style);
-    }, [player.style]);
 
     const lastMovement = useSelector((state) =>
         getMovedPixelsSinceLastTurn(state, player),
@@ -85,9 +80,9 @@ function MovementPicker({ player, onPositionSelected, onConfirmSelection }) {
 
     return (
         <div
-            ref={rootElement}
             className="movement-picker-container"
             style={{
+                ...getPlayerStyleCSS(player),
                 transform: `translate(${translate.x}px, ${translate.y}px)`,
             }}
         >

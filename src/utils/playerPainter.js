@@ -1,20 +1,26 @@
 import { doesLineCollide } from 'utils/circuit';
 
-export const setPlayerCSSVars = (element, style) => {
-    if (!element) {
-        return;
+/**
+ *
+ * @param {Player} player
+ * @returns {React.CSSProperties}
+ */
+export const getPlayerStyleCSS = (player) => {
+    if (!player) {
+        return {};
     }
-    element.style.setProperty('--player-color', style.dotColor);
-    element.style.setProperty('--player-size', `${style.dotSize + 2}px`);
-    element.style.setProperty(
-        '--movement-picker-size',
-        `${style.dotSize - 1}px`,
-    );
-    element.style.setProperty(
-        '--movement-picker-size-center',
-        `${style.dotSize + 2}px`,
-    );
-    element.style.setProperty('--player-border-radius', style.round);
+
+    return {
+        // @ts-ignore
+        '--player-color': player.style.dotColor,
+        '--player-border-radius': player.style.round,
+        '--player-trail-border-radius': player.style.round,
+        '--player-size': `${player.style.dotSize + 2}px`,
+        '--movement-picker-size': `${player.style.dotSize - 1}px`,
+        '--movement-picker-size-center': `${player.style.dotSize + 2}px`,
+        '--player-trail-color': player.style.dotColor,
+        '--player-trail-size': `${player.style.dotSize}px`,
+    };
 };
 
 export const getColorForTempLine = (

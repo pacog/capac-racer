@@ -1,23 +1,20 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 import { player as playerProp } from 'components/propTypes';
 import { projectToScreenPosition } from 'store/map/selectors';
 import { PathLine } from 'react-svg-pathline';
-
+import { getPlayerStyleCSS } from 'utils/playerPainter';
 import './style.css';
 
 const PlayerTrail = ({ player, isActive }) => {
-    const rootElement = useRef(null);
-    useEffect(() => {
-        setCSSVars(rootElement.current, player.style);
-    }, [player.style]);
     const storeState = useSelector((state) => state);
     if (!player.prevPositions.length) {
         return <></>;
     }
     const points = player.prevPositions.map((position) =>
+        // @ts-ignore
         projectToScreenPosition(storeState, position),
     );
     const pointsWithoutLast = points.slice(0, points.length - 1);
@@ -26,11 +23,12 @@ const PlayerTrail = ({ player, isActive }) => {
             className={classNames('player-trail-container', {
                 'is-active': isActive,
             })}
-            ref={rootElement}
+            style={getPlayerStyleCSS(player)}
         >
             <svg className="player-trail">
                 <PathLine
                     points={points}
+                    // @ts-ignore
                     stroke={player.style.trailColor}
                     strokeWidth={player.style.trailWidth}
                     fill="none"
@@ -59,14 +57,5 @@ PlayerTrail.propTypes = {
     player: playerProp.isRequired,
     isActive: PropTypes.bool.isRequired,
 };
-
-function setCSSVars(element, style) {
-    if (!element) {
-        return;
-    }
-    element.style.setProperty('--player-trail-color', style.dotColor);
-    element.style.setProperty('--player-trail-size', `${style.dotSize}px`);
-    element.style.setProperty('--player-trail-border-radius', style.round);
-}
 
 export default PlayerTrail;
