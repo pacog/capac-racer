@@ -1,9 +1,11 @@
-export const MAIN_MENU = Symbol('MAIN_MENU');
-export const GAME = Symbol('GAME');
-export const CIRCUIT_SELECTION = Symbol('CIRCUIT_SELECTION');
-export const PLAYERS_SELECTION = Symbol('PLAYERS_SELECTION');
-export const HIGH_SCORES = Symbol('HIGH_SCORES');
-export const CREDITS = Symbol('CREDITS');
-export const LOADING_GAME = Symbol('LOADING_GAME');
-export const REPLAY_GAME = Symbol('REPLAY_GAME');
-export const TUTORIAL = Symbol('TUTORIAL');
+import { getUniqueIdString as id } from 'utils/getUniqueIdString';
+
+export const MAIN_MENU = id('MAIN_MENU');
+export const GAME = id('GAME');
+export const CIRCUIT_SELECTION = id('CIRCUIT_SELECTION');
+export const PLAYERS_SELECTION = id('PLAYERS_SELECTION');
+export const HIGH_SCORES = id('HIGH_SCORES');
+export const CREDITS = id('CREDITS');
+export const LOADING_GAME = id('LOADING_GAME');
+export const REPLAY_GAME = id('REPLAY_GAME');
+export const TUTORIAL = id('TUTORIAL');

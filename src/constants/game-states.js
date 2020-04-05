@@ -1,16 +1,18 @@
-export const NOT_STARTED = Symbol('NOT_STARTED');
-export const START_SCREEN = Symbol('START_SCREEN');
-export const PLAYER_TURN_START_SCREEN = Symbol('PLAYER_TURN_START_SCREEN');
-export const WAITING_FOR_PLAYER_INPUT = Symbol('WAITING_FOR_PLAYER_INPUT');
-export const ANIMATING_PLAYER_MOVEMENT = Symbol('ANIMATING_PLAYER_MOVEMENT');
-export const ANIMATING_RANDOM_PLAYER_MOVEMENT = Symbol(
+import { getUniqueIdString as id } from 'utils/getUniqueIdString';
+
+export const NOT_STARTED = id('NOT_STARTED');
+export const START_SCREEN = id('START_SCREEN');
+export const PLAYER_TURN_START_SCREEN = id('PLAYER_TURN_START_SCREEN');
+export const WAITING_FOR_PLAYER_INPUT = id('WAITING_FOR_PLAYER_INPUT');
+export const ANIMATING_PLAYER_MOVEMENT = id('ANIMATING_PLAYER_MOVEMENT');
+export const ANIMATING_RANDOM_PLAYER_MOVEMENT = id(
     'ANIMATING_RANDOM_PLAYER_MOVEMENT',
 );
-export const NOTIFY_COLLISION = Symbol('NOTIFY_COLLISION');
-export const NOTIFY_AI_COLLISION = Symbol('NOTIFY_AI_COLLISION');
-export const NOTIFY_GROUNDED = Symbol('NOTIFY_GROUNDED');
-export const NOTIFY_AI_GROUNDED = Symbol('NOTIFY_AI_GROUNDED');
-export const NOTIFY_VICTORY = Symbol('NOTIFY_VICTORY');
-export const NOTIFY_HIGH_SCORE = Symbol('NOTIFY_HIGH_SCORE');
-export const SHOW_MENU = Symbol('SHOW_MENU');
-export const AI_THINKING_SCREEN = Symbol('AI_THINKING_SCREEN');
+export const NOTIFY_COLLISION = id('NOTIFY_COLLISION');
+export const NOTIFY_AI_COLLISION = id('NOTIFY_AI_COLLISION');
+export const NOTIFY_GROUNDED = id('NOTIFY_GROUNDED');
+export const NOTIFY_AI_GROUNDED = id('NOTIFY_AI_GROUNDED');
+export const NOTIFY_VICTORY = id('NOTIFY_VICTORY');
+export const NOTIFY_HIGH_SCORE = id('NOTIFY_HIGH_SCORE');
+export const SHOW_MENU = id('SHOW_MENU');
+export const AI_THINKING_SCREEN = id('AI_THINKING_SCREEN');

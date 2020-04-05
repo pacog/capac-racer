@@ -1,9 +1,11 @@
+import { getUniqueIdString as id } from 'utils/getUniqueIdString';
+
 export const actionTypes = {
-    MOVE_TO: 'MOVE_TO',
-    SET_PLAYERS: 'SET_PLAYERS',
-    NOTIFY_COLLISION: 'NOTIFY_COLLISION',
-    REDUCE_GROUNDED: 'REDUCE_GROUNDED',
-    NOTIFY_VISITED_CHECKPOINTS: 'NOTIFY_VISITED_CHECKPOINTS',
+    MOVE_TO: id('MOVE_TO'),
+    SET_PLAYERS: id('SET_PLAYERS'),
+    NOTIFY_COLLISION: id('NOTIFY_COLLISION'),
+    REDUCE_GROUNDED: id('REDUCE_GROUNDED'),
+    NOTIFY_VISITED_CHECKPOINTS: id('NOTIFY_VISITED_CHECKPOINTS'),
 };
 
 export const moveTo = (playerId, position, timePassed) => {
