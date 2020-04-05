@@ -7,7 +7,7 @@ import { startWaitingForPlayerInput } from 'store/game/async-actions';
 
 const StartTurnModal = () => {
     const dispatch = useDispatch();
-    const currentPlayer = useSelector((state) => getCurrentPlayer(state));
+    const currentPlayer = useSelector(getCurrentPlayer);
 
     return (
         <div

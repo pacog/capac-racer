@@ -15,7 +15,7 @@ import AIThinkingModal from './AIThinkingModal';
 import './style.css';
 
 const GameScreenModals = () => {
-    const gameState = useSelector((state) => getGameState(state));
+    const gameState = useSelector(getGameState);
 
     switch (gameState) {
         case gameStates.START_SCREEN:

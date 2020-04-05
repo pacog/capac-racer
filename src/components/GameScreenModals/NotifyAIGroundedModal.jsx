@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { getCurrentPlayer } from 'store/game/selectors';
 import pluralize from 'pluralize';
 
+// TODO: there are a few components with this showContent behaviour, do a component for that.
 const NotifyAIGroundedModal = () => {
     const [showContent, setShowContent] = useState(false);
     useEffect(() => {
@@ -14,7 +15,7 @@ const NotifyAIGroundedModal = () => {
         };
     }, []);
 
-    const currentPlayer = useSelector((state) => getCurrentPlayer(state));
+    const currentPlayer = useSelector(getCurrentPlayer);
 
     return (
         // eslint-disable-next-line jsx-a11y/click-events-have-key-events

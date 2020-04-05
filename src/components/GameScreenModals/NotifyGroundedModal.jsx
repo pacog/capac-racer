@@ -7,7 +7,7 @@ import pluralize from 'pluralize';
 
 const NotifyGroundedModal = () => {
     const dispatch = useDispatch();
-    const currentPlayer = useSelector((state) => getCurrentPlayer(state));
+    const currentPlayer = useSelector(getCurrentPlayer);
     return (
         // eslint-disable-next-line jsx-a11y/click-events-have-key-events
         <div
