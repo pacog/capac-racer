@@ -9,7 +9,7 @@ import {
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import addVHCSSVar from './utils/add-vh-css-var';
+import addVHCSSVar from './utils/addVhCssVar';
 
 // @ts-ignore
 window.capac_racer_version = process.env.REACT_APP_VERSION;
