@@ -178,8 +178,8 @@
  * Game state
  *
  * @typedef {object} GameState
- * @property {Symbol} gameState
- * @property {Symbol} prevGameState We store one game state previous to the current so we can go back after pausing
+ * @property {string} gameState
+ * @property {string} prevGameState We store one game state previous to the current so we can go back after pausing
  * @property {string[]} players
  * @property {string} currentTurnPlayerId
  * @property {Circuit} circuitInfo
