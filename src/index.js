@@ -1,3 +1,4 @@
+import 'type-defs';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import waitingForPlayerCounter from 'utils/waitingForPlayerCounter';

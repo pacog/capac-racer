@@ -1,4 +1,3 @@
-import 'type-defs';
 import { combineReducers } from 'redux';
 import { MAIN_MENU } from 'constants/screens';
 import { STYLES } from 'constants/player-styles';

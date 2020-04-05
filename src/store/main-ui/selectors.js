@@ -1,5 +1,3 @@
-import 'type-defs';
-
 /**
  * @param {RootState} state
  */
