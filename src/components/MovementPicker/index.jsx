@@ -1,12 +1,16 @@
-// TODO: complex component, transform to class
+// TODO add framer motion to animate stuff
 
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { PathLine } from 'react-svg-pathline';
-import { player as playerProp } from 'components/propTypes';
+import {
+    player as playerProp,
+    vector2d as vector2dProp,
+    Circuit as circuitProp,
+} from 'components/propTypes';
 import { projectToScreenPosition } from 'store/map/selectors';
 import {
     getOtherPlayersPositionInScreen,
@@ -22,149 +26,176 @@ import { isTouchDevice } from 'utils/is-touch-device';
 
 import './style.css';
 
-function MovementPicker({ player, onPositionSelected, onConfirmSelection }) {
-    const [tempLine, setTempLine] = useState(null);
-    const [animatePoints, setAnimatePoints] = useState(false);
+class MovementPicker extends React.Component {
+    state = {
+        tempLine: null,
+    };
 
-    const lastMovement = useSelector((state) =>
-        getMovedPixelsSinceLastTurn(state, player),
-    ) || { x: 0, y: 0 };
-
-    const [translate, setTranslate] = useState(lastMovement);
-
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            setTranslate({ x: 0, y: 0 });
-            setAnimatePoints(true);
-        });
-
-        return () => clearTimeout(timeout);
-    }, []);
-
-    useEffect(() => {
-        setTempLine(null);
-        return () => setTempLine(null);
-    }, [player]);
-
-    const circuit = useSelector(getCircuitInfo);
-    const originalPlayerScreenPosition = useSelector((state) =>
-        projectToScreenPosition(state, player.position),
-    );
-    const possiblePositions = useSelector((state) =>
-        getPossibleDestinationsForPlayerInScreen(state, player),
-    );
-
-    const nextPivot = useSelector((state) =>
-        getPivotForPlayerInScreen(state, player),
-    );
-
-    const otherPlayersPosition = useSelector((state) =>
-        getOtherPlayersPositionInScreen(state, player.id),
-    );
-
-    const selectedPosition = useSelector(getSelectedPosition);
-    const selectedPositionScreen = useSelector((state) =>
-        projectToScreenPosition(state, selectedPosition),
-    );
-    const selectButtonPosition = getSelectButtonPosition(possiblePositions);
-
-    const lineToPaint = tempLine || selectedPositionScreen;
-
-    const wouldCollide =
-        lineToPaint &&
-        doesLineCollide(
-            [originalPlayerScreenPosition, lineToPaint],
-            circuit,
-            otherPlayersPosition,
+    render() {
+        const selectButtonPosition = getSelectButtonPosition(
+            this.props.possiblePositions,
         );
 
-    return (
-        <div
-            className="movement-picker-container"
-            style={{
-                ...getPlayerStyleCSS(player),
-                transform: `translate(${translate.x}px, ${translate.y}px)`,
-            }}
-        >
-            {possiblePositions.map((eachPosition) => (
-                // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-                <div
-                    key={`${player.id}_${eachPosition.position.x}_${eachPosition.position.y}`}
-                    className={classNames('movement-picker', {
-                        'movement-picker-center':
-                            !eachPosition.screen.dx && !eachPosition.screen.dy,
-                    })}
-                    style={{
-                        left: eachPosition.screen.baseX,
-                        top: eachPosition.screen.baseY,
-                        transform: animatePoints
-                            ? `translate(${eachPosition.screen.dx}px, ${eachPosition.screen.dy}px)`
-                            : 'translate(0, 0)',
-                    }}
-                    onClick={() => onPositionSelected(eachPosition.position)}
-                    onMouseEnter={() => setTempLine(eachPosition.screen)}
-                    onMouseLeave={() => setTempLine(null)}
-                />
-            ))}
-            {isTouchDevice && selectedPosition && (
-                // eslint-disable-next-line react/button-has-type
-                <button
-                    className="button button-bg movement-picker-select-button"
-                    style={{
-                        left: selectButtonPosition.x,
-                        top: selectButtonPosition.y,
-                    }}
-                    onClick={onConfirmSelection}
-                >
-                    Select
-                </button>
-            )}
-            {lineToPaint && (
-                <svg className="movement-picker-temp-line">
+        const lineToPaint =
+            this.state.tempLine || this.props.selectedPositionScreen;
+
+        const wouldCollide =
+            lineToPaint &&
+            doesLineCollide(
+                [this.props.originalPlayerScreenPosition, lineToPaint],
+                this.props.circuit,
+                this.props.otherPlayersPosition,
+            );
+
+        return (
+            <div
+                className="movement-picker-container"
+                style={{
+                    ...getPlayerStyleCSS(this.props.player),
+                    // transform: `translate(${translate.x}px, ${translate.y}px)`,
+                }}
+            >
+                {this.props.possiblePositions.map((eachPosition) => (
+                    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+                    <div
+                        key={`${this.props.player.id}_${eachPosition.position.x}_${eachPosition.position.y}`}
+                        className={classNames('movement-picker', {
+                            'movement-picker-center':
+                                !eachPosition.screen.dx &&
+                                !eachPosition.screen.dy,
+                        })}
+                        style={{
+                            left: eachPosition.screen.baseX,
+                            top: eachPosition.screen.baseY,
+                            transform: `translate(${eachPosition.screen.dx}px, ${eachPosition.screen.dy}px)`,
+                        }}
+                        onClick={() =>
+                            this.props.onPositionSelected(eachPosition.position)
+                        }
+                        onMouseEnter={() =>
+                            this.setState({ tempLine: eachPosition.screen })
+                        }
+                        onMouseLeave={() => this.setState({ tempLine: null })}
+                    />
+                ))}
+                {isTouchDevice && this.props.selectedPosition && (
+                    // eslint-disable-next-line react/button-has-type
+                    <button
+                        className="button button-bg movement-picker-select-button"
+                        style={{
+                            left: selectButtonPosition.x,
+                            top: selectButtonPosition.y,
+                        }}
+                        onClick={this.props.onConfirmSelection}
+                    >
+                        Select
+                    </button>
+                )}
+                {lineToPaint && (
+                    <svg className="movement-picker-temp-line">
+                        <PathLine
+                            points={[
+                                this.props.originalPlayerScreenPosition,
+                                lineToPaint,
+                            ]}
+                            // @ts-ignore
+                            stroke={getColorForTempLine(
+                                this.props.player,
+                                [
+                                    this.props.originalPlayerScreenPosition,
+                                    lineToPaint,
+                                ],
+                                this.props.circuit,
+                                this.props.otherPlayersPosition,
+                            )}
+                            strokeWidth={this.props.player.style.trailWidth}
+                            strokeDasharray="2"
+                            fill="none"
+                            r={2}
+                        />
+                    </svg>
+                )}
+                <svg className="movement-picker-ghost-line">
                     <PathLine
-                        points={[originalPlayerScreenPosition, lineToPaint]}
-                        stroke={getColorForTempLine(
-                            player,
-                            [originalPlayerScreenPosition, lineToPaint],
-                            circuit,
-                            otherPlayersPosition,
-                        )}
-                        strokeWidth={player.style.trailWidth}
-                        strokeDasharray="2"
+                        points={[
+                            this.props.originalPlayerScreenPosition,
+                            this.props.nextPivot,
+                        ]}
+                        // @ts-ignore
+                        stroke={this.props.player.style.trailColor}
+                        strokeWidth={this.props.player.style.trailWidth}
+                        strokeDasharray="1"
                         fill="none"
                         r={2}
                     />
                 </svg>
-            )}
-            <svg className="movement-picker-ghost-line">
-                <PathLine
-                    points={[originalPlayerScreenPosition, nextPivot]}
-                    stroke={player.style.trailColor}
-                    strokeWidth={player.style.trailWidth}
-                    strokeDasharray="1"
-                    fill="none"
-                    r={2}
-                />
-            </svg>
 
-            {lineToPaint && wouldCollide && (
-                <div
-                    className="movement-picker-crash"
-                    style={{
-                        left: lineToPaint.x,
-                        top: lineToPaint.y,
-                    }}
-                />
-            )}
-        </div>
-    );
+                {lineToPaint && wouldCollide && (
+                    <div
+                        className="movement-picker-crash"
+                        style={{
+                            left: lineToPaint.x,
+                            top: lineToPaint.y,
+                        }}
+                    />
+                )}
+            </div>
+        );
+    }
 }
 
 MovementPicker.propTypes = {
     player: playerProp.isRequired,
     onPositionSelected: PropTypes.func.isRequired,
     onConfirmSelection: PropTypes.func.isRequired,
+    // lastMovement: vector2dProp,
+    circuit: circuitProp.isRequired,
+    originalPlayerScreenPosition: circuitProp.isRequired,
+    possiblePositions: PropTypes.arrayOf(vector2dProp).isRequired,
+    nextPivot: vector2dProp.isRequired,
+    otherPlayersPosition: PropTypes.arrayOf(vector2dProp),
+    selectedPosition: vector2dProp,
+    selectedPositionScreen: vector2dProp,
 };
+
+MovementPicker.defaultProps = {
+    // lastMovement: {
+    //     x: 0,
+    //     y: 0,
+    // },
+    otherPlayersPosition: [],
+    selectedPosition: null,
+    selectedPositionScreen: null,
+};
+
+const mapStateToProps = (state, ownProps) => {
+    const selectedPosition = getSelectedPosition(state);
+    return {
+        ...ownProps,
+        lastMovement: getMovedPixelsSinceLastTurn(state, ownProps.player),
+        circuit: getCircuitInfo(state),
+        originalPlayerScreenPosition: projectToScreenPosition(
+            state,
+            ownProps.player.position,
+        ),
+        possiblePositions: getPossibleDestinationsForPlayerInScreen(
+            state,
+            ownProps.player,
+        ),
+        nextPivot: getPivotForPlayerInScreen(state, ownProps.player),
+        otherPlayersPosition: getOtherPlayersPositionInScreen(
+            state,
+            ownProps.player.id,
+        ),
+        selectedPosition,
+        selectedPositionScreen: projectToScreenPosition(
+            state,
+            selectedPosition,
+        ),
+    };
+};
+
+export default connect(mapStateToProps)(MovementPicker);
 
 /**
  * Gets the position to put the button to select (only used for touch devices)
@@ -190,5 +221,3 @@ function getSelectButtonPosition(possiblePlayerPositions) {
         y: maxY,
     };
 }
-
-export default MovementPicker;
