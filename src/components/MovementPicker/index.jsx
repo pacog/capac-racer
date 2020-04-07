@@ -1,9 +1,5 @@
-// TODO add framer motion to animate stuff
-// TODO separate into components?
-
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { PathLine } from 'react-svg-pathline';
@@ -25,6 +21,7 @@ import {
 import { doesLineCollide } from 'utils/circuit';
 import { getColorForTempLine, getPlayerStyleCSS } from 'utils/playerPainter';
 import { isTouchDevice } from 'utils/is-touch-device';
+import PossibleDestinations from './PossibleDestinations';
 
 import './style.css';
 
@@ -64,41 +61,15 @@ class MovementPicker extends React.Component {
                     ...getPlayerStyleCSS(this.props.player),
                 }}
             >
-                {this.props.possiblePositions.map((eachPosition, index) => (
-                    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-                    <motion.div
-                        key={`${this.props.player.id}_${eachPosition.position.x}_${eachPosition.position.y}`}
-                        className={classNames('movement-picker', {
-                            'movement-picker-center':
-                                !eachPosition.screen.dx &&
-                                !eachPosition.screen.dy,
-                        })}
-                        style={{
-                            left: eachPosition.screen.baseX,
-                            top: eachPosition.screen.baseY,
-                        }}
-                        animate={{
-                            x: eachPosition.screen.dx,
-                            y: eachPosition.screen.dy,
-                        }}
-                        initial={{
-                            x: 0,
-                            y: 0,
-                        }}
-                        transition={{
-                            ease: 'easeInOut',
-                            duration: 0.3,
-                            delay: 0.2 + index * 0.1,
-                        }}
-                        onClick={() =>
-                            this.props.onPositionSelected(eachPosition.position)
-                        }
-                        onMouseEnter={() =>
-                            this.setState({ tempLine: eachPosition.screen })
-                        }
-                        onMouseLeave={() => this.setState({ tempLine: null })}
-                    />
-                ))}
+                <PossibleDestinations
+                    onPositionSelected={this.props.onPositionSelected}
+                    onPositionHover={(screenPosition) =>
+                        this.setState({ tempLine: screenPosition })
+                    }
+                    onPositionHoverEnd={() => this.setState({ tempLine: null })}
+                    player={this.props.player}
+                    possiblePositions={this.props.possiblePositions}
+                />
                 {isTouchDevice && this.props.selectedPosition && (
                     // eslint-disable-next-line react/button-has-type
                     <button
