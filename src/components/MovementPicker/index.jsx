@@ -1,4 +1,5 @@
 // TODO add framer motion to animate stuff
+// TODO separate into components?
 
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
@@ -6,6 +7,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { PathLine } from 'react-svg-pathline';
+import { motion } from 'framer-motion';
 import {
     player as playerProp,
     vector2d as vector2dProp,
@@ -46,18 +48,25 @@ class MovementPicker extends React.Component {
                 this.props.circuit,
                 this.props.otherPlayersPosition,
             );
-
         return (
-            <div
+            <motion.div
                 className="movement-picker-container"
+                animate={{
+                    x: 0,
+                    y: 0,
+                }}
+                initial={{
+                    x: this.props.lastMovement.x,
+                    y: this.props.lastMovement.y,
+                }}
+                transition={{ ease: 'easeIn', duration: 0.3 }}
                 style={{
                     ...getPlayerStyleCSS(this.props.player),
-                    // transform: `translate(${translate.x}px, ${translate.y}px)`,
                 }}
             >
-                {this.props.possiblePositions.map((eachPosition) => (
+                {this.props.possiblePositions.map((eachPosition, index) => (
                     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-                    <div
+                    <motion.div
                         key={`${this.props.player.id}_${eachPosition.position.x}_${eachPosition.position.y}`}
                         className={classNames('movement-picker', {
                             'movement-picker-center':
@@ -67,7 +76,19 @@ class MovementPicker extends React.Component {
                         style={{
                             left: eachPosition.screen.baseX,
                             top: eachPosition.screen.baseY,
-                            transform: `translate(${eachPosition.screen.dx}px, ${eachPosition.screen.dy}px)`,
+                        }}
+                        animate={{
+                            x: eachPosition.screen.dx,
+                            y: eachPosition.screen.dy,
+                        }}
+                        initial={{
+                            x: 0,
+                            y: 0,
+                        }}
+                        transition={{
+                            ease: 'easeInOut',
+                            duration: 0.3,
+                            delay: 0.2 + index * 0.1,
                         }}
                         onClick={() =>
                             this.props.onPositionSelected(eachPosition.position)
@@ -139,7 +160,7 @@ class MovementPicker extends React.Component {
                         }}
                     />
                 )}
-            </div>
+            </motion.div>
         );
     }
 }
@@ -148,7 +169,7 @@ MovementPicker.propTypes = {
     player: playerProp.isRequired,
     onPositionSelected: PropTypes.func.isRequired,
     onConfirmSelection: PropTypes.func.isRequired,
-    // lastMovement: vector2dProp,
+    lastMovement: vector2dProp,
     circuit: circuitProp.isRequired,
     originalPlayerScreenPosition: circuitProp.isRequired,
     possiblePositions: PropTypes.arrayOf(vector2dProp).isRequired,
@@ -159,10 +180,10 @@ MovementPicker.propTypes = {
 };
 
 MovementPicker.defaultProps = {
-    // lastMovement: {
-    //     x: 0,
-    //     y: 0,
-    // },
+    lastMovement: {
+        x: 0,
+        y: 0,
+    },
     otherPlayersPosition: [],
     selectedPosition: null,
     selectedPositionScreen: null,
@@ -172,7 +193,10 @@ const mapStateToProps = (state, ownProps) => {
     const selectedPosition = getSelectedPosition(state);
     return {
         ...ownProps,
-        lastMovement: getMovedPixelsSinceLastTurn(state, ownProps.player),
+        lastMovement: getMovedPixelsSinceLastTurn(state, ownProps.player) || {
+            x: 0,
+            y: 0,
+        },
         circuit: getCircuitInfo(state),
         originalPlayerScreenPosition: projectToScreenPosition(
             state,

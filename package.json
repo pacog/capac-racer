@@ -5,6 +5,7 @@
     "homepage": "https://pacog.github.io/capac-racer",
     "dependencies": {
         "classnames": "^2.2.6",
+        "framer-motion": "^1.10.3",
         "lodash.debounce": "^4.0.8",
         "lodash.shuffle": "^4.2.0",
         "pluralize": "^8.0.0",

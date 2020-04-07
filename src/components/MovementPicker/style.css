@@ -20,8 +20,6 @@
 
     z-index: 7;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    transition: transform 0.2s var(--movement-picker-delay)
-        var(--movement-picker-easing);
 }
 
 .movement-picker-center {
