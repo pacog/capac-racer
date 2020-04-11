@@ -16,6 +16,12 @@
     }
 }
 
+@media screen and (max-height: 300px) {
+    .logo {
+        --logo-screen-size-x: 0.5;
+    }
+}
+
 .logo-up {
     color: var(--white);
     text-shadow: 0 0 5px var(--darkest-blue);
