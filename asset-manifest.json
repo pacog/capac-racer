@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/capac-racer/static/css/main.b82cc67e.chunk.css",
-    "main.js": "/capac-racer/static/js/main.2a4a83db.chunk.js",
-    "main.js.map": "/capac-racer/static/js/main.2a4a83db.chunk.js.map",
-    "runtime-main.js": "/capac-racer/static/js/runtime-main.60e2173a.js",
-    "runtime-main.js.map": "/capac-racer/static/js/runtime-main.60e2173a.js.map",
-    "static/js/2.f49589a2.chunk.js": "/capac-racer/static/js/2.f49589a2.chunk.js",
-    "static/js/2.f49589a2.chunk.js.map": "/capac-racer/static/js/2.f49589a2.chunk.js.map",
+    "main.css": "/capac-racer/static/css/main.81f4ba29.chunk.css",
+    "main.js": "/capac-racer/static/js/main.91f1c82a.chunk.js",
+    "main.js.map": "/capac-racer/static/js/main.91f1c82a.chunk.js.map",
+    "runtime-main.js": "/capac-racer/static/js/runtime-main.c0df7b26.js",
+    "runtime-main.js.map": "/capac-racer/static/js/runtime-main.c0df7b26.js.map",
+    "static/js/2.ca89fe52.chunk.js": "/capac-racer/static/js/2.ca89fe52.chunk.js",
+    "static/js/2.ca89fe52.chunk.js.map": "/capac-racer/static/js/2.ca89fe52.chunk.js.map",
     "index.html": "/capac-racer/index.html",
-    "precache-manifest.f8f0c681ca1d19dc7265328008371f99.js": "/capac-racer/precache-manifest.f8f0c681ca1d19dc7265328008371f99.js",
+    "precache-manifest.a182cbbc049069c1bd802a1df5398b53.js": "/capac-racer/precache-manifest.a182cbbc049069c1bd802a1df5398b53.js",
     "service-worker.js": "/capac-racer/service-worker.js",
-    "static/css/main.b82cc67e.chunk.css.map": "/capac-racer/static/css/main.b82cc67e.chunk.css.map",
-    "static/js/2.f49589a2.chunk.js.LICENSE": "/capac-racer/static/js/2.f49589a2.chunk.js.LICENSE",
+    "static/css/main.81f4ba29.chunk.css.map": "/capac-racer/static/css/main.81f4ba29.chunk.css.map",
+    "static/js/2.ca89fe52.chunk.js.LICENSE.txt": "/capac-racer/static/js/2.ca89fe52.chunk.js.LICENSE.txt",
     "static/media/index.css": "/capac-racer/static/media/doppioone-regular-webfont.3d276e82.woff2",
     "static/media/style.css": "/capac-racer/static/media/tut_3.ad2d2ce3.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.60e2173a.js",
-    "static/js/2.f49589a2.chunk.js",
-    "static/css/main.b82cc67e.chunk.css",
-    "static/js/main.2a4a83db.chunk.js"
+    "static/js/runtime-main.c0df7b26.js",
+    "static/js/2.ca89fe52.chunk.js",
+    "static/css/main.81f4ba29.chunk.css",
+    "static/js/main.91f1c82a.chunk.js"
   ]
 }
