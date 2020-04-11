@@ -45,47 +45,55 @@ class GameBoardCameraHandler extends React.Component {
      */
     props;
 
+    componentDidMount() {
+        this.moveCurrentPlayerIntoView();
+    }
+
     componentDidUpdate(prevProps) {
         if (this.props.currentPlayer !== prevProps.currentPlayer) {
-            if (
-                !this.state.boardSize ||
-                !this.props.currentPlayer ||
-                !this.props.currentPlayer.position
-            ) {
-                return;
-            }
-            const viewport = {
-                topLeft: substract({ x: 0, y: 0 }, this.state.cameraPosition),
-                size: this.state.boardSize,
-            };
-            if (
-                isInsideViewport(
-                    this.props.playerScreenPosition,
-                    viewport,
-                    PADDING_FOR_VIEWPORT,
-                )
-            ) {
-                return;
-            }
-            const closestPointInViewport = getClosestPointInsideViewport(
+            this.moveCurrentPlayerIntoView();
+        }
+    }
+
+    moveCurrentPlayerIntoView = () => {
+        if (
+            !this.state.boardSize ||
+            !this.props.currentPlayer ||
+            !this.props.currentPlayer.position
+        ) {
+            return;
+        }
+        const viewport = {
+            topLeft: substract({ x: 0, y: 0 }, this.state.cameraPosition),
+            size: this.state.boardSize,
+        };
+        if (
+            isInsideViewport(
                 this.props.playerScreenPosition,
                 viewport,
                 PADDING_FOR_VIEWPORT,
-            );
-            const newCameraMovement = substract(
-                closestPointInViewport,
-                this.props.playerScreenPosition,
-            );
-
-            const oldCameraPosition = this.state.cameraPosition;
-
-            // TODO find a way of not doing state changes on prop update
-            // eslint-disable-next-line react/no-did-update-set-state
-            this.setState({
-                cameraPosition: add(oldCameraPosition, newCameraMovement),
-            });
+            )
+        ) {
+            return;
         }
-    }
+        const closestPointInViewport = getClosestPointInsideViewport(
+            this.props.playerScreenPosition,
+            viewport,
+            PADDING_FOR_VIEWPORT,
+        );
+        const newCameraMovement = substract(
+            closestPointInViewport,
+            this.props.playerScreenPosition,
+        );
+
+        const oldCameraPosition = this.state.cameraPosition;
+
+        // TODO find a way of not doing state changes on prop update
+        // eslint-disable-next-line react/no-did-update-set-state
+        this.setState({
+            cameraPosition: add(oldCameraPosition, newCameraMovement),
+        });
+    };
 
     handlePointerDown = (event) => {
         const coordinates = getCoordinatesFromPointerEvent(event);
@@ -123,9 +131,12 @@ class GameBoardCameraHandler extends React.Component {
                     handleHeight
                     handleWidth
                     onResize={(width, height) => {
-                        this.setState({
-                            boardSize: { width, height },
-                        });
+                        this.setState(
+                            {
+                                boardSize: { width, height },
+                            },
+                            this.moveCurrentPlayerIntoView,
+                        );
                     }}
                 >
                     <div
