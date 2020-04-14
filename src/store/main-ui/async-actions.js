@@ -17,6 +17,7 @@ export const addRandomPlayer = () => {
         const newStyle = keepPickingUntilNotInArray(
             () => pickRandomFromArray(allStyles),
             currentStyles,
+            (a, b) => a.id === b.id,
         );
         const newName = keepPickingUntilNotInArray(getRandomName, currentNames);
 

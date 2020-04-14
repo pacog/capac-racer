@@ -9,11 +9,13 @@ export const pickRandomFromArray = (array) => {
 export const keepPickingUntilNotInArray = (
     pickerFn,
     arrayToAvoid,
+    compareFunction = (a, b) => a === b,
     maxTries = 10000,
 ) => {
     for (let i = 0; i < maxTries; i += 1) {
         const newPick = pickerFn();
-        if (arrayToAvoid.indexOf(newPick) === -1) {
+        const found = arrayToAvoid.find((el) => compareFunction(el, newPick));
+        if (!found) {
             return newPick;
         }
     }
