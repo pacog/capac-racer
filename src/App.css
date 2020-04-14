@@ -48,6 +48,10 @@
     color: var(--orange);
 }
 
+.button:not([disabled]):active {
+    color: var(--orange-2);
+}
+
 .button-bg {
     background: var(--red-2);
     border-radius: 6px;
@@ -56,6 +60,11 @@
 }
 .button-bg.button:not([disabled]):hover {
     background: var(--red-3);
+    color: var(--white);
+}
+
+.button-bg.button:not([disabled]):active {
+    background: var(--red);
     color: var(--white);
 }
 
